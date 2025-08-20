@@ -19,6 +19,7 @@ public class Demo2 {
 		        System.out.print(" ");
 		    for (j = 1; j <= i; j++)
 		        System.out.print("* ");
+			//made changes
 		    System.out.println();
 		}
 	}
