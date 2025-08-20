@@ -1,0 +1,24 @@
+package program1;
+import java.util.Scanner;
+
+public class Demo2 {
+
+	public static void main(String[] args) {
+		
+		Scanner scanner = new Scanner(System.in);
+		
+		System.out.print("Enter a number:");
+        int number = scanner.nextInt();
+        scanner.close();
+
+
+		int factorial=1;
+		int i;
+		for(i=1;i<=number;i++) { 
+			
+			factorial=factorial*i;
+		}
+        System.out.println(factorial);
+	}
+
+}
