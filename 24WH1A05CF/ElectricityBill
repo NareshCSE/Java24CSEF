@@ -1,0 +1,40 @@
+package program1;
+
+import java.util.Scanner;
+
+public class calculator {
+
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("Enter the First Number:");
+		int number1 = scanner.nextInt();
+		System.out.print("Enter the Second Number:");
+		int number2 = scanner.nextInt();
+		System.out.print("Enter the operator:");
+		char operator = scanner.next().charAt(0);
+		scanner.close();
+		switch (operator) {
+		case '+': {
+			System.out.print("Addition:" + (number1 + number2));
+			break;
+		}
+		case '-': {
+			System.out.print("Subtraction:" + (number1 - number2));
+			break;
+		}
+		case '*': {
+			System.out.print("Multiplication:" + (number1 * number2));
+			break;
+		}
+		case '/': {
+			System.out.print("Division:" + ((float)number1 / number2));
+			break;
+		}
+		default: {
+			System.out.print("Invalid");
+		}
+		}
+
+	}
+
+}
