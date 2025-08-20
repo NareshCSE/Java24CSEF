@@ -1,0 +1,27 @@
+package add;
+import java.util.Scanner;
+
+public class Pattern2 {
+
+	public static void main(String[] args) {
+		Scanner scanner=new Scanner(System.in);
+		System.out.println("enter a number:");
+		int n=scanner.nextInt();
+		
+		int i,j,k;
+		
+		for(i=n;i>=1;i--) {
+			for(j=1;j<i;j++) {
+				System.out.print(" ");
+			}
+			for(k=0;k<=n-i;k++) {
+				System.out.print("*");
+			}
+			System.out.println();
+
+		} 
+		
+        scanner.close();
+	}
+
+}
