@@ -1,6 +1,6 @@
-package patternc;
 
-public class patternc {
+
+public class Patternc {
 
 	public static void main(String[] args) {
 	
