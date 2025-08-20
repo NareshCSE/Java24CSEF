@@ -2,7 +2,7 @@ import java.util.Scanner;
 public class Week1_Electricity_bill {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
 		Scanner sc=new Scanner(System.in);
 		System.out.print("enter old readings:");
 		int old=sc.nextInt();
