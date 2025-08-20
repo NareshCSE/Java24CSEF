@@ -1,0 +1,88 @@
+package problemsolving;
+
+import java.util.Scanner;
+
+
+
+
+public class electricitybill {
+
+		           public static void main(String[] args) {
+		
+			        Scanner scanner = new Scanner(System.in);
+
+			        System.out.println("Enter old meter reading: ");
+
+			        int oldReading = scanner.nextInt();
+
+			        System.out.println("Enter current meter reading: ");
+
+			        int currentReading = scanner.nextInt();
+
+
+			        if (currentReading < oldReading) {
+
+			            System.out.println("Error: Current reading cannot be less than old reading.");
+
+			            return;
+
+			        }
+
+
+
+			        int units = currentReading - oldReading;
+
+			        int remainingUnits = units;
+
+			        int bill = 0;
+
+			        if (remainingUnits <= 50) {
+
+			            bill = remainingUnits * 1;
+
+			        } else if (remainingUnits <= 100) {
+
+			            bill = 50 * 1 + (remainingUnits - 50) * 2;
+
+			        } else if (remainingUnits <= 200) {
+
+			            bill = 50 * 1 + 50 * 2 + (remainingUnits - 100) * 3;
+
+			        } else if (remainingUnits <= 400) {
+
+			            bill = 50 * 1 + 50 * 2 + 100 * 3 + (remainingUnits - 200) * 4;
+
+			        } else {
+
+			            bill = 50 * 1 + 50 * 2 + 100 * 3 + 200 * 4 + (remainingUnits - 400) * 5;
+
+			        }
+
+
+
+			        
+
+			        System.out.println("Total units consumed: " + units);
+
+			        System.out.println("Total electricity bill: Rs." + bill);
+
+
+
+			        scanner.close();
+
+			    }
+
+			
+
+
+
+
+
+		}
+
+
+
+
+
+
+
