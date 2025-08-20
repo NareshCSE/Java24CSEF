@@ -1,0 +1,20 @@
+package Com.Sample;
+
+class pattern_b {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+       int i,j,n=5;
+       for(i=1;i<=n;i++) {
+    	   for(j=1;j<=n;j++) {
+    		   if(i+j>n) {
+    			   System.out.printf("* ");
+    		   }
+    		   else {
+    			  System.out.printf("  ");
+    		   }
+    	   }System.out.println();
+       }
+	}
+
+}
