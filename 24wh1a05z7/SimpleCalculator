@@ -1,0 +1,26 @@
+import java.util.Scanner;
+public class simpleCalculator {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Number1= ");
+		int number1=sc.nextInt();
+		System.out.print("Number2= ");
+		int number2=sc.nextInt();
+		sc.nextLine();
+		System.out.print("Enter Arithmetic Operation: ");
+		String operation=sc.nextLine();
+		switch(operation) {
+		case "+": System.out.print("Addition= "+ (number1+number2));
+		          break;
+		case "-": System.out.print("Subtraction= "+ (number1-number2));
+		          break;
+		case "*": System.out.print("Multiplication= "+ (number1*number2));
+		          break;
+		case "/": System.out.print("Division= "+ (number1/number2));
+                  break;
+		}
+	}
+
+}
