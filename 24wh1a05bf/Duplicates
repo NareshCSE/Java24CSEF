@@ -1,0 +1,22 @@
+package assignment;
+
+public class duplicate {
+
+	public static void main(String[] args) 
+	{
+		int arr[]= {10,50,30,30,50};
+		System.out.println("duplicate values");
+		for (int i = 0; i < arr.length; i++) 
+		{
+            for (int j = i + 1; j < arr.length; j++) 
+            {
+                if (arr[i] == arr[j]) 
+                {
+                    System.out.println(arr[i]);
+                    break;
+                }
+            }
+		} 
+	}
+
+}
