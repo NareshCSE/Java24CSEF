@@ -1,0 +1,16 @@
+package javademo;
+
+public class commonvalues {
+	public static void main(String[] args) {
+		String[]a= {"A","B","C","D","M","V"};
+		String[]b= {"R","P","M","A","G","D"};
+		System.out.println("common values:");
+		for(int i=0;i<a.length;i++) {
+			for(int j=0;j<b.length;j++) {
+				if(a[i]==b[j]) {
+					System.out.println(a[i]);
+			}
+		}
+	  }
+	}
+}
