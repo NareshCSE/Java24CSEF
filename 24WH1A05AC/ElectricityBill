@@ -1,0 +1,29 @@
+package labprograms;
+import java.util.*;
+public class ElectricityBill {
+
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		int charge;
+		System.out.println("Enter the number of units:");
+		int unit=scanner.nextInt();
+		if(unit>=0 && unit<50) {
+			charge=unit*1;
+			System.out.println("The consumption charge is:"+charge);
+		}
+		else if(unit>=50 && unit<100) {
+			charge=50*1+(unit-50)*2;
+			System.out.println("The consumption charge is :"+charge);
+		}
+		else if(unit>=100 && unit<200) {
+			charge=50*1+50*2+(unit-100)*3;
+			System.out.println("The consumption charge is :"+charge);
+		}
+		else if(unit>=200 && unit<400) {
+			charge=50*1+50*2+100*3+(unit-400)*5;
+			System.out.println("The consumption charge is :"+charge);
+		}
+	}
+		
+	
+}
