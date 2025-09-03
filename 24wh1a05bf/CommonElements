@@ -1,0 +1,21 @@
+package assignment;
+
+public class CommonElements {
+    public static void main(String[] args) {
+        String arr1[] = {"apple", "banana", "cherry", "date"};
+        String arr2[] = {"banana", "cherry", "mango", "fig"};
+
+        System.out.print("Common Elements: ");
+        for (String str1 : arr1) 
+        {
+            for (String str2 : arr2) 
+            {
+                if (str1.equals(str2)) 
+                {
+                    System.out.print(str1 + " ");
+                    break;
+                }
+            }
+        }
+    }
+}
