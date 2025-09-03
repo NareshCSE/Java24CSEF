@@ -1,0 +1,37 @@
+package demo;
+import java.util.Scanner;
+public class arrays {
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+   //int[] arr= {2,3,4,5,6,2,6,8}; 
+	Scanner input=new Scanner(System.in);
+   int len=input.nextInt();
+   System.out.print("Length of the array");
+   System.out.print(len);
+   int count=0;
+   int[] arr=new int[len];
+   for(int i=0;i<len;i++)
+   {
+	   arr[i]=input.nextInt();
+   }
+   System.out.println("Duplicate elements");
+   for(int i=0;i<len;i++)    
+   {
+	   for(int j=i+1;j<len;j++)    
+	   {
+		   if(arr[i]==arr[j])
+		   {
+			  count+=1;
+		   }
+		   
+	   }
+	   if(count>=1)
+	   {
+		   System.out.println(arr[i]);
+	   }
+	   count=0;
+   }
+}
+
+}
