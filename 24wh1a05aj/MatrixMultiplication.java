@@ -3,8 +3,7 @@ import java.util.Scanner;
 public class MultiplicationOfArrays {
 	public static void main(String[] args) {
 		        Scanner sc = new Scanner(System.in);
-
-		        // Input dimensions
+		
 		        System.out.print("Enter rows of first matrix: ");
 		        int m = sc.nextInt();
 		        System.out.print("Enter columns of first matrix / rows of second matrix: ");
@@ -12,7 +11,6 @@ public class MultiplicationOfArrays {
 		        System.out.print("Enter columns of second matrix: ");
 		        int p = sc.nextInt();
 
-		        
 		        int A[][]= new int[m][n];
 		        System.out.println("Enter elements of first matrix:");
 		        for (int i = 0; i < m; i++) {
