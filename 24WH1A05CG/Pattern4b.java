@@ -1,0 +1,23 @@
+package sahasra;
+
+public class Pattern_4b {
+
+	public static void main(String[] args) {
+		int i=5;
+		int j=0;
+		for(i=4;i>=0;i--) {
+			for(j=0;j<5;j++)
+			{
+				if(j>=i) {
+					System.out.print("*");
+				}
+				else {
+				System.out.print(" ");
+				}
+			}
+			System.out.println();
+		}
+
+	}
+
+}
