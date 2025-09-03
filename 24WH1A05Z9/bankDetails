@@ -1,0 +1,29 @@
+package z9;
+
+import java.util.Scanner;
+
+public class bankDetails {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner scanner=new Scanner(System.in);
+		System.out.println("Enter Customer details:");
+		System.out.print("Name:");
+		String name=scanner.nextLine();
+	
+		System.out.print("Adhaar number:");
+		String aadhar=scanner.nextLine();
+		
+		System.out.print("PAN number:");
+		String pan=scanner.nextLine();
+		 System.out.println("\nCustomer details:");
+	        System.out.println("Name: " + name);
+	        System.out.println("Aadhar Number: " + aadhar);
+	        System.out.println("PAN Number: " + pan);
+
+	        scanner.close();
+			
+
+	}
+
+}
