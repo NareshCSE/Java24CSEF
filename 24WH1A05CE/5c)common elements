@@ -1,0 +1,28 @@
+package javalab;
+
+public class Common_elements_between_two_arrays {
+
+	public static void main(String[] args) {
+		String array1[]= {"sita","gita","raju"};
+		String array2[]= {"ram","gita","sita"};
+				
+				
+				
+				
+				
+				
+	 for(String i:array1) {
+		 for(String j:array2)
+		 {
+			 if(i==j)
+		   {System.out.print(i+" ");
+			 
+		   }
+			 
+		 }
+		 
+	 }
+
+	}
+
+}
