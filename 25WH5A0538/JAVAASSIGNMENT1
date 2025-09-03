@@ -1,0 +1,45 @@
+\\MULTIPLICATION OF MATRIX
+package javaproject4;
+
+public class matrices 
+{
+	public static void main(String[] args)
+    {
+		int[][]  matrixA={
+			{1,2,4},
+		    {3,5,6},
+		    {8,9,7},
+		    };
+		int [][] matrixB= {
+				{9,6,4},
+				{3,1,7},
+				{2,5,8},
+		};
+		int [][] resultmatrix = new int [matrixA.length][matrixB[0].length];
+		if (matrixA[0].length==matrixB.length) 
+		{
+			for(int i=0;i<matrixA.length;i++)
+			{
+			for(int j=0;j<matrixB[0].length;j++) 
+			{
+			for(int k=0;k<matrixB.length;k++)
+			{
+				resultmatrix [i][j] +=matrixA[i][k]*matrixB[k][j] ;
+			}
+		}
+	}
+			System.out.println("resultant matrix:");	
+			for (int i=0;i<resultmatrix.length;i++ ) 
+			{
+			for (int j=0;j<resultmatrix[0].length;j++ )
+			{
+			System.out.println(resultmatrix [i][j]+" ");	
+	        }
+		System.out.println();
+			}
+	    }else {
+		 System.out.println("the maxtrix can't possible to take improper dimensons");	
+	 }
+
+	}
+}
