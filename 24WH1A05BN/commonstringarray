@@ -1,0 +1,36 @@
+public class common{
+    public static void main(String[] args) {
+        String[] array1 = {"apple", "banana", "cherry", "date", "fig"};
+        String[] array2 = {"grape", "banana", "kiwi", "fig", "melon"};
+
+        String[] common = new String[Math.min(array1.length, array2.length)];
+        int count = 0;
+
+        System.out.println("Common elements:");
+
+        for (int i = 0; i < array1.length; i++) {
+            for (int j = 0; j < array2.length; j++) {
+                if (array1[i].equals(array2[j])) {
+                   
+                    boolean alreadyExists = false;
+                    for (int k = 0; k < count; k++) {
+                        if (common[k].equals(array1[i])) {
+                            alreadyExists = true;
+                            break;
+                        }
+                    }
+
+                    if (!alreadyExists) {
+                        common[count] = array1[i];
+                        count++;
+                        System.out.println(array1[i]);
+                    }
+
+                    break; 
+                }
+            }
+        }
+    }
+}
+
+
