@@ -1,0 +1,59 @@
+package firstjavalab;
+import java.util.*;
+public class MatrixMultiplication {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the number of rows in matrix1:");
+		int m1 = sc.nextInt();
+		System.out.println("Enter the number of columns in matrix1:");
+		int n1 = sc.nextInt();
+		int mat1[][] = new int[m1][n1]; 
+		
+		for(int i =0;i<m1;i++) {
+			for(int j=0;j<n1;j++) {
+				System.out.println(" Enter Element:");
+				mat1[i][j]=sc.nextInt();
+			}
+		}
+		
+		System.out.println("Enter the number of rows in matrix2:");
+		int m2 = sc.nextInt();
+		System.out.println("Enter the number of columns in matrix2:");
+		int n2 = sc.nextInt();
+		int mat2[][] = new int[m2][n2]; 
+		
+		for(int i =0;i<m2;i++) {
+			for(int j=0;j<n2;j++) {
+				System.out.println(" Enter Elements:");
+				mat2[i][j] = sc.nextInt();
+			}
+		}
+		
+		int mat3[][] = new int[n1][m2];
+		
+		if(n1!=m2) {
+			System.out.println("Matrices cannot be multiplied");
+		}
+		else {
+			for(int i=0;i<n1;i++) {
+				for(int j=0;j<m2;j++) {
+					for(int k =0;k<n1;k++) {
+						mat3[i][j] += mat1[i][k]*mat2[k][j];
+					}
+				}
+			}
+		}
+		
+		for(int i =0;i<n1;i++) {
+			for(int j=0;j<m2;j++) {
+				System.out.print(mat3[i][j]+" ");
+				
+			}
+			System.out.println();
+		}
+		
+	}
+
+}
