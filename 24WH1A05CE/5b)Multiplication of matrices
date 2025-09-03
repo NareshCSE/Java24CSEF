@@ -1,0 +1,64 @@
+package javalab;
+import java.util.Scanner;
+public class multiplication_matrices {
+
+	public static void main(String[] args) {
+		Scanner myObj=new Scanner(System.in);
+		System.out.print("Enter matrix-1 size: ");
+		int r1=myObj.nextInt();
+		int c1=myObj.nextInt();
+		System.out.print("Enter matrix-2 size: ");
+		int r2=myObj.nextInt();
+		int c2=myObj.nextInt();
+		int matrix1[][]=new int[r1][c1];
+		int matrix2[][]=new int[r2][c2];
+		int matrix3[][]=new int[r1][c2];
+		System.out.println("Enter matrix-1 elements:");
+		for(int a=0;a<r1;a++)
+		{
+			for(int b=0;b<c1;b++)
+			{
+				matrix1[a][b]=myObj.nextInt();
+			}
+		}
+		System.out.println("Enter matrix-2 elements:");
+		for(int c=0;c<r2;c++)
+		{
+			for(int d=0;d<c2;d++)
+			{
+				matrix2[c][d]=myObj.nextInt();
+			}
+		}
+		
+		if(c1!=r2)
+		{
+			System.out.println("Matrices cannot be multiplied");
+			return;
+		}
+		
+		
+		
+		
+		for(int i=0;i<r1;i++)
+		{
+			for(int j=0;j<c2;j++)
+			{
+				for(int k=0;k<r2;k++)
+				{
+					matrix3[i][j]+=matrix1[i][k]*matrix2[k][j];
+					
+				}
+			}
+		}
+		for(int p=0;p<3;p++)
+		{
+			for(int l=0;l<3;l++)
+			{
+				System.out.print(matrix3[p][l]);
+			}
+			System.out.println();
+		}
+
+	}
+
+}
