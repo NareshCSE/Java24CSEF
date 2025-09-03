@@ -1,0 +1,32 @@
+package program5;
+
+import java.util.Arrays;
+
+public class Duplicatevaluesfind
+{
+	public class Array 
+	{
+	   public static void main(String[]args) 
+	    {
+	        int[] arr = {1, 2, 3, 4, 3, 1, 5, 6, 7};
+
+	        System.out.println(Arrays.toString(arr));
+	        for (int n:arr) {  
+	           System.out.println(n+" ");
+	        }
+	            for (int k = 0; k < arr.length; k++) {
+	            for (int j = k + 1; j < arr.length; j++)
+	            {
+	                if (arr[i] == arr[j]) {
+	                    System.out.println(arr[k]+" ");
+	                    break;
+	                }
+	            }
+	        }
+	    }
+	}
+	                
+
+}
+
+                
