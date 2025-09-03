@@ -1,0 +1,20 @@
+public class commonvalues {
+	public static void main(String[]args)
+	{
+		String[]a= {"rithwika","Bavya","Chandana","Fathima"};
+		String[]b= {"Chandana","vishala","Fathima","Saanvi"};
+		System.out.println("common values:");
+		for(int i=0;i<a.length;i++)
+		{
+			for(int j=0;j<b.length;j++)
+			{
+				if(a[i]==b[j])
+				{
+				System.out.println(a[i]);
+			}
+		}
+		
+
+}
+	}
+}
