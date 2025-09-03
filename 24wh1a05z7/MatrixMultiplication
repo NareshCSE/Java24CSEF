@@ -1,0 +1,55 @@
+import java.util.Scanner;
+public class Marices {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.print("No.of Rows: ");
+		int rows1 = sc.nextInt();
+		System.out.print("No.of Columns: ");
+		int cols1 = sc.nextInt();
+		int[][] matrix1 = new int[rows1][cols1];
+		System.out.println("Enter Matrix1 elements:");
+		for(int i=0;i<rows1;i++) {
+			for(int j=0;j<cols1;j++) {
+				matrix1[i][j]=sc.nextInt();
+			}
+		}
+		int rows2 = cols1;
+		System.out.println("rows of matrix2 = columns of matrix1");
+		System.out.print("No.of Columns: ");
+		int cols2 = sc.nextInt();
+		int[][] matrix2 = new int[rows2][cols2];
+		System.out.println("Enter Matrix2 elements:");
+		for(int i=0;i<rows2;i++) {
+			for(int j=0;j<cols2;j++) {
+				matrix2[i][j]=sc.nextInt();
+			}
+		}
+		System.out.println("Matrix1:");
+		for(int row=0;row<rows1;row++) {
+			for(int col=0;col<cols1;col++) {
+				System.out.print(matrix1[row][col]+" ");
+			}
+			System.out.println();
+		}
+		System.out.println("Matrix2:");
+		for(int row=0;row<rows2;row++) {
+			for(int col=0;col<cols2;col++) {
+				System.out.print(matrix2[row][col]+" ");
+			}
+			System.out.println();
+		}
+		System.out.println("Multiplication of matrices:");
+		for(int i=0;i<rows1;i++) {
+			for(int j=0;j<cols2;j++) {
+				int sum=0;
+				for(int k=0;k<rows2;k++) {
+					sum = sum + matrix1[i][k]*matrix2[k][j];
+				}
+				System.out.print(sum+" ");
+			}
+			System.out.println();
+		}
+	}
+
+}
