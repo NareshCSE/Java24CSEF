@@ -1,0 +1,48 @@
+package javademo;
+import java.util.Scanner;
+public class banking {
+	public static void main(String[] args)
+	{
+    Scanner sc = new Scanner(System.in);
+     System.out.print("Enter your choice: ");
+     int choice = sc.nextInt();
+     
+            switch (choice) {
+            case 1:
+            	System.out.println("Account creation");
+            	break;
+
+            case 2:
+                System.out.print("Credit amount:");
+                sc.nextInt();
+                System.out.print("Account number:");
+                sc.nextInt();
+                System.out.print("Amount credited succesfully");
+                break;
+
+            case 3:
+                System.out.print("Debit amount ");
+                break;
+
+            case 4:
+                System.out.println("Mini statement");
+                break;
+
+            case 5:
+                System.out.println("Transfer amount");
+                System.out.print(" from Account number:");
+                sc.nextInt();
+                System.out.print(" to Account number:");
+                sc.nextInt();
+                System.out.print("Amount credited succesfully");
+                break;
+
+            case 6:
+                System.out.println("Continue");
+                
+                break;
+            }
+        sc.close();
+    }
+}
+    
