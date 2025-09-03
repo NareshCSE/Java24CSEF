@@ -1,0 +1,58 @@
+import java.util.Scanner;
+
+public class mularray {
+	@SuppressWarnings("resource")
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int m,n;
+		System.out.println("Enter 1st matrix size: ");
+		m = sc.nextInt();
+		n = sc.nextInt();
+		int[][] mat1 = new int[m][n];
+		int p,q;
+		System.out.println("Enter 2nd matrix size: ");
+		p = sc.nextInt();
+		q = sc.nextInt();
+		int[][] mat2 = new int[p][q];
+		System.out.println("Enter elements of 1st matrix: ");
+		for (int i = 0;i<m;i++)
+		{
+			for (int j = 0; j<n;j++)
+			{
+				mat1[i][j] = sc.nextInt();
+			}
+		}
+		if(n != p) {
+			System.out.println("Multiplication is not possible");
+		}
+		
+		System.out.println("Enter elements of 2nd matrix: ");
+		for (int i = 0;i<p;i++)
+		{
+			for (int j = 0; j < q;j++)
+			{
+				mat2[i][j] = sc.nextInt();
+			}
+		}
+		int[][] mat3 = new int[m][q];
+		for (int i = 0;i<m;i++)
+		{
+			for (int j = 0; j<q;j++)
+			{
+				for(int k = 0;k<n;k++)
+				{
+					mat3[i][j] += mat1[i][k] * mat2[k][j];
+				}
+			}
+		}
+		System.out.println("Multiplied matrix: ");
+		for (int i=0;i<m;i++)
+		{
+			for (int j = 0;j<q;j++)
+			{
+				System.out.println(mat3[i][j] + " ");
+			}
+		}
+	}
+	
+}
