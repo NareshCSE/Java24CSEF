@@ -1,0 +1,23 @@
+package Labproblems;
+import java.util.Scanner;
+public class Question3 {
+	           public static void main(String[] args) {
+	        	System.out.print("Enter the number of integers: ");
+		        Scanner scanner = new Scanner(System.in);
+		        int count = scanner.nextInt();
+		        int evenSum = 0;
+		        int oddSum = 0;
+		        for (int i = 1; i <= count; i++) {
+		        	 System.out.print("Enter integer " + i + ": ");
+		             int number = scanner.nextInt();
+		            if (number % 2 == 0) {
+		                evenSum += number;
+		            } else {
+		                oddSum += number;
+		            }
+		        }
+		        System.out.println("Sum of even integers: " + evenSum);
+		        System.out.println("Sum of odd integers: " + oddSum);
+		        scanner.close();
+		    }
+}
