@@ -1,0 +1,55 @@
+package prj1;
+import java.util.*;
+public class BankApplication {
+
+	public static void main(String[] args) {
+		Scanner sc= new Scanner (System.in);
+		int bank = 7;
+		String bank_application;
+		System.out.println("enter options:1) account creation. 2)credit amount. 3)debit amount. 4)mini statement. 5)transfer amount. 6)continue");
+		int choice = sc.nextInt();
+		switch(choice) {
+		case 1:
+            System.out.println("Enter customer name:");
+            String name = sc.next(); 
+            System.out.println("Enter Aadhar number:");
+            String aadhar = sc.next();
+            System.out.println("Enter PAN number:");
+            String pan = sc.next();
+            System.out.println("Account creation successfull:");
+            break;
+		case 2:
+			System.out.println("enter account number and amount:");
+			int account= sc.nextInt();
+			System.out.println("credit amount successfull");
+			break;
+		case 3:
+			System.out.println("enter debited amount and account number:");
+			int enter= sc.nextInt();
+			System.out.println("debit amount successfull");
+			break;
+		case 4:
+			System.out.println("MINI STATEMENT");
+			System.out.println("Thank you,successfull.");
+			break;
+		case 5:
+			System.out.println("transformmed amount is of...");
+			int transfer = sc.nextInt();
+			System.out.println("transfer amount successfull");
+			break;
+		case 6:
+            System.out.println("Continue? Enter 1 for yes, 0 for no:");
+            int yesOrNo = sc.nextInt();
+            if (yesOrNo == 1) {
+                System.out.println("Continuing...");
+            } else {
+                System.out.println("Exiting...");
+            }
+            break;
+        default:
+            System.out.println("Invalid option");
+		}
+		
+	}
+
+}
