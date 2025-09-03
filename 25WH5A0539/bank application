@@ -1,0 +1,81 @@
+package program5;
+import java.util.Scanner;
+
+public class bankapplication1 {
+    static double balance = 0;
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int choice;
+
+        do {
+            System.out.println("\n--- Bank Menu ---");
+            System.out.println("1. Create Account (Set Initial Balance)");
+            System.out.println("2. Credit Amount (Deposit)");
+            System.out.println("3. Debit Amount (Withdraw)");
+            System.out.println("4. Balance Enquiry");
+            System.out.println("5. Exit");
+            System.out.print("Enter your choice: ");
+            choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    createAccount(scanner);
+                    break;
+                case 2:
+                    creditAmount(scanner);
+                    break;
+                case 3:
+                    debitAmount(scanner);
+                    break;
+                case 4:
+                    balanceEnquiry();
+                    break;
+                case 5:
+                    System.out.println("Thank you for using the bank system!");
+                    break;
+                default:
+                    System.out.println("Invalid choice, try again.");
+            }
+        } while (choice != 5);
+
+        scanner.close();
+    }
+
+    static void createAccount(Scanner scanner) {
+        System.out.print("Enter initial balance: ");
+        balance = scanner.nextDouble();
+        if (balance < 0) {
+            System.out.println("Balance cannot be negative. Setting balance to 0.");
+            balance = 0;
+        }
+        System.out.println("Account created with balance: " + balance);
+    }
+
+    static void creditAmount(Scanner scanner) {
+        System.out.print("Enter amount to deposit: ");
+        double amount = scanner.nextDouble();
+        if (amount > 0) {
+            balance += amount;
+            System.out.println(amount + " deposited. New balance: " + balance);
+        } else {
+            System.out.println("Invalid amount.");
+        }
+    }
+
+    static void debitAmount(Scanner scanner) {
+        System.out.print("Enter amount to withdraw: ");
+        double amount = scanner.nextDouble();
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            System.out.println(amount + " withdrawn. New balance: " + balance);
+        } else {
+            System.out.println("Insufficient balance or invalid amount.");
+        }
+    }
+
+    static void balanceEnquiry() {
+        System.out.println("Your current balance is: " + balance);
+    }
+}
+
