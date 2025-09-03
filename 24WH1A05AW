@@ -1,0 +1,8 @@
+package java1;
+public class Add {
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int a=28,b=14;
+		System.out.println(a+b);
+	}
+}
