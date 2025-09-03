@@ -16,6 +16,7 @@ public class ArraysDuplicateValues {
 			for(int j=0;j<i;j++) {
 				if(numbers[i]==numbers[j]) {
 					System.out.println(numbers[i]);
+					break;
 				}
 			}
 		}
