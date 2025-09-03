@@ -1,0 +1,40 @@
+package labprograms;
+import java.util.*;
+public class Calculator {
+
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Enter the number1:");
+		int number1=scanner.nextInt();
+		System.out.println("Enter the number2:");
+		int number2=scanner.nextInt();
+		System.out.println("a-addition"+"\n"+"s-subtraction"+"\n"+"m-multiplication"+"\n"+"d-division");
+		System.out.println("Select an option:");
+		char ch=scanner.next().charAt(0);
+		int sum=number1+number2;
+		int difference=number1-number2;
+		int product=number1*number2;
+		int division=number1/number2;
+		switch(ch) {
+		case 'a':
+			System.out.println("Addition of"+"number1"+"and"+"number2"+"is:"+sum);
+			break;
+		case 's':
+			System.out.println("subtraction of"+"number1"+"and"+"number2"+"is:"+difference);
+			break;
+		case 'm':
+			System.out.println("multiplication of"+"number1"+"and"+"number2"+"is:"+product);
+			break;
+		case 'd':
+			System.out.println("division of"+"number1"+"and"+"number2"+"is:"+division);
+			break;
+		default:
+			System.out.println("Invalid input");
+			
+		}
+		
+		
+		
+	}
+
+}
