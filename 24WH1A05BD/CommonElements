@@ -1,0 +1,44 @@
+package add;
+import java.util.Scanner;
+
+public class CommonElements {
+
+	public static void main(String[] args) {
+		Scanner scanner=new Scanner(System.in);
+		System.out.println("enter size of first array:");
+		int n1=scanner.nextInt();
+		scanner.nextLine();
+		String[] arr1=new String[n1];
+		System.out.println("enter elements of first array:");
+		for(int i=0;i<n1;i++) {
+			 arr1[i]=scanner.nextLine();
+		}
+		
+		System.out.println("enter size of second array");
+		int n2=scanner.nextInt();
+		scanner.nextLine();
+		String[] arr2=new String[n2];
+		System.out.println("enter elements of second array:");
+		for(int i=0;i<n2;i++) {
+			 arr2[i]=scanner.nextLine();
+		}
+		
+		System.out.println("\nCommon Elements:");
+		boolean found=false;
+		for(int i=0;i<n1;i++) {
+			for(int j=0;j<n2;j++) {
+				if(arr1[i].equals(arr2[j])) {
+					System.out.println(arr1[i]);
+					found=true;
+					break;
+				}
+			}
+		}
+		if(!found) {
+			System.out.println("No Common Elements");
+			
+		}
+		scanner.close();
+	}
+
+}
