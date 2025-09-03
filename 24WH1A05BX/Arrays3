@@ -1,0 +1,31 @@
+package demo;
+
+public class arrays3 {
+
+	public static void main(String[] args) {
+		//String[] colors = new String[5];
+		String[] colors = {"Blue","Red","Green","Orange"};
+		/*colors[0]="Blue";
+		colors[1]="Red";
+		colors[2]="Green";
+		colors[3]="Orange";*/
+        String[] colors1 = {"Black","Green","Blue","White"} ;
+       /* colors1[0]="Black";
+        colors1[1]="Green";
+        colors1[2]="Blue";
+        colors[3]="White"; */
+        int n=4;
+        int i,j;
+        for(i=0;i<n;i++)
+        {
+        	for(j=0;j<n;j++)
+        	{
+        		if(colors[i]==colors1[j])
+        		{
+        			System.out.println(colors[i]);
+        		}
+        	}
+        }
+	}
+
+}
