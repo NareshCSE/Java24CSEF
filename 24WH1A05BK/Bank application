@@ -1,0 +1,149 @@
+package bankapplication;
+import java.util.Scanner;
+public class Bankapplication {
+	    static final int MAX_ACCOUNTS = 100;
+	    static int accountCount = 0;
+
+	    static String[] names = new String[MAX_ACCOUNTS];
+	    static String[] aadhaar = new String[MAX_ACCOUNTS];
+	    static String[] pan = new String[MAX_ACCOUNTS];
+	    static int[] accountNumbers = new int[MAX_ACCOUNTS];
+	    static double[] balances = new double[MAX_ACCOUNTS];
+
+	    static Scanner sc = new Scanner(System.in);
+
+	    public static void main(String[] args) {
+	        char cont;
+	        do {
+	            System.out.println("\n===== BANK MENU =====");
+	            System.out.println("1. Account Creation");
+	            System.out.println("2. Credit Amount");
+	            System.out.println("3. Debit Amount");
+	            System.out.println("4. Mini Statement / Balance Enquiry");
+	            System.out.println("5. Transfer Amount");
+	            System.out.println("6. Exit");
+	            System.out.print("Enter your choice: ");
+	            int choice = sc.nextInt();
+
+	            switch (choice) {
+	                case 1: accountCreation(); break;
+	                case 2: creditAmount(); break;
+	                case 3: debitAmount(); break;
+	                case 4: balanceEnquiry(); break;
+	                case 5: transferAmount(); break;
+	                case 6: 
+	                    System.out.println("Exiting Application...");
+	                    return;
+	                default:
+	                    System.out.println("Invalid choice. Try again.");
+	            }
+
+	            System.out.print("\nDo you want to continue? (y/n): ");
+	            cont = sc.next().charAt(0);
+
+	        } while (cont == 'y' || cont == 'Y');
+	    }
+
+	    public static void accountCreation() {
+	        if (accountCount >= MAX_ACCOUNTS) {
+	            System.out.println("Cannot create more accounts!");
+	            return;
+	        }
+	        sc.nextLine(); 
+	        System.out.print("Enter Name: ");
+	        names[accountCount] = sc.nextLine();
+	        System.out.print("Enter Aadhaar Number: ");
+	        aadhaar[accountCount] = sc.nextLine();
+	        System.out.print("Enter PAN: ");
+	        pan[accountCount] = sc.nextLine();
+	        accountNumbers[accountCount] = 1000 + accountCount; // simple account no.
+	        balances[accountCount] = 0;
+
+	        System.out.println("Account Created Successfully!");
+	        System.out.println("Account Number: " + accountNumbers[accountCount]);
+
+	        accountCount++;
+	    }
+
+	    public static void creditAmount() {
+	        System.out.print("Enter Account Number: ");
+	        int acc = sc.nextInt();
+	        int index = findAccount(acc);
+	        if (index == -1) {
+	            System.out.println("Account not found!");
+	            return;
+	        }
+	        System.out.print("Enter Amount to Credit: ");
+	        double amt = sc.nextDouble();
+	        balances[index] += amt;
+	        System.out.println("Amount Credited Successfully! New Balance: " + balances[index]);
+	    }
+
+	    public static void debitAmount() {
+	        System.out.print("Enter Account Number: ");
+	        int acc = sc.nextInt();
+	        int index = findAccount(acc);
+	        if (index == -1) {
+	            System.out.println("Account not found!");
+	            return;
+	        }
+	        System.out.print("Enter Amount to Debit: ");
+	        double amt = sc.nextDouble();
+	        if (balances[index] >= amt) {
+	            balances[index] -= amt;
+	            System.out.println("Amount Debited Successfully! New Balance: " + balances[index]);
+	        } else {
+	            System.out.println("Insufficient Balance!");
+	        }
+	    }
+
+	    public static void balanceEnquiry() {
+	        System.out.print("Enter Account Number: ");
+	        int acc = sc.nextInt();
+	        int index = findAccount(acc);
+	        if (index == -1) {
+	            System.out.println("Account not found!");
+	            return;
+	        }
+	        System.out.println("\n--- Mini Statement ---");
+	        System.out.println("Name: " + names[index]);
+	        System.out.println("Account No: " + accountNumbers[index]);
+	        System.out.println("Balance: " + balances[index]);
+	    }
+
+	    public static void transferAmount() {
+	        System.out.print("Enter From Account Number: ");
+	        int fromAcc = sc.nextInt();
+	        int fromIndex = findAccount(fromAcc);
+
+	        System.out.print("Enter To Account Number: ");
+	        int toAcc = sc.nextInt();
+	        int toIndex = findAccount(toAcc);
+
+	        if (fromIndex == -1 || toIndex == -1) {
+	            System.out.println("Invalid account number(s).");
+	            return;
+	        }
+
+	        System.out.print("Enter Amount to Transfer: ");
+	        double amt = sc.nextDouble();
+
+	        if (balances[fromIndex] >= amt) {
+	            balances[fromIndex] -= amt;
+	            balances[toIndex] += amt;
+	            System.out.println("Transfer Successful!");
+	            System.out.println("Your New Balance: " + balances[fromIndex]);
+	        } else {
+	            System.out.println("Insufficient Balance!");
+	        }
+	    }
+	    public static int findAccount(int acc) {
+	        for (int i = 0; i < accountCount; i++) {
+	            if (accountNumbers[i] == acc) {
+	                return i;
+	            }
+	        }
+	        return -1;
+	    }
+	}
+
