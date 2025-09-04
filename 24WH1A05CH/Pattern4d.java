@@ -1,0 +1,39 @@
+public class Pattern4d {
+
+	public static void main(String[] args) {
+		int row=5;
+		int col=9;
+		int number=1;
+        int num=0;
+		for(int i=0;i<row;i++)
+		{
+			for(int j=0;j<col;j++)
+			{
+			 
+				
+				if(j>=((col-1)/2)-i && j<=((col-1)/2)+i)
+				{
+					if(j>(col-1)/2)
+					  {
+						  num-=1;
+						  System.out.print(num);
+					  }
+					else
+				   {System.out.print(number);
+                    num=number;
+				   number+=1;
+				   }
+				}
+				
+				else
+				{
+					System.out.print(" ");
+				}
+			}
+			number=1;
+			System.out.println();
+		}
+
+	}
+
+}
