@@ -1,48 +1,63 @@
-package javademo;
+package demo;
 import java.util.Scanner;
-public class banking {
-	public static void main(String[] args)
-	{
-    Scanner sc = new Scanner(System.in);
-     System.out.print("Enter your choice: ");
-     int choice = sc.nextInt();
-     
-            switch (choice) {
-            case 1:
-            	System.out.println("Account creation");
-            	break;
+  public class bankingdetails {
+  public static void main(String[] args)
+		{
+	    Scanner sc = new Scanner(System.in);
+	     System.out.print("Enter your choice: ");
+	     int choice = sc.nextInt();
+	     
+	            switch (choice) {
+	            case 1:
+	            	System.out.println("Account creation");
+	            	System.out.println("Accounter name:");
+	            	String name=sc.next();
+	            	System.out.println("Aadhar number:");
+	            	long aadhar=sc.nextLong();
+	            	System.out.println("Pan number:");
+	            	String pan=sc.next();
+                    System.out.println("Account created successfully");
+	            	break;
 
-            case 2:
-                System.out.print("Credit amount:");
-                sc.nextInt();
-                System.out.print("Account number:");
-                sc.nextInt();
-                System.out.print("Amount credited succesfully");
-                break;
+	            case 2:
+	                System.out.print("Credit amount:");
+	                sc.nextInt();
+	                System.out.print("Account number:");
+	                sc.nextInt();
+	                System.out.print("Amount credited succesfully");
+	                break;
 
-            case 3:
-                System.out.print("Debit amount ");
-                break;
+	            case 3:
+	                System.out.print("Debit amount ");
+	                sc.nextInt();
+	                System.out.println("Account number:");
+	                sc.nextInt();
+                    System.out.println("Amount:");
+	            	sc.nextInt();
+                    System.out.println("Amount debited sucessfully");
+	                break;
 
-            case 4:
-                System.out.println("Mini statement");
-                break;
+	            case 4:
+	                System.out.println("Mini statement");
+	        	    System.out.println("Balence enquiry");
+	                break;
 
-            case 5:
-                System.out.println("Transfer amount");
-                System.out.print(" from Account number:");
-                sc.nextInt();
-                System.out.print(" to Account number:");
-                sc.nextInt();
-                System.out.print("Amount credited succesfully");
-                break;
+	            case 5:
+	                System.out.println("Transfer amount");
+	            	System.out.print(" from Account number:");
+	                sc.nextInt();
+	                System.out.print(" to Account number:");
+	                sc.nextInt();
+	                System.out.print("Amount credited succesfully");
+	                break;
 
-            case 6:
-                System.out.println("Continue");
-                
-                break;
-            }
-        sc.close();
-    }
-}
-    
+	            case 6:
+	                System.out.println("Continue:");
+	                System.out.println("Yes");
+	                System.out.println("No");
+	                break;
+	            }
+	        sc.close();
+	    }
+	}
+  
