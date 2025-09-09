@@ -1,0 +1,28 @@
+package demo;
+import java.util.Scanner;
+
+public class Pattern4 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner num=new Scanner(System.in);
+		System.out.print("Enter n value: ");
+		int n=num.nextInt();
+		int i,j,k;
+		for(i=1;i<=n;i++) {
+			for(j=1;j<=n-i;j++) {
+				System.out.print(" ");
+			}
+		
+			for(k=1;k<=i;k++) {
+				System.out.print(k);
+			}
+			for(int l=i-1;l>=1;l--) {
+				System.out.print(l);
+			}
+			System.out.println();
+		}
+
+	}
+
+}
