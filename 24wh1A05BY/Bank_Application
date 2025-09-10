@@ -1,0 +1,106 @@
+package test;
+import java.util.Scanner;
+
+public class bank_ques {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String ch="yes";
+		int amount=0;
+		double account=0;
+		while(ch.equals("yes")){
+			System.out.println("1. Account Creation (scan customer details name, aadhar number and pan) \r\n"
+					+ "2. Credit Amount (account number and amount)  \r\n"
+					+ "3. Debit Amount (account number and money) \r\n"
+					+ "4. Mini statement/balance enquiry\r\n"
+					+ "5. Transfer account (from account number, to account number, amount)\r\n"
+					+ "6. Continue (y/n)\r\n"
+					+ "");
+			System.out.println("enter any one option from above:\n");
+			Scanner iput=new Scanner(System.in);
+			int n=iput.nextInt();
+			iput.nextLine();
+			
+			if(n==1) {
+				 amount=0;
+			}
+			switch(n) {
+			case 1:
+			{
+				System.out.println("enter your name:");
+				String N=iput.nextLine();
+				System.out.println("enter aadhar number:");
+			    double a=iput.nextInt();
+			    iput.nextLine();
+			    System.out.println("enter pan number:");
+			    double p=iput.nextInt();
+			    iput.nextLine();
+			    System.out.println("enter account number:");
+			     account=iput.nextInt();
+			     iput.nextLine();
+			    
+			    break;
+			}
+			case 2:
+			{
+				System.out.println("enter account number:");
+			    double  account1=iput.nextInt();
+			    iput.nextLine();
+			    if(account==account1) {
+			    System.out.println("enter amount:");
+			    double p=iput.nextInt();
+			    iput.nextLine();
+			  
+			    amount+=p;
+			    }else {
+			    	System.out.println("recheck ur account number");
+			    }
+			    break;
+			}
+			case 3:
+			{
+				System.out.println("enter account number:");
+			    double account2=iput.nextInt();
+			    iput.nextLine();
+			    if(account==account2) {
+			    System.out.println("enter money:");
+			    double p=iput.nextInt();
+			    iput.nextLine();
+			  
+			    amount-=p;
+			    }else {
+			    	System.out.println("recheck ur account number");
+			    }
+			    break;
+			}
+			case 4:
+			{
+				System.out.println("the balance:"+amount);
+				break;
+			}
+			case 5:
+			{
+				System.out.println("enter account number from which u r sending:");
+				int a1=iput.nextInt();
+				System.out.println("enter account number u r sending to:");
+				int a2=iput.nextInt();
+				iput.nextLine();
+				System.out.println("enter amount u wnated to transfer:");
+				int a3=iput.nextInt();
+				iput.nextLine();
+				amount-=a3;
+				break;
+			}
+			
+			}
+			System.out.println("if u wanted to continue press 'yes',otherwise press'no'");
+			
+			String s=iput.nextLine();
+			ch=(s);
+				
+		}
+		System.out.println("successfully logged out");
+
+	}
+
+}
