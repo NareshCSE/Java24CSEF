@@ -4,6 +4,7 @@ public class pallindrome7 {
 
 	public static void main(String[] args) {
 		Scanner myObj=new Scanner(System.in);
+		System.out.println("Enter a word:");
 		String word=myObj.next();
 		StringBuffer sbuffer=new StringBuffer();
 		sbuffer.append(word);
