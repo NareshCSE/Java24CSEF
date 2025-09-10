@@ -1,0 +1,33 @@
+import java.util.Scanner;
+
+public class prime_fibonacci {
+	 public static boolean isPrime(int num) {
+	        if (num <= 1) return false;
+	        if (num == 2) return true;
+	        if (num % 2 == 0) return false;
+	        for (int i = 3; i <= Math.sqrt(num); i += 2) {
+	            if (num % i == 0) return false;
+	        }
+	        return true;
+	    }
+
+	    public static void PrimeFibonacci(int n) {
+	        int a = 0, b = 1, c;
+	        while (a <= n) {
+	            if (isPrime(a)) {
+	                System.out.println(a);
+	            }
+	            c = a + b;
+	            a = b;
+	            b = c;
+	        }
+	    }
+
+	    public static void main(String[] args) {
+	        try (Scanner scanner = new Scanner(System.in)) {
+	            System.out.print("Enter the range n: ");
+	            int n = scanner.nextInt();
+	            PrimeFibonacci(n);
+	        }
+	    }
+	}
