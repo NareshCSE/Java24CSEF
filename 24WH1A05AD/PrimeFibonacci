@@ -1,0 +1,43 @@
+import java.util.*;
+public class FibonacciPrime {
+	public static boolean isPrime(int num) {
+		int count =0;
+		if(num<=1)
+			return false;
+		if(num==2) {
+			return true;
+		}
+		for(int i = 2;i<num;i++) {
+			if(num%i==0) {
+				count+=1;
+				break;
+			}
+		}
+
+		return count==0;
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter a number:");
+		int number = sc.nextInt();
+		int first = 0;
+		int second = 1;
+		int temp;
+		//int count =0;
+		System.out.println("Prime Fibonacci numbers up to " + number + ":");
+
+        while (first <= number) {
+            if (isPrime(first)) {
+                System.out.print(first + " ");
+            }
+
+            temp = first + second;
+            first = second;
+            second = temp;
+        }
+        sc.close();
+	}
+
+}
