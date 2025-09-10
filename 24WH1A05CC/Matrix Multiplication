@@ -42,8 +42,7 @@ public class ArrayB {
 					}
 				}
 			}
-		}
-		System.out.println("result matrix is:");
+            System.out.println("result matrix is:");
 		for(int i=0;i<rows1;i++) {
 			for(int j=0;j<cols2;j++) {
 				System.out.print(result[i][j]+" ");
@@ -51,6 +50,8 @@ public class ArrayB {
 			}
 			System.out.println();
 		}
+		}
+		
 		
 	
 	
