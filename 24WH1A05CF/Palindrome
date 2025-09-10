@@ -1,0 +1,30 @@
+package csef;
+
+import java.util.Scanner;
+
+public class StringExample {
+
+	public static void main(String[] args) {
+		Scanner scanner=new Scanner(System.in);
+	      StringBuffer sbuffer = new StringBuffer();
+	      
+	      System.out.print("Enter a String:");
+	      String enteredString=scanner.next();
+	      
+	      sbuffer.append(enteredString);
+	      StringBuffer sbuffer2=new StringBuffer(sbuffer);
+	      sbuffer.reverse();
+	      if(sbuffer.toString().equals(sbuffer2.toString())) {
+	    	  System.out.println("Palindrome");
+	      }
+	      else {
+	    	  System.out.println("Not Palindrome");
+	      }
+	      scanner.close();
+
+		}
+
+
+
+	}
+
