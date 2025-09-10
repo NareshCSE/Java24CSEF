@@ -1,0 +1,27 @@
+package test;
+import java.util.Scanner;
+public class Sum_of_even_odd {
+  public static void main(String[] args){
+	int seven=0;
+	int sodd=0;
+	Scanner rr=new Scanner(System.in);
+	int[] arr=new int[1000];
+	System.out.println("enter no.o array elements needed");
+	int n=rr.nextInt();
+	rr.nextLine();
+	int i;
+	for(i=0;i<n;i++) {
+		arr[i]=rr.nextInt();
+		if(arr[i]%2==0) {
+			seven+=arr[i];
+		}
+		else {
+			sodd+=arr[i];
+		}
+	}
+	System.out.println("Sum of even numbers:"+seven);
+	System.out.println("Sum of odd numbers:"+sodd);
+	
+	
+}
+}
