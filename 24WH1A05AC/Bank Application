@@ -1,0 +1,131 @@
+package labprograms;
+import java.util.*;
+public class BankDetails {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		String[] names = new String[100];
+		String[] aadhar = new String[100];
+		String[] pan = new String[100];
+		int[] accNum = new int[100];
+		double[] balance = new double[100];
+		int accountCount = 0;
+		int nextAccNum = 1001; 
+		char cont = 'y';
+		while (cont == 'y' || cont == 'Y') {
+			System.out.println("\n--- Bank Menu ---");
+		    System.out.println("1. Account Creation");
+		    System.out.println("2. Credit Amount");
+		    System.out.println("3. Debit Amount");
+		    System.out.println("4. Balance Enquiry");
+		    System.out.println("5. Transfer Amount");
+		    System.out.print("Enter your choice: ");
+		    int choice = sc.nextInt();
+		    sc.nextLine(); 
+		    switch (choice) {
+		    case 1:
+		    	System.out.print("Enter customer name: ");
+		        names[accountCount] = sc.nextLine();
+		        System.out.print("Enter Aadhar number: ");
+		        aadhar[accountCount] = sc.nextLine();
+		        System.out.print("Enter PAN number: ");
+		        pan[accountCount] = sc.nextLine();
+		        accNum[accountCount] = nextAccNum;
+		        balance[accountCount] = 0;
+		        System.out.println("Account created successfully! Account No: " + nextAccNum);
+		        accountCount++;
+		        nextAccNum++;
+		        break;
+		     case 2:
+		    	 System.out.print("Enter account number: ");
+		         int accC = sc.nextInt();
+		         System.out.print("Enter amount to credit: ");
+		         double amtC = sc.nextDouble();
+		         boolean foundC = false;
+		         for (int i = 0; i < accountCount; i++) {
+		        	 if (accNum[i] == accC) {
+		        		 balance[i] += amtC;
+		                 System.out.println("Amount credited successfully! New Balance: " + balance[i]);
+		                 foundC = true;
+		                 break;
+		                        }
+		                    }
+		                    if (!foundC) {
+		                        System.out.println("Account not found!");
+		                    }
+		                    break;
+		     case 3:
+		    	 System.out.print("Enter account number: ");
+		         int accD = sc.nextInt();
+		         System.out.print("Enter amount to debit: ");
+		         double amtD = sc.nextDouble();
+		         boolean foundD = false;
+		         for (int i = 0; i < accountCount; i++) {
+		        	 if (accNum[i] == accD) {
+		        		 if (balance[i] >= amtD) {
+		        			 balance[i] -= amtD;
+		                     System.out.println("Amount debited successfully! New Balance: " + balance[i]);
+		                     } else {
+		                                System.out.println("Insufficient balance!");
+		                            }
+		                            foundD = true;
+		                            break;
+		                        }
+		                    }
+		                    if (!foundD) {
+		                        System.out.println("Account not found!");
+		                    }
+		                    break;
+		    case 4: 
+		    	System.out.print("Enter account number: ");
+		        int accB = sc.nextInt();
+		        boolean foundB = false;
+		        for (int i = 0; i < accountCount; i++) {
+		        	if (accNum[i] == accB) {
+		        		System.out.println("Account Holder: " + names[i]);
+		                System.out.println("Balance: " + balance[i]);
+		                foundB = true;
+		                 break;
+		                        }
+		                    }
+		                    if (!foundB) {
+		                        System.out.println("Account not found!");
+		                    }
+		                    break;
+		    case 5: 
+		                    System.out.print("Enter FROM account number: ");
+		                    int fromAcc = sc.nextInt();
+		                    System.out.print("Enter TO account number: ");
+		                    int toAcc = sc.nextInt();
+		                    System.out.print("Enter amount to transfer: ");
+		                    double amtT = sc.nextDouble();
+		                    int fromIndex = -1, toIndex = -1;
+		                    for (int i = 0; i < accountCount; i++) {
+		                        if (accNum[i] == fromAcc) fromIndex = i;
+		                        if (accNum[i] == toAcc) toIndex = i;
+		                    }
+		                    if (fromIndex != -1 && toIndex != -1) {
+		                        if (balance[fromIndex] >= amtT) {
+		                            balance[fromIndex] -= amtT;
+		                            balance[toIndex] += amtT;
+		                            System.out.println("Transfer successful!");
+		                            System.out.println("New Balance (From Account): " + balance[fromIndex]);
+		                        } else {
+		                            System.out.println("Insufficient balance in source account!");
+		                        }
+		                    } else {
+		                        System.out.println("Invalid account number(s)!");
+		                    }
+		                    break;
+
+		                default:
+		                    System.out.println("Invalid choice!");
+		            }
+
+		            System.out.print("\nDo you want to continue? (yes/no): ");
+		            cont = sc.next().charAt(0);
+		        }
+
+		        System.out.println("Thank you for using the Bank Application!");
+		        sc.close();
+		    }
+}
