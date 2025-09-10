@@ -1,0 +1,85 @@
+package demo;
+
+import java.util.Scanner;
+
+public class BankApplication {
+	public static void main (String[]args) {
+	Scanner sc = new  Scanner(System.in);
+	String  ch="yes";
+	int amount = 0;
+	double acc=0;
+	do {
+		System.out.println("Menu Card :-");
+		System.out.println("1.Account Creation");
+		System.out.println("2.Credit Amount");
+		System.out.println("3.Debit Amount");
+		System.out.println("4.Mini Statement/Balance Enquiry");
+		System.out.println("5.Transfer Account");
+		System.out.println("6.Exit");
+		System.out.println("Enter option : ");
+	    int option = sc.nextInt();
+	   sc.nextLine();
+	   if(option==1) {
+		   amount=0;
+	   }
+		switch(option) 
+		{
+		case 1 :
+			System.out.print("Enter Customer's name : ");
+			String name = sc.nextLine();
+			System.out.print("Enter Aadhar Number : ");
+			String aadhar = sc.nextLine();
+			System.out.print("Enter PAN number : ");
+			String pan = sc.nextLine();	
+			System.out.println("Enter account number : ");
+			acc = sc.nextInt();
+			System.out.println("Account created : "+ name);
+			sc.nextLine();
+			break;
+		case 2:
+			System.out.print("Enter the Account Number : ");
+			double acc1 = sc.nextInt();
+			if(acc==acc1) {
+				System.out.print("Enter the amount to be credited : ");
+				double a1 = sc.nextInt();
+				sc.nextLine();
+				amount+=a1;
+			}
+		    break;
+		case 3: 
+			System.out.print("Enter the Account Number : ");
+			double acc2 = sc.nextInt();
+			if(acc==acc2) {
+			    System.out.print("Enter the amount to be debitted : ");
+			    int a2 = sc.nextInt();
+			    sc.nextLine();
+			    amount-=a2;
+			}
+		    break;
+		case 4:
+			System.out.println("Mini statement/balance for account "+amount);
+		    break;
+		case 5:
+			System.out.print("From account number : ");
+			String fromAccount = sc.next();
+			System.out.print("To account number : ");
+			String toAccount = sc.next();
+			System.out.print("Enter the amount : ");
+			int amount3 = sc.nextInt();
+			amount-=amount3;
+			System.out.println(amount3 +" transferred from "+ fromAccount +"to"+ toAccount);
+		    break;
+		case 6:
+			System.out.print("Exit!");
+			break;
+		default:
+			System.out.println("Invalid choice");
+			sc.nextLine();
+		System.out.println("Do you want to continue (yes/no) : ");
+		ch = sc.next();
+		}
+	}while(ch.equals("yes"));
+	
+  System.out.println("Successfully logged out");
+}
+}
