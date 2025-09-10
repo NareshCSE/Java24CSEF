@@ -1,0 +1,23 @@
+package demo;
+
+public class fibonacciseries {
+	public static void main(String[] args) {
+		int limit = 10;
+        int a = 0, b = 1;
+        while (a <= limit) {
+            if (a > 1 && isPrime(a)) {
+                System.out.println(a);
+            }
+            int next = a + b;
+            a = b;
+            b = next;
+        }
+    }
+    public static boolean isPrime(int n) {
+        if (n <= 1) return false;
+        for (int i = 2; i <= Math.sqrt(n); i++) {
+            if (n % i == 0) return false;
+        }
+        return true;
+    }
+}
