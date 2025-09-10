@@ -1,0 +1,43 @@
+package demo;
+import java.util.*;
+public class largestevenno {
+	public static void main(String[] args) {
+		String str= "ad%#2373#@" ;
+        LinkedHashSet<Character> digitSet = new LinkedHashSet<>();
+        for (char ch : str.toCharArray()) {
+            if (Character.isDigit(ch)) {
+                digitSet.add(ch);
+            }
+        }
+        if (digitSet.isEmpty()) {
+            System.out.println("No digits found.");
+            return;
+        }
+        List<Character> digits = new ArrayList<>(digitSet);
+        digits.sort(Collections.reverseOrder());
+        Character evenDigit = null;
+        for (Character d : digits) {
+            if ((d - '0') % 2 == 0) {
+                evenDigit = d;
+                break; 
+            }
+        }
+        if (evenDigit == null) {
+            System.out.println("No even digit found");
+            return;
+        }
+        StringBuilder largestEven = new StringBuilder();
+        for (Character d : digits) {
+            if (!d.equals(evenDigit)) {
+                largestEven.append(d);
+            }
+        }
+        largestEven.append(evenDigit);
+
+        System.out.println("Largest even number: " + largestEven.toString());
+    }
+}
+
+
+
+
