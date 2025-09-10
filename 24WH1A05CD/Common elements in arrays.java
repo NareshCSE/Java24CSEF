@@ -1,0 +1,40 @@
+package javalab;
+
+import java.util.Scanner;
+
+public class Commonelementsarrays {
+	@SuppressWarnings("resource")
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n1,n2;
+		System.out.println("enter sizes of arrays:");
+		n1 = sc.nextInt();
+		n2 = sc.nextInt();
+		sc.nextLine();
+		String[] arr1 = new String[n1];
+		String[] arr2 = new String[n2];
+		System.out.println("Enter 1st array elements:");
+		for (int i=0;i<n1;i++) 
+		{
+			arr1[i] = sc.nextLine();
+		}
+		System.out.println("Enter 2nd array elements:");
+		for (int i=0;i<n2;i++) 
+		{
+			arr2[i] = sc.nextLine();
+		}
+		System.out.println("Common elements between two arrays:");
+		for (int i = 0;i<n1;i++)
+		{
+			for (int j =0;j<n2;j++)
+			{
+				if (arr1[i].equals(arr2[j]))
+				{
+					System.out.println(arr1[i]);
+					break;
+				}
+			}
+		}
+		
+	}
+}
