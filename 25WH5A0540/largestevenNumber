@@ -1,0 +1,31 @@
+package practise;
+
+import java.util.Arrays;
+
+public class largestEvenNumber {
+	public static void main(String[]args)
+	{
+		String a = "ad%#2373#@";
+		String digits = "";
+        for (char c : a.toCharArray()) {
+            if (Character.isDigit(c) && digits.indexOf(c) == -1) {
+                digits += c;
+            }
+        }
+        char[] sorted = digits.toCharArray();
+        Arrays.sort(sorted);
+        String result = new String(sorted);
+        result = new StringBuilder(result).reverse().toString();  
+        if (result.charAt(result.length() - 1) % 2 != 0) {
+            for (int i = result.length() - 1; i >= 0; i--) {
+                if (result.charAt(i) % 2 == 0) {
+                    result = result.substring(0, i) + result.charAt(i) + result.substring(i + 1);
+                    break;
+                }
+            }
+        }
+        System.out.println("Largest even number: " + result);
+   
+
+}
+}
