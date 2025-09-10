@@ -1,0 +1,36 @@
+package demo;
+import java.util.Scanner;
+class getbalence{
+	void BankA() {
+		System.out.println("$1000");
+	}
+    void BankB() {
+    	System.out.println("$1500");
+    }
+	void BankC() {
+		System.out.println("$2000");
+	}
+}
+public class bank {
+public static void main(String[] args) {
+	Scanner scanner = new Scanner(System.in);
+	System.out.println("Enter bank name (A, B or C): ");
+    String bankName = scanner.nextLine().trim().toUpperCase();
+    getbalenceBank(bankName);
+    scanner.close();
+}
+	public static void getbalenceBank(String bankName) {
+		getbalence gb=new getbalence();
+		switch(bankName){
+		case "A":
+		gb.BankA();	
+		break;
+		case "B":
+		gb.BankB();
+		break;
+		case "C":
+		gb.BankC();
+		break;
+	}
+  }
+}
