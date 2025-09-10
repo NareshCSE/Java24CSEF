@@ -1,0 +1,85 @@
+package comsample;
+import java.util.Scanner;
+public class Bankappli {
+    public static void main(String[] args) 
+    {
+        Scanner input = new Scanner(System.in);
+        while(true)
+        {
+        	 System.out.println("1 Account Creation");
+             System.out.println("2 credit amount");
+             System.out.println("3 Debit Amount");
+             System.out.println("4 Mini statement/balance enquiry");
+             System.out.println("5 Transfer account");
+             System.out.println("6 continue");
+             System.out.println("7 exit");
+             System.out.print("Enter your choice: ");
+        	int n;
+            n = input.nextInt();
+            switch (n) 
+            {
+                case 1:
+                    System.out.println("Account Creation Selected");
+                    input.nextLine();
+                    String name =input.nextLine();
+                    System.out.println("Welcome" + " " + name );
+                    System.out.print(" enter adhar no:");
+                    int h;
+                    h=input.nextInt();
+                    System.out.println(h);
+                    System.out.println("enter pan no:");
+                    int p;
+                    p=input.nextInt();
+                    System.out.println( " " + p);
+                    break;
+                case 2:
+                    System.out.println("credit amount Selected");
+                    int a;
+                    a=input.nextInt();
+                    System.out.println("enter account no:" + " " + a);
+                    int m;
+                    m=input.nextInt();
+                    System.out.println("enter amount no:" + " " + m);
+                    break;
+                case 3:
+                    System.out.println("Debit Amount Selected");
+                    int w;
+                    w=input.nextInt();
+                    System.out.println("enter account no:" + " " + w);
+                    int q;
+                    q=input.nextInt();
+                    System.out.println("enter money no:" + " " + q);
+                    break;
+                case 4:
+                    System.out.println("Mini statement/balance enquiry Selected");
+                    break;
+                case 5:
+                    System.out.println("Transfer account Selected");
+                    int f;
+                    f=input.nextInt();
+                    System.out.println("enter from which account :" + " " + f);
+                    int t;
+                    t=input.nextInt();
+                    System.out.println("enter account no:" + " " + t);
+                    int d;
+                    d=input.nextInt();
+                    System.out.println("enter amount no:" + " " + d);
+                    break;
+                case 6:
+                    System.out.println("Continue is Selected");
+                    input.nextLine();
+                    String name1=input.nextLine();
+                    System.out.println("now continue" + " " + name1 );
+                    break;
+                case 7:
+                    System.out.println("exit");
+                    input.close();
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("others");
+                    break;
+            }
+        } 
+    }
+}
