@@ -1,0 +1,66 @@
+import java.util.Scanner;
+public class Bank {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int option;
+		String acc = "5935";
+		long sum=0;
+		do {
+					System.out.print("Menu:\n1.Account Creation\n2.Credit Amount\n3.Debit Amount\n4.balance enquiry\n5.Transfer account\n6.Continue\nChoose an Option: ");
+					option = sc.nextInt();
+					switch(option) {
+					case 1: System.out.println("Enter Customer Details:");
+					        System.out.print("Name:");
+					        sc.nextLine();
+					        String name = sc.nextLine();
+					        System.out.print("Aadhar Number:");
+					        long aadhar = sc.nextLong();
+					        System.out.print("Pan Number:");
+					        long pan = sc.nextLong();
+					        System.out.println("Account Created Successfully!");
+					        break;
+					case 2: System.out.print("Enter Amount:");
+			                long money = sc.nextInt();
+			                sum = sum + money;
+					        break;
+					case 3: System.out.print("Enter Amount:");
+	                        long money1 = sc.nextInt();
+	                        if(sum>=money1) {
+	                        	sum = sum - money1;
+	                        }
+	                        else {
+	                	        System.out.println("Insufficient Balance!");
+	                        }
+			                break;
+					case 4: System.out.println("Available Balance:"+ sum);
+	                        break;
+					case 5: System.out.println("Enter Account Number to which you want to trasfer: ");
+					        int acc1 = sc.nextInt();
+					        System.out.println("Enter Amount: ");
+					        int money2 = sc.nextInt();
+					        if(sum>=money2) {
+	                        	sum = sum - money2;
+	                        	System.out.println("Transferred Successfully!");
+	                        }
+	                        else {
+	                	        System.out.println("Insufficient Balance!");
+	                        }
+					        break;
+					case 6: System.out.println("Do you want Exit?(Yes/No):");
+					        sc.nextLine();
+					        String ch = sc.nextLine();
+					        if(ch=="Yes" || ch=="yes" || ch=="y" || ch=="Y") {
+					        	break;
+					        }
+					        else {
+					        	continue;
+					        }
+					        }
+		}while(option<6);
+		System.out.println("ThankYou!");
+		
+
+	}
+
+}
