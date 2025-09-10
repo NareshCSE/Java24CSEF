@@ -1,0 +1,64 @@
+import java.util.*;
+public class BankApplication {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int ch,amount,account;
+		String name;
+		long a,num;
+		do {
+			System.out.println("1-Account creation");
+			System.out.println("2-Credit Amount");
+			System.out.println("3-Debit Amount");
+			System.out.println("4-MiniStatement/Bank Enquiry");
+			System.out.println("5-Transfer Amount");
+			System.out.println("6-Exit");
+			System.out.println("Enter your choice:");
+			ch = sc.nextInt();
+			//switch
+			switch(ch) {
+			case 1:
+				System.out.println("Enter your name:");
+				name = sc.next();
+				System.out.println("Enter your aadhaar number:");
+				a = sc.nextLong();
+				System.out.println("Enter your phone number:");
+				num= sc.nextLong();
+			    System.out.println("Your Account has created successfully");
+			    break;
+			case 2 :
+				System.out.println("Enter the account number:");
+				account = sc.nextInt();
+				System.out.println("Enter the amount to credit:");
+				amount = sc.nextInt();
+				System.out.println(amount +" has been succesfully credited");
+				break;
+			case 3:
+				System.out.println("Enter the account number:");
+				account = sc.nextInt();
+				System.out.println("Enter the amount to debit");
+				amount = sc.nextInt();
+				System.out.println(amount+" has been successfully debited");
+				break;
+			case 4:
+				System.out.println("MINI STATEMENT");
+				System.out.println("Thank you..");
+			case 5:
+				System.out.println("Enter the account number to which amount to be transferred:");
+				account = sc.nextInt();
+				System.out.println("Enter the amount to transfer:");
+				amount = sc.nextInt();
+				System.out.println(amount+"has been transferred to the account number"+ account );
+				break;
+			case 6:
+				System.out.println("Exiting...");
+				break;
+			default:
+				System.out.println("Invalid Choice");
+			}
+		}while(ch!=6);
+		// TODO Auto-generated method stub
+
+	}
+
+}
