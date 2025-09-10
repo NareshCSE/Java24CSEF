@@ -1,0 +1,20 @@
+import java.util.Scanner;
+public class palindromestring {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+        Scanner scanner = new Scanner(System.in);
+        String  s1= scanner.nextLine();
+        StringBuilder  stringbuilder = new StringBuilder(s1);
+        stringbuilder.reverse();
+        String r1= stringbuilder.toString();
+        if (s1.equals(r1)) {
+        	System.out.println("String is a palindrome");
+        }
+        else {
+        	System.out.println("String is not a palindrome");
+        }
+        
+	}
+
+}
