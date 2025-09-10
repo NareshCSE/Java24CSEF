@@ -1,0 +1,30 @@
+import java.util.Scanner;
+
+public class palindromestring {
+	@SuppressWarnings("resource")
+	public static void main(String[] args)
+	{
+		Scanner sc = new Scanner(System.in);
+		String names ;
+		System.out.println("Enter a word: ");
+		names = sc.nextLine();
+		String[] ch = names.split("");
+		int len = ch.length;
+		boolean isPalindrome = true;
+		for(int i=0;i<len/2;i++)
+		{
+				if(!ch[i].equals(ch[len-1-i])) {
+					isPalindrome = false;
+					break;
+				}
+		}
+		if(isPalindrome)
+		{
+			System.out.println("Palindrome");
+		}
+		else
+		{
+			System.out.println("Not Palindrome");
+		}
+	}
+}
