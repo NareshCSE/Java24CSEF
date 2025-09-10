@@ -1,0 +1,48 @@
+package practise;
+
+import java.util.Scanner;
+
+public class getbalance {
+	void BankA()
+	{
+		System.out.println("$1000");
+	}
+	void BankB()
+	{
+		System.out.println("$1500");
+	}
+	void BankC()
+	{
+		System.out.println("$2000");
+	}
+
+}
+ class Bank
+{
+	public static void main(String[]args)
+	{
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("enter bank name(A,B,C):");
+		String bankName = scanner.nextLine().trim().toUpperCase();
+		getbalanceBank(bankName);
+		scanner.close();
+	}
+	public static void getbalanceBank(String bankName)
+	{
+		getbalance gb = new getbalance();
+		
+		switch(bankName)
+		{
+		case "A":
+			gb.BankA();
+			break;
+		case "B":
+			gb.BankB();
+			break;
+		case "C":
+			gb.BankC();
+			break;
+			
+		}
+	}
+}
