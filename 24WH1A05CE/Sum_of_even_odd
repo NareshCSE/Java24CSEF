@@ -7,10 +7,10 @@ public class Even_odd {
 		System.out.print("Enter no.of Integers: ");
 		int n=myObj.nextInt();
 		
-		System.out.print("Enter a number: ");
-		int number=myObj.nextInt();
-		for(int i=0;i<n-1;i++)
-		{
+		
+		for(int i=0;i<n;i++)
+		{ System.out.print("Enter a number: ");
+		  int number=myObj.nextInt();
 			if(number%2==0)
 			{
 				even+=number;
@@ -19,8 +19,7 @@ public class Even_odd {
 			{
 				odd+=number;
 			}
-			System.out.print("Enter a number: ");
-			number=myObj.nextInt();
+			
 			
 		}
 		System.out.println("Sum of even numbers: "+even);
