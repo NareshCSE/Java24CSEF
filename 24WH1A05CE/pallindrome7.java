@@ -9,7 +9,7 @@ public class pallindrome7 {
 		StringBuffer sbuffer=new StringBuffer();
 		sbuffer.append(word);
 		
-		if(word.compareTo(sbuffer.reverse().toString())==0)
+		if(word.compareTo(sbuffer.reverse().toString())==0)//if(sbuffer.reverse().toString().equals(enteredString)) 
 		{
 			System.out.print("Given String is a pallindrome");
 		}
