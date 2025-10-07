@@ -38,8 +38,9 @@ public class Array {
 			  }
 			}
 		  if(flag==1)
+		  { flag=0;
 			  continue;
-		   
+		  }
 			for(int l=k+1;l<array.length;l++)
 			{ 
 				if(array[k]==array[l])
