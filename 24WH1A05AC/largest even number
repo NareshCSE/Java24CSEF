@@ -1,0 +1,23 @@
+import java.util.Scanner;
+public class LargestEvenNumber {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String s = sc.nextLine();
+        boolean[] seen = new boolean[10];
+        for (char c : s.toCharArray()) {
+            if (Character.isDigit(c)) seen[c - '0'] = true;
+        }
+        StringBuilder sb = new StringBuilder();
+        char lastEven = 0;
+        for (int i = 9; i >= 0; i--) {
+            if (seen[i]) {
+                if (i % 2 == 0) lastEven = (char)(i + '0');
+                else sb.append(i);
+            }
+        }
+        if (lastEven == 0) System.out.println(-1);
+        else System.out.println(sb.toString() + lastEven);
+        sc.close();
+    }
+}
