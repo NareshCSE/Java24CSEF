@@ -1,0 +1,172 @@
+package assignment_problems;
+
+import java.util.Scanner;
+
+class Item {
+    private int id;
+    private String name;
+    private double price;
+
+    Item(int id, String name, double price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
+    public int getId() { 
+    	return id; 
+    }
+    public String getName() {
+    	return name; 
+    }
+    public double getPrice() { 
+    	return price; 
+    }
+}
+
+class Order {
+    private int orderId;
+    private Item[] items = new Item[100];
+    private int itemCount = 0;
+
+    Order(int orderId) {
+        this.orderId = orderId;
+    }
+    public int getOrderId() { 
+    	return orderId; 
+    }
+    public Item[] getItems() {
+        Item[] currentItems = new Item[itemCount];
+        for (int i = 0; i < itemCount; i++) {
+            currentItems[i] = items[i];
+        }
+        return currentItems;
+    }
+    public void addItem(Item item) {
+        if (itemCount < items.length)
+            items[itemCount++] = item;
+    }
+}
+
+interface Restaurant{
+    void printName();
+    void addItem(Item item);
+    Item[] getMenu();
+    Order placeOrder(int[] itemIds);
+    double generateBill(int orderId);
+}
+
+class KFC implements Restaurant {
+    private Item[] menu = new Item[50];
+    private Order[] orders = new Order[50];
+    private int menuCount = 0;
+    private int ordersCount = 0;
+    private int orderIdCounter = 1;
+
+    public void printName() {
+        System.out.println("Restaurant: KFC");
+    }
+    
+    public void addItem(Item item) {
+        if (menuCount < menu.length) {
+            menu[menuCount++] = item;
+        }
+    }
+    
+    public Item[] getMenu() {
+        Item[] currentMenu = new Item[menuCount];
+        for (int i = 0; i < menuCount; i++) {
+            currentMenu[i] = menu[i];
+        }
+        return currentMenu;
+    }
+    
+    public Order placeOrder(int[] itemIds) {
+        Order order = new Order(orderIdCounter++);
+        for (int id : itemIds) {
+            for (int i = 0; i < menuCount; i++) {
+                if (menu[i].getId() == id) {
+                    order.addItem(menu[i]);
+                    break;
+                }
+            }
+        }
+        if (ordersCount < orders.length) {
+            orders[ordersCount++] = order;
+        }
+        return order;
+    }
+    
+    public double generateBill(int orderId) {
+        for (int i = 0; i < ordersCount; i++) {
+            if (orders[i].getOrderId() == orderId) {
+                double total = 0.0;
+                for (Item item : orders[i].getItems()) {
+                    total += item.getPrice();
+                }
+                return total * 1.06; 
+            }
+        }
+        return 0.0;
+    }
+}
+
+
+public class Restaurantclass {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		KFC kfc = new KFC();
+		
+		while(true) {
+			System.out.println("1. restaurant name");
+			System.out.println("2. Add item");
+			System.out.println("3. Show menu");
+			System.out.println("4. place order");
+			System.out.println("5. generate bill");
+			System.out.println("6.Exit ");
+			System.out.println("Select an option:  ");
+			
+			int choice = sc.nextInt();
+			
+			switch(choice) {
+				case 1: kfc.printName();
+						break;
+				case 2: System.out.print("enter item ID: ");
+						int ID = sc.nextInt();
+						System.out.print("enter item name: ");
+						String name = sc.next();
+						System.out.print("enter item price: ");
+						double price = sc.nextDouble();
+						kfc.addItem(new Item(ID, name, price));
+						break;
+				case 3: System.out.println("Menu");
+		        		for (Item item : kfc.getMenu()) {
+		        			System.out.printf("%d %s %.2f",item.getId(), item.getName(), item.getPrice());
+		        		}
+		        		break;
+				case 4: System.out.print("How many items? ");
+		        		int count = sc.nextInt();
+		        		int[] ids = new int[count];
+		        		System.out.print("Enter IDs: ");
+		        		for (int i = 0; i < count; i++) {
+		        			ids[i] = sc.nextInt();
+		        		}
+		        		Order order = kfc.placeOrder(ids);
+		        		System.out.println("Order ID: " + order.getOrderId());
+		        		break;
+			    case 5: System.out.print("Order ID: ");
+			    		int ID1 = sc.nextInt();
+			        	double bill = kfc.generateBill(ID1);
+			        	System.out.println("Total: " + bill);
+			        	break;
+			    case 6: System.out.println("exit");
+			    		return;
+			    
+			}
+		}
+	}
+}
+
+
+
+
+
