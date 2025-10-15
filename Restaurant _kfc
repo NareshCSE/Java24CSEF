@@ -1,0 +1,124 @@
+interface Restaurant{
+	void addItem(Item item);
+	Item[] getMenu();
+	int placeOrder(Order order);
+	double generateBill(Order id);
+}
+class Item {
+	private int itemId;
+	private String name;
+	private double price;
+	public Item(String name,int itemId,double price) {
+		this.name = name;
+		this.itemId = itemId;
+		this.price = price;
+	}
+	public String getName(){
+		return name;
+	}
+	public double getPrice() {
+		return price;
+	}
+	public int getItemId() {
+		return itemId;
+	}
+	
+}
+class Order {
+	private int id;
+	private Item[] item;
+	private int quantity;
+	public Order(Item[] item,int quantity) {
+		//this.id=id;
+		this.item=item;
+		this.quantity=quantity;
+	}
+	public int getId() {
+		return id;
+	}
+	public int getQuantity() {
+		return quantity;
+	}
+	public Item[] getItems() {
+		return item;
+	}
+}
+
+class KFC implements Restaurant{
+	Item[] items = new Item[10];
+	Order[] orders = new Order[10];
+	int itemCount = 0;
+	int orderSize=0;
+	int nextorderId=1;
+	public void addItem(Item item) {
+		if(itemCount < items.length) {
+			items[itemCount]=item;
+		}
+		else {
+			System.out.println("Menu is full");		
+		}
+		itemCount++;
+	}
+	public void displayMenu() {
+		System.out.println("*****************MENU******************");
+		for(int i=0;i<itemCount;i++) {
+			System.out.print(items[i].getItemId()+"."+items[i].getName()+" - ");
+			System.out.println("$"+items[i].getPrice());
+		}
+	}
+	public int placeOrder(Order order) {
+		if(orderSize < orders.length) {
+			order = new Order(order.getItems(),order.getQuantity());
+			orders[orderSize++]=order;
+			return order.getId();
+		}
+		else {
+			System.out.println("Orders list is full");
+			return -1;
+		}
+	}
+	public double generateBill(int orderId) {
+		for(int i=0;i<orderSize;i++) {
+			if(orders[i].getId() == orderId) {
+				Order order = orders[i];
+				double total = 0.0;
+				Item[] items = order.getItems();
+				int quantity = order.getQuantity();
+				for(Item item: items) {
+					total+=item.getPrice()*quantity;
+				}
+				return total;
+			}
+		}
+		System.out.println("Order Id not found");
+		return -1;
+	}
+	
+}
+
+
+public class RestaurantInterface {
+	public static void main(String[] args) {
+		KFC kfc = new KFC();
+		Item chicken = new Item("Chicken",1,145.50);
+		Item burger = new Item("Cheese Burger",2,99.9);
+		Item pizza = new Item("Onion Pizza",3,120.75);
+		Item biryani = new Item("Veg Biryani",4,120.0);
+		Item pulav = new Item("Pulav",5,80.5);
+		Item shawarma = new Item("Shawarma",6,50);
+		kfc.addItem(chicken);
+		kfc.addItem(burger);
+		kfc.addItem(pizza);
+		kfc.addItem(biryani);
+		kfc.addItem(pulav);
+		kfc.addItem(shawarma);
+		kfc.displayMenu();
+		System.out.println("**********Bill for your Order**********");
+		Item[] itemsOrdered = {pizza,pulav};
+		Order order = new Order(itemsOrdered,3);
+		int orderId = kfc.placeOrder(order);
+        double totalBill = kfc.generateBill(orderId);
+        System.out.println("Total bill: $" + totalBill);
+		
+	}
+}
