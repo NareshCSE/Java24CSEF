@@ -1,0 +1,137 @@
+package assignment_problems;
+
+import java.util.Scanner;
+
+class Course{
+	private int id;
+	private String name;
+	private double price;
+	
+	Course(int id, String name, double price){
+		this.id = id;
+		this.name = name;
+		this.price = price;
+	}
+	
+	public int getId() {
+		return id;
+	}
+	
+	public String getname() {
+		return name;
+	}
+	
+	public double getprice() {
+		return price;
+	}
+	
+}
+
+interface studentCourse{
+	void addCourse(Course course) throws Exception;
+	Course[] viewCourses() throws Exception;
+	double addFee() throws Exception;
+	
+}
+
+class Semester implements studentCourse{
+	private Course[] courses;
+	private int count;
+	
+	Semester(int Capacity) {
+		this.courses = new Course[Capacity];
+		this.count = 0;
+	}
+
+	@Override
+    public void addCourse(Course course) throws Exception {
+        try {
+            courses[count++] = course; 
+        } catch (Exception e) {
+            System.out.println("Course capacity exceeded");
+            e.printStackTrace(); 
+        }
+    }
+
+    @Override
+    public Course[] viewCourses() throws Exception {
+        Course[] enrolled = new Course[count];
+        try {
+            for (int i = 0; i < count; i++) {
+                enrolled[i] = courses[i];
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return enrolled;
+    }
+
+    @Override
+    public double addFee() throws Exception {
+        double totalFee = 0;
+        try {
+            for (int i = 0; i < count; i++) {
+                double fee = courses[i].getprice();
+                if (fee > 1500) {
+                    fee -= fee * 0.10;
+                }
+                totalFee += fee;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
+        return totalFee;
+    }
+}
+
+public class Courseimplementation {
+    public static void main(String[] args) throws Exception {
+        Scanner sc = new Scanner(System.in);
+        Semester semester = new Semester(2);
+
+        while (true) {
+            System.out.println("1. Add Course");
+            System.out.println("2. View Courses");
+            System.out.println("3. Calculate Total Fee");
+            System.out.println("4. Exit");
+            System.out.print("Enter choice: ");
+
+            int choice = sc.nextInt();
+
+            switch (choice) {
+            	case 1: System.out.print("ID: ");
+                       	int id = sc.nextInt();
+                       	System.out.print("Name: ");
+                       	String name = sc.next();
+                       	System.out.print("Price: ");
+                       	double price = sc.nextDouble();
+                       	if (price < 1000 || price > 3000) {
+                       		System.out.println("Price must be between 1000 and 3000");
+                       	} else {
+                       		semester.addCourse(new Course(id, name, price));
+                       		System.out.println("Course added.");
+                       	}
+                       	break;
+                case 2: Course[] courses = semester.viewCourses();
+                       	for (Course c : courses) {
+                       		int id1 = c.getId();
+                       		String name1 = c.getname();
+                       		double price1 = c.getprice();
+                        	System.out.println(id1 + " " + name1 + " " + price1);
+                       	}
+                        break;
+                case 3: System.out.println("Total fee: " + semester.addFee());
+                   		break;
+                case 4: System.out.println("Exited");
+                        return;
+                }
+            }
+      }
+}
+
+	
+	
+
+
+	
