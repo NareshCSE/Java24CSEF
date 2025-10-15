@@ -1,0 +1,46 @@
+import java.util.Scanner;
+
+public class LargestEvenNumber {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter the string: ");
+        String input = sc.nextLine();
+
+        System.out.println(findLargestEvenNumber(input));
+        sc.close();
+    }
+
+    public static String findLargestEvenNumber(String s) {
+        boolean[] digitsPresent = new boolean[10];
+
+        for (char c : s.toCharArray()) {
+            if (Character.isDigit(c)) {
+                digitsPresent[c - '0'] = true;
+            }
+        }
+
+        int smallestEvenDigit = -1;
+        for (int i = 0; i <= 8; i += 2) {
+            if (digitsPresent[i]) {
+                smallestEvenDigit = i;
+                digitsPresent[i] = false;
+                break;
+            }
+        }
+
+        if (smallestEvenDigit == -1) {
+            return "-1";
+        }
+
+        StringBuilder result = new StringBuilder();
+        for (int i = 9; i >= 0; i--) {
+            if (digitsPresent[i]) {
+                result.append(i);
+            }
+        }
+        result.append(smallestEvenDigit);
+
+        return result.toString();
+    }
+}
