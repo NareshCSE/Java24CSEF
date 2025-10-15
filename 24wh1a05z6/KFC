@@ -1,0 +1,116 @@
+package cse;
+interface Restaurant{
+	void printName();
+	
+	void addItem(Item item);
+	Item[] getMenu();
+	void placeOrder(Order order);
+	double generateBill(int orderId);
+	}
+class Item{
+	private int itemid;
+	private String name;
+	private double price;
+	public Item(int itemid,String name,double price) {
+		this.itemid=itemid;
+		this.name=name;
+		this.price=price;
+		
+	}
+	public int getItemId(){
+		return itemid;
+	}
+	public String getName(){
+		return name;
+	}
+	public double getPrice(){
+		return price;
+	}
+}
+class Order{
+	private int orderid;
+	private Item[] items;
+	public Order(int orderid,Item[] items) {
+		this.orderid=orderid;
+		this.items=items;
+	}
+	public int getOrderId{
+		return orderid;
+	}
+	public Item[] getItems{
+		return items;
+	}
+	
+}
+
+class KFC implements Restaurant {
+	
+	    private String name = "KFC";
+
+	    private Item[] menu = new Item[100];  
+	    private int menuCount = 0;
+
+	    private Order[] orders = new Order[100];
+	    private int orderCount = 0;
+
+	    
+	    public void printName() {
+	        System.out.println("Restaurant Name: " + name);
+	    }
+
+	    
+	    public void addItem(Item item) {
+	        if (menuCount < menu.length) {
+	            menu[menuCount++] = item;
+	        } else {
+	            System.out.println("Menu is full");
+	        }
+	    }
+
+	    
+	    public Item[] getMenu() {
+	        Item[] currentMenu = new Item[menuCount];
+	        for (int i = 0; i < menuCount; i++) {
+	            currentMenu[i] = menu[i];
+	        }
+	        return currentMenu;
+	    }
+
+	    
+	    public void placeOrder(Order order) {
+	        if (orderCount < orders.length) {
+	            orders[orderCount++] = order;
+	        } else {
+	            System.out.println("Order limit reached);
+	        }
+	    }
+
+	   
+	    public double generateBill(int orderId) {
+	        Order order = null;
+	        for (int i = 0; i < orderCount; i++) {
+	            if (orders[i].getOrderId() == orderId) {
+	                order = orders[i];
+	                break;
+	            }
+	        }
+	        if (order == null) {
+	            System.out.println("Order not found.");
+	            return 0;
+	        }
+
+	        double totalAmount = 0;
+	        for (Item item : order.getItems()) {
+	            totalAmount += item.getPrice();
+	        }
+
+	        
+	        totalAmount += totalAmount * 0.06;
+	        return totalAmount;
+	    }
+	}
+
+
+	
+
+
