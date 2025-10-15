@@ -1,0 +1,116 @@
+package mainrestaurant;
+
+class Item {
+    private String name;
+    private double price;
+
+    public Item(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+}
+
+class Order {
+    private int orderId;
+    private Item[] items;
+
+    public Order(int orderId, Item[] items) {
+        this.orderId = orderId;
+        this.items = items;
+    }
+
+    public Item[] getItems() {
+        return items;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
+}
+
+interface Restaurant {
+    void printName();
+
+    void addItem(Item item);
+
+    Item[] getMenu();
+
+    Order placeOrder(int orderId, Item[] items);
+
+    double generateBill(Order order);
+}
+
+class KFC implements Restaurant {
+    private Item[] menu = new Item[10];
+    private int count = 0;
+
+    @Override
+    public void printName() {
+        System.out.println("Welcome to KFC!");
+    }
+
+    @Override
+    public void addItem(Item item) {
+        if (count < menu.length) {
+            menu[count++] = item;
+        }
+    }
+
+    @Override
+    public Item[] getMenu() {
+        return menu;
+    }
+
+    @Override
+    public Order placeOrder(int orderId, Item[] items) {
+        return new Order(orderId, items);
+    }
+
+    @Override
+    public double generateBill(Order order) {
+        double total = 0;
+        for (Item item : order.getItems()) {
+            if (item != null) {
+                total += item.getPrice();
+            }
+        }
+        return total + (total * 0.06); // 6% tax
+    }
+}
+
+public class MAINRestaurant {
+    public static void main(String[] args) {
+        Restaurant kfc = new KFC();
+        kfc.printName();
+
+        kfc.addItem(new Item("Burger", 120));
+        kfc.addItem(new Item("Popcorn Chicken", 180));
+        kfc.addItem(new Item("Pepsi", 50));
+
+        System.out.println("\n-------------- MENU ----------------");
+        for (Item item : kfc.getMenu()) {
+            if (item != null) {
+                System.out.println(item.getName() + " - $" + item.getPrice());
+            }
+        }
+
+        Item[] orderItems = {
+            new Item("Burger", 120),
+            new Item("Pepsi", 50)
+        };
+
+        Order order = kfc.placeOrder(101, orderItems);
+        double total = kfc.generateBill(order);
+
+        System.out.println("\nOrder ID: " + order.getOrderId());
+        System.out.println("Total (with 6% tax): $" + total);
+    }
+}
