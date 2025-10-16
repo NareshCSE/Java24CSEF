@@ -79,7 +79,6 @@ class Semester implements studentCourse{
             }
         } catch (Exception e) {
             e.printStackTrace();
-            throw e;
         }
         return totalFee;
     }
