@@ -1,8 +1,8 @@
-package java1;
+package myjava;
 
 import java.util.Scanner;
 
-public class EvenOddSum {
+public class exp3 {
 
 
 
@@ -32,7 +32,7 @@ public class EvenOddSum {
 
 		for(i=0;i<n;i++) {
 
-			System.out.println(arr[i]);
+			System.out.print(arr[i]+" ");
 
 		}
 
@@ -52,7 +52,7 @@ public class EvenOddSum {
 
 		}
 
-		System.out.println("even sum="+evenSum);
+		System.out.println("\n"+"even sum="+evenSum);
 
 		System.out.println("odd sum="+oddSum);
 
