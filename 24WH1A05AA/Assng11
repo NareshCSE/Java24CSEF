@@ -1,0 +1,142 @@
+import java.util.*;
+
+interface Bank {
+    void createAccount(String name, double initialDeposit);
+    void creditAmount(double amount);
+    void debitAmount(double amount);
+    void transferAmount(Bank toBank, double amount);
+    void miniStatement();
+    double rateOfInterest(); // fixed ROI
+}
+
+class SBI implements Bank {
+    private String accHolder;
+    private double balance;
+    private final double ROI = 6.5; // SBI rate of interest
+
+    @Override
+    public void createAccount(String name, double initialDeposit) {
+        this.accHolder = name;
+        this.balance = initialDeposit;
+        System.out.println("SBI account created for " + name + " with initial deposit $" + initialDeposit);
+    }
+
+    @Override
+    public void creditAmount(double amount) {
+        balance += amount;
+        System.out.println("Credited $" + amount + " to SBI account. Current Balance: $" + balance);
+    }
+
+    @Override
+    public void debitAmount(double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+            System.out.println("Debited $" + amount + " from SBI account. Current Balance: $" + balance);
+        } else {
+            System.out.println("Insufficient funds in SBI account!");
+        }
+    }
+
+    @Override
+    public void transferAmount(Bank toBank, double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+            System.out.println("Transferred $" + amount + " from SBI to another bank.");
+            toBank.creditAmount(amount);
+        } else {
+            System.out.println("Transfer failed! Insufficient balance in SBI account.");
+        }
+    }
+
+    @Override
+    public void miniStatement() {
+        System.out.println("---- SBI Mini Statement ----");
+        System.out.println("Account Holder: " + accHolder);
+        System.out.println("Balance: $" + balance);
+        System.out.println("Rate of Interest: " + ROI + "%");
+    }
+
+    @Override
+    public double rateOfInterest() {
+        return ROI;
+    }
+}
+
+class Axis implements Bank {
+    private String accHolder;
+    private double balance;
+    private final double ROI = 7.0; // Axis rate of interest
+
+    @Override
+    public void createAccount(String name, double initialDeposit) {
+        this.accHolder = name;
+        this.balance = initialDeposit;
+        System.out.println("Axis account created for " + name + " with initial deposit $" + initialDeposit);
+    }
+
+    @Override
+    public void creditAmount(double amount) {
+        balance += amount;
+        System.out.println("Credited $" + amount + " to Axis account. Current Balance: $" + balance);
+    }
+
+    @Override
+    public void debitAmount(double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+            System.out.println("Debited $" + amount + " from Axis account. Current Balance: $" + balance);
+        } else {
+            System.out.println("Insufficient funds in Axis account!");
+        }
+    }
+
+    @Override
+    public void transferAmount(Bank toBank, double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+            System.out.println("Transferred $" + amount + " from Axis to another bank.");
+            toBank.creditAmount(amount);
+        } else {
+            System.out.println("Transfer failed! Insufficient balance in Axis account.");
+        }
+    }
+
+    @Override
+    public void miniStatement() {
+        System.out.println("---- Axis Mini Statement ----");
+        System.out.println("Account Holder: " + accHolder);
+        System.out.println("Balance: $" + balance);
+        System.out.println("Rate of Interest: " + ROI + "%");
+    }
+
+    @Override
+    public double rateOfInterest() {
+        return ROI;
+    }
+}
+
+public class BankDemo {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Late Binding — Interface reference assigned to subclass object
+        Bank sbi = new SBI();
+        sbi.createAccount("Ravi", 5000);
+
+        Bank axis = new Axis();
+        axis.createAccount("Kiran", 3000);
+
+        // Perform some operations
+        sbi.creditAmount(1000);
+        sbi.debitAmount(500);
+        sbi.transferAmount(axis, 1000);
+
+        sbi.miniStatement();
+        axis.miniStatement();
+
+        System.out.println("\nRate of Interest (SBI): " + sbi.rateOfInterest() + "%");
+        System.out.println("Rate of Interest (Axis): " + axis.rateOfInterest() + "%");
+
+        sc.close();
+    }
+}
