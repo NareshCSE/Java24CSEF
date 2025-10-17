@@ -1,0 +1,104 @@
+public class LargestEvenNumber {
+
+    public static void main(String[] args) {
+        String str = "ad%#2373#@";
+        String result = findLargestEvenNumber(str);
+        System.out.println(result);
+    }
+
+    public static String findLargestEvenNumber(String str) {
+        boolean[] seen = new boolean[10]; // to track unique digits
+        StringBuilder digits = new StringBuilder();
+
+        // Step 1: Extract digits and remove duplicates
+        for (char ch : str.toCharArray()) {
+            if (Character.isDigit(ch)) {
+                int d = ch - '0';
+                if (!seen[d]) {
+                    digits.append(d);
+                    seen[d] = true;
+                }
+            }
+        }
+
+        // If no digits found
+        if (digits.length() == 0) {
+            return "-1";
+        }
+
+        // Step 2: Convert digits to an integer array
+        int[] nums = new int[digits.length()];
+        for (int i = 0; i < digits.length(); i++) {
+            nums[i] = digits.charAt(i) - '0';
+        }
+
+        // Step 3: Sort in descending order
+        java.util.Arrays.sort(nums);
+        reverse(nums);
+
+        // Step 4: Find smallest even digit to place at the end
+        Integer evenDigit = null;
+        for (int i = nums.length - 1; i >= 0; i--) {
+            if (nums[i] % 2 == 0) {
+                evenDigit = nums[i];
+                // remove it
+                int[] temp = new int[nums.length - 1];
+                int index = 0;
+                for (int n : nums) {
+                    if (n != evenDigit || index == temp.length) {
+                        temp[index++] = n;
+                        evenDigit = null; // remove only once
+                        break;
+                    }
+                }
+                // rebuild list (simplify)
+                break;
+            }
+        }
+
+        // Step 5: If no even digit found
+        boolean hasEven = false;
+        for (int n : nums) {
+            if (n % 2 == 0) {
+                hasEven = true;
+                break;
+            }
+        }
+        if (!hasEven) return "-1";
+
+        // Find smallest even digit (from original nums)
+        int smallestEven = 10;
+        for (int n : nums) {
+            if (n % 2 == 0 && n < smallestEven)
+                smallestEven = n;
+        }
+
+        // Remove that even digit once
+        StringBuilder result = new StringBuilder();
+        boolean removed = false;
+        for (int n : nums) {
+            if (n == smallestEven && !removed) {
+                removed = true;
+            } else {
+                result.append(n);
+            }
+        }
+
+        // Step 6: Append smallest even digit at end
+        result.append(smallestEven);
+
+        return result.toString();
+    }
+
+    // Helper method to reverse array
+    public static void reverse(int[] arr) {
+        int left = 0, right = arr.length - 1;
+        while (left < right) {
+            int temp = arr[left];
+            arr[left] = arr[right];
+            arr[right] = temp;
+            left++;
+            right--;
+        }
+    }
+}
