@@ -1,8 +1,8 @@
-package javaprograms;
+package myjava;
 import java.util.*;
 
 
-public class Bank_Application {
+public class exp6 {
 
 	public static void main(String[] args) {
 		Scanner number= new Scanner(System.in);
@@ -11,15 +11,15 @@ public class Bank_Application {
 		String accountNumber="0",account,transfer,choice;
 		String name,pan,password;
 		int credit,balence,total=0,debit,adharNo;
+		System.out.println("1. Account Creation");
+		System.out.println("2. Credit Amount");
+		System.out.println("3. Debit Amount");
+		System.out.println("4.Balence");
+		System.out.println("5. Transfer account");
+		System.out.println("6. Continue (y/n)");
 		
 		do {
-			System.out.println("1. Account Creation");
-			System.out.println("2. Credit Amount");
-			System.out.println("3. Debit Amount");
-			System.out.println("4.Balence");
-			System.out.println("5. Transfer account");
-			System.out.println("6. Continue (y/n)\n");
-			
+			System.out.println("Enter your Choice:");
 		    option = number.nextInt();
 		    switch(option) {
 		    case 1:
@@ -29,14 +29,10 @@ public class Bank_Application {
 		        
      	    	System.out.println("Enter your Aadhar No:");
        	    	adharNo=number.nextInt();
-       	    	
-		    	System.out.println("Enter your PAN card No:");
-		    	number.nextLine();
-                pan=number.nextLine();
-                
+       
 		    	System.out.println("Enter Account Number you would like:");
 		    	accountNumber=number.nextLine();
-		    	
+		    	number.nextLine(); 
 		    	System.out.println("Your account is created.");
 		    	break;
 		    case 2:
@@ -72,9 +68,6 @@ public class Bank_Application {
 		        System.out.println("Amount in your Account is"+total);
 		        break;
 		   case 5:
-			   System.out.println("Enter your Account number to Transfer Amount:");
-			   number.nextLine();
-		    	accountNumber=number.nextLine();
 		    	System.out.println("Enter your Account number to which you want to tranfer money:");
 		    	number.nextLine();
 		    	transfer=number.nextLine();
@@ -83,6 +76,7 @@ public class Bank_Application {
 	    		total-=debit;
 	    		System.out.println("Enter Passcode to your account:");
 		    	password=number.nextLine();
+		    	number.nextLine();
 	    		System.out.println(debit+"is Transfered");
 	    		break;
 		   case 6:
