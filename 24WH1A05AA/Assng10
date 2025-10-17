@@ -1,0 +1,44 @@
+// Base class
+class Bank {
+    // Method to be overridden
+    public int getBalance() {
+        return 0;
+    }
+}
+
+// Subclass for Bank A
+class BankA extends Bank {
+    @Override
+    public int getBalance() {
+        return 1000;
+    }
+}
+
+// Subclass for Bank B
+class BankB extends Bank {
+    @Override
+    public int getBalance() {
+        return 1500;
+    }
+}
+
+// Subclass for Bank C
+class BankC extends Bank {
+    @Override
+    public int getBalance() {
+        return 2000;
+    }
+}
+
+// Main class
+public class BankDemo {
+    public static void main(String[] args) {
+        BankA a = new BankA();
+        BankB b = new BankB();
+        BankC c = new BankC();
+
+        System.out.println("Balance in Bank A: $" + a.getBalance());
+        System.out.println("Balance in Bank B: $" + b.getBalance());
+        System.out.println("Balance in Bank C: $" + c.getBalance());
+    }
+}
