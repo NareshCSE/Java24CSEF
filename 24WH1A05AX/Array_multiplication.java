@@ -1,13 +1,17 @@
-package javaprog;
+package myjava;
 import java.util.*;
-public class Array_multiplication {
+public class exp5b {
 
 	public static void main(String[] args) {
 		Scanner size=new Scanner(System.in);
 		System.out.println("Enter size of arrays");
+		System.out.println("row1:");
 		int rows1=size.nextInt();
+		System.out.println("col1::");
 		int cols1=size.nextInt();
+		System.out.println("row2:");
 		int rows2=size.nextInt();
+		System.out.println("col2:");
 		int cols2=size.nextInt();
 		int[][] array1= new int[rows1][cols1];
 		int[][] array2= new int[rows2][cols2];
