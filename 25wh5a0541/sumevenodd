@@ -1,0 +1,25 @@
+package demo;
+
+import java.util.Scanner;
+
+public class evenodd {
+	public static void main(String[] args) {
+		Scanner sc= new Scanner(System.in);
+		System.out.println("Enter no of digits:");
+		int n= sc.nextInt();
+		int evensum=0,oddsum=0;
+		System.out.println("Enter number:");
+		for(int i =0;i< n;i++) {
+		int num= sc.nextInt();
+			if(num%2 == 0) {
+				evensum+=num;
+			}
+			else {
+				oddsum+= num;
+			}
+		}
+		System.out.println("Even sum is:"+ evensum);
+		System.out.println("Odd sum is:"+ oddsum);
+		sc.close();
+	}
+}
