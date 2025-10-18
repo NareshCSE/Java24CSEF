@@ -10,8 +10,6 @@ class getbalence{
 	void BankC() {
 		System.out.println("$2000");
 	}
-}
-public class bank {
 public static void main(String[] args) {
 	Scanner scanner = new Scanner(System.in);
 	System.out.println("Enter bank name (A, B or C): ");
