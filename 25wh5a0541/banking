@@ -6,7 +6,6 @@ import java.util.Scanner;
 	    Scanner sc = new Scanner(System.in);
 	     System.out.print("Enter your choice: ");
 	     int choice = sc.nextInt();
-	     
 	            switch (choice) {
 	            case 1:
 	            	System.out.println("Account creation");
@@ -38,8 +37,19 @@ import java.util.Scanner;
 	                break;
 
 	            case 4:
-	                System.out.println("Mini statement");
-	        	    System.out.println("Balence enquiry");
+	                System.out.println("1.Mini statement");
+	        	    System.out.println("2.Balence enquiry");
+	        	    sc.nextInt();
+	        	    System.out.println("Aadhar number:");
+	            	long Aadhar=sc.nextLong();
+	        	    System.out.println("Account details:");
+	        	    System.out.println("Name:");
+	        	    String Name=sc.next();
+	        	    System.out.println("Pan Number:");
+	        	    sc.nextInt();
+	        	    System.out.println("Balence:");
+                    sc.nextInt();
+	        	    System.out.println("Verified successfully");
 	                break;
 
 	            case 5:
@@ -48,6 +58,8 @@ import java.util.Scanner;
 	                sc.nextInt();
 	                System.out.print(" to Account number:");
 	                sc.nextInt();
+	                System.out.println("Amount:");
+	                sc.nextInt();
 	                System.out.print("Amount credited succesfully");
 	                break;
 
@@ -55,6 +67,8 @@ import java.util.Scanner;
 	                System.out.println("Continue:");
 	                System.out.println("Yes");
 	                System.out.println("No");
+	                sc.next();
+	        	    System.out.println("Exiting");
 	                break;
 	            }
 	        sc.close();
