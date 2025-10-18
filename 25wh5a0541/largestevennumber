@@ -16,10 +16,11 @@ public class largestevenno {
         List<Character> digits = new ArrayList<>(digitSet);
         digits.sort(Collections.reverseOrder());
         Character evenDigit = null;
-        for (Character d : digits) {
-            if ((d - '0') % 2 == 0) {
-                evenDigit = d;
-                break; 
+        for (int i = digits.size() - 1; i >= 0; i--) {
+            if ((digits.get(i) - '0') % 2 == 0) {
+               evenDigit  = digits.get(i);
+                digits.remove(i);
+                break;
             }
         }
         if (evenDigit == null) {
@@ -36,8 +37,5 @@ public class largestevenno {
 
         System.out.println("Largest even number: " + largestEven.toString());
     }
+
 }
-
-
-
-
