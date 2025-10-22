@@ -1,0 +1,52 @@
+package labPrograms;
+import java.util.Scanner;
+class atmpinvalidator
+{
+	String name="John";
+	int pin=1234;
+	public atmpinvalidator(String name,int pin)
+	{
+		if(name.equals(this.name)&& pin==this.pin)
+		{
+			System.out.println("Welcome!");
+		}
+		else if(!(name.equals(this.name)))
+		{
+			System.out.println("You are different  user");
+		}
+		else
+		{
+			System.out.println("Pin is incorrect!Try again");
+		}
+	}
+	
+}
+class pinMismatchException extends RuntimeException
+{
+	public pinMismatchException()
+	{
+		super("Your account has been locked");
+	}
+}
+public class atmPin {
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		int chance=1;
+		while(chance<=4) {
+		if(chance==4)
+		{
+			throw new pinMismatchException();
+		}
+		else {
+			String name=sc.next();
+			int pin=sc.nextInt();
+			atmpinvalidator p1=new atmpinvalidator(name,pin);
+	
+		}
+		chance=chance+1;
+		}
+		
+
+	}
+
+}
