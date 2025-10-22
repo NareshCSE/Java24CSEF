@@ -1,0 +1,49 @@
+package z7project;
+
+import java.util.Scanner;
+
+class pinMisMatchException extends Exception{
+	public pinMisMatchException(String message) {
+		super(message);
+	}
+}
+
+public class AtmPinValidator {
+	private static final String Correct_Pin = "1234";
+	public static void validatePin(String inputPin) throws pinMisMatchException{
+		if(!inputPin.equals(Correct_Pin)) {
+			throw new pinMisMatchException("Entered Pin Incorrect!\t");
+		}
+	}
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter Account Holder Name: ");
+        String accHolderName = scanner.nextLine();
+
+        int attempts = 0;
+        boolean isAuthenticated = false;
+
+        while (attempts < 3) {
+            System.out.print("Enter PIN: ");
+            String inputPin = scanner.nextLine();
+
+            try {
+                validatePin(inputPin);
+                System.out.println("Welcome, " + accHolderName + "! You have successfully logged in.");
+                isAuthenticated = true;
+                break;
+            } catch (pinMisMatchException e) {
+                attempts++;
+                System.out.println(e.getMessage() + " Attempts left: " + (3 - attempts));
+            }
+        }
+
+        if (!isAuthenticated) {
+            System.out.println("Sorry..Your Account Has been Locked");
+        }
+
+        scanner.close();
+	}
+
+}
