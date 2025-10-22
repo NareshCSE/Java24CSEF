@@ -1,0 +1,154 @@
+package assignment;
+class Item {
+ private int id;
+ private String name;
+ private double price;
+
+ public Item(int id, String name, double price) {
+     this.id = id;
+     this.name = name;
+     this.price = price;
+ }
+
+ public int getId() { return id; }
+ public String getName() { return name; }
+ public double getPrice() { return price; }
+
+ @Override
+ public String toString() {
+     return name + " ($" + price + ")";
+ }
+}
+
+class Order {
+ private int orderId;
+ private Item[] items;
+
+ public Order(int orderId, Item[] items) {
+     this.orderId = orderId;
+     this.items = items;
+ }
+
+ public int getOrderId() { return orderId; }
+ public Item[] getItems() { return items; }
+}
+
+interface Restaurant {
+ default void printName() {
+     System.out.println("Restaurant Name: " + getClass().getSimpleName());
+ }
+
+
+ void addItem(Item item);
+ Item[] getMenu();
+ Order placeOrder(int[] itemIds);
+ double generateBill(int orderId);
+}
+
+class KFC implements Restaurant {
+ private Item[] menu = new Item[10];
+ private int menuCount = 0;
+
+ private Order[] orders = new Order[10];
+ private int orderCount = 0;
+
+ private int nextOrderId = 1;
+
+ @Override
+ public void addItem(Item item) {
+     if (menuCount < menu.length) {
+         menu[menuCount++] = item;
+     } else {
+         System.out.println("Menu full. Cannot add more items.");
+     }
+ }
+
+ @Override
+ public Item[] getMenu() {
+     Item[] currentMenu = new Item[menuCount];
+     for (int i = 0; i < menuCount; i++) {
+         currentMenu[i] = menu[i];
+     }
+     return currentMenu;
+ }
+
+ @Override
+ public Order placeOrder(int[] itemIds) {
+     Item[] orderedItems = new Item[itemIds.length];
+     int count = 0;
+
+     for (int id : itemIds) {
+         Item found = null;
+         for (int i = 0; i < menuCount; i++) {
+             if (menu[i].getId() == id) {
+                 found = menu[i];
+                 break;
+             }
+         }
+         if (found != null) {
+             orderedItems[count++] = found;
+         } else {
+             System.out.println("Item ID " + id + " not found.");
+         }
+     }
+
+     Item[] finalItems = new Item[count];
+     for (int i = 0; i < count; i++) {
+         finalItems[i] = orderedItems[i];
+     }
+
+     Order newOrder = new Order(nextOrderId++, finalItems);
+     if (orderCount < orders.length) {
+         orders[orderCount++] = newOrder;
+     } else {
+         System.out.println("Order list full. Cannot accept new orders.");
+     }
+     System.out.println("Order list with ID: " + newOrder.getOrderId());
+     return newOrder;
+ }
+
+ @Override
+ public double generateBill(int orderId) {
+     Order order = null;
+     for (int i = 0; i < orderCount; i++) {
+         if (orders[i].getOrderId() == orderId) {
+             order = orders[i];
+             break;
+         }
+     }
+     if (order == null) {
+         System.out.println("Invalid Order ID");
+         return 0;
+     }
+
+     double total = 0;
+     for (Item item : order.getItems()) {
+         total += item.getPrice();
+     }
+
+     return total + total * 0.06; 
+ }
+}
+
+public class  InterfaceRestarent {
+ public static void main(String[] args) {
+     KFC kfc = new KFC();
+
+     kfc.printName();
+
+     kfc.addItem(new Item(1, "Zinger Burger", 5.99));
+     kfc.addItem(new Item(2, "Fries", 2.99));
+     kfc.addItem(new Item(3, "Pepsi", 1.99));
+
+     System.out.println("Menu:");
+     for (Item item : kfc.getMenu()) {
+         System.out.println(item);
+     }
+
+     Order order = kfc.placeOrder(new int[]{1, 3});
+     double bill = kfc.generateBill(order. getOrderId());
+
+     System.out.printf("Total bill (including 6%% tax): $%.2f%n", bill);
+ }
+}
+ 
