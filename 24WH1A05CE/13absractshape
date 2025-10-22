@@ -1,0 +1,59 @@
+package javalab;
+abstract class Shape{
+	int a,b;
+	abstract void printArea();
+}
+class Rectangle extends Shape{
+	Rectangle(int a,int b)
+	{
+		this.a=a;
+		this.b=b;
+	}
+	
+	@Override
+	void printArea() {
+		System.out.println("Area of the Rectangle is: "+a*b);
+		
+	}
+	
+	
+}
+class Triangle extends Shape{
+	Triangle(int a,int b)
+	{
+		this.a=a;
+		this.b=b;
+	}
+	
+	@Override
+	void printArea() {
+		System.out.println("Area of the Triangle is: "+a*b*0.5);
+		
+	}
+	
+	
+}
+class Circle extends Shape{
+	Circle(int a)
+	{
+		this.a=a;
+		
+	}
+	
+	@Override
+	void printArea() {
+		System.out.println("Area of the Rectangle is: ",3.14*a*a);
+		
+	}
+	
+	
+}
+
+
+public class Shapes {
+
+	public static void main(String[] args) {
+		
+	}
+
+}
