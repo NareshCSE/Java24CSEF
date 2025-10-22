@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+@SuppressWarnings("serial")
+class CreditsNotSufficientException extends RuntimeException{
+	public CreditsNotSufficientException(String message) {
+		super(message);
+	}
+}
+public class EhCredits {
+	@SuppressWarnings("resource")
+	public static void main(String[] args) throws CreditsNotSufficientException {
+		Scanner sc = new Scanner(System.in);
+		int credits;
+		System.out.println("Enter number of credits:");
+		credits = sc.nextInt();
+		if(credits < 50)
+		{
+			throw new CreditsNotSufficientException("Insufficient Credits.");
+		}
+		else
+		{
+			System.out.println("Credits available:" + credits);
+		}
+		sc.close();
+	}
+}
