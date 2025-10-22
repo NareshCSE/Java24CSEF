@@ -1,0 +1,28 @@
+package z7project;
+class creditsNotSufficientException extends Exception{
+	public creditsNotSufficientException(String message) {
+		super(message);
+	}
+}
+
+public class CreditsNotSufficient {
+	public static void checkCredits(int credits) throws creditsNotSufficientException{
+		if(credits<50) {
+			throw new creditsNotSufficientException("Check credits: "+credits);
+		}
+	}
+
+	public static void main(String[] args) {
+		int[] testCredits = {10,80,50};
+		for(int credits : testCredits) {
+			try {
+	            checkCredits(credits);
+	            System.out.println("Check passed.");
+	        } catch (creditsNotSufficientException e) {
+	            System.out.println("Exception caught: " + e.getMessage());
+	        }
+		}
+
+	}
+
+}
