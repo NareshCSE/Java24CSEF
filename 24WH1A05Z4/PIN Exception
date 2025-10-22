@@ -1,0 +1,43 @@
+import java.util.Scanner;
+@SuppressWarnings("serial")
+class PinMisMatchException extends RuntimeException{
+	public PinMisMatchException(String message) {
+		super(message);
+	}
+}
+
+public class pinValidator {
+	public static void main(String[] args) throws PinMisMatchException {
+		Scanner sc = new Scanner(System.in);
+		final int correctPin = 1004;
+        int maxAttempts = 3;
+
+        System.out.print("Enter your account holder name: ");
+        String accHolderName = sc.nextLine();
+
+        int attempt = 0;
+        boolean isValid = false;
+
+        while (attempt < maxAttempts) {
+            System.out.print("Enter your PIN: ");
+            int enteredPin = sc.nextInt();
+
+            if (enteredPin == correctPin) {
+                System.out.println("Pin is matched. Welcome, " + accHolderName + "!");
+                isValid = true;
+                break;
+            } else {
+                attempt++;
+                if (attempt < maxAttempts) {
+                    System.out.println("Incorrect PIN. Try again.");
+                }
+            }
+        }
+
+        if (!isValid) {
+            throw new PinMisMatchException("Sorry..Your Account Has been Locked");
+        }
+
+        sc.close();
+	}
+}
