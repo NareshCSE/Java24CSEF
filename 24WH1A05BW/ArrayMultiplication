@@ -1,0 +1,64 @@
+package demo;
+import java.util.Scanner;
+public class array_mult {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner input=new Scanner(System.in);
+		int sum=0;
+    //int[][] mat1= {{1,2},{5,6}};
+		//int len=input.nextInt();
+		System.out.println(sum);
+		int[][] mat1=new int[2][2];
+		for(int i=0;i<2;i++)
+		{
+			for(int j=0;j<2;j++)
+			{
+				mat1[i][j]=input.nextInt();
+			}
+		}
+    System.out.println("Matrix1");
+    for(int i=0;i<2;i++)
+    {
+    	for(int j=0;j<2;j++)
+    	{
+    		System.out.print(mat1[i][j]+" ");
+    	}
+    	System.out.println();
+    }
+    //int[][] mat2= {{1,2},{3,4}};
+    int[][] mat2=new int[2][2];
+    for(int i=0;i<2;i++)
+	{
+		for(int j=0;j<2;j++)
+		{
+			mat2[i][j]=input.nextInt();
+		}
+	}
+    System.out.println("Matrix2");
+    for(int i=0;i<2;i++)
+    {
+    	for(int j=0;j<2;j++)
+    	{
+    		System.out.print(mat2[i][j]+" ");
+    	}
+    	System.out.println();
+    }
+    System.out.println("Multiplication of two matrices");
+    for(int i=0;i<2;i++)
+    {
+    	for(int j=0;j<2;j++) 
+    	{
+    		sum=0;
+    		for(int k=0;k<2;k++)
+    		{
+    			sum+=mat1[i][k]*mat2[k][j];
+    		}
+    		System.out.print(sum+" ");
+    	}
+    	System.out.println();
+    }
+    
+	}
+
+}
