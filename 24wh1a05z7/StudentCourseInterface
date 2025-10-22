@@ -1,0 +1,96 @@
+package z7project;
+
+interface StudentCourse{
+	void addCourse(Course course) throws Exception;
+	Course[] viewCourses() throws Exception;
+	void addFee() throws Exception;
+}
+
+class Course {
+	private String courseName;
+	private int courseId;
+	private double coursePrice;
+	public Course(String courseName,int courseId,double coursePrice) {
+		this.courseName=courseName;
+		this.courseId=courseId;
+		this.coursePrice=coursePrice;
+	}
+	public String getCourseName() {
+		return courseName;
+	}
+	public int getCourseId() {
+		return courseId;
+	}
+	public double getCoursePrice() {
+		return coursePrice;
+	}
+}
+class Semester implements StudentCourse {
+    private Course[] courses;
+    private int courseCount; 
+    public Semester(int maxCourses) {
+        courses = new Course[maxCourses]; 
+        courseCount = 0;
+    }
+    public void addCourse(Course course) throws Exception {
+        if (course == null) {
+            throw new Exception("Course cannot be null");
+        }
+        
+        if (courseCount >= courses.length) {
+            throw new Exception("Course list is full. Cannot add more courses.");
+        }
+        
+        courses[courseCount++] = course; 
+        System.out.println("Course " + course.getCourseName() + " added successfully.");
+    }
+    public Course[] viewCourses() throws Exception {
+        if (courseCount == 0) {
+            throw new Exception("No courses available.");
+        }
+        Course[] currentCourses = new Course[courseCount];
+        System.arraycopy(courses, 0, currentCourses, 0, courseCount);
+        return currentCourses;
+    }
+    public void addFee(double fee) throws Exception {
+        if (fee < 1000 || fee > 3000) {
+            throw new Exception("Fee must be between 1000 and 3000.");
+        }
+
+        double finalFee = fee;
+        if (fee > 1500) {
+            finalFee -= fee * 0.10; 
+            System.out.println("Fee is above 1500. A 10% discount is applied.");
+        }
+
+        System.out.println("Final Fee after discount (if any): " + finalFee);
+    }
+}
+public class StudentCourseInterface {
+	public static void main(String args[]) {
+		 try {
+	            
+	            Semester semester = new Semester(3);
+	            Course course1 = new Course("Math",101, 1200);
+	            Course course2 = new Course("Science",102, 1800);
+	            Course course3 = new Course("History",103, 1500);
+	            Course course4 = new Course("Computer Science",104, 2000); // This should not be added
+	            semester.addCourse(course1);
+	            semester.addCourse(course2);
+	            semester.addCourse(course3);
+	            try {
+	                semester.addCourse(course4);
+	            } catch (Exception e) {
+	                System.out.println(e.getMessage());
+	            }
+	            Course[] courses = semester.viewCourses();
+	            for (Course course : courses) {
+	                System.out.println("Course ID: " + course.getCourseId() + ", Name: " + course.getCourseName() + ", Price: " + course.getCoursePrice());
+	            }
+	            semester.addFee(2000); 
+	            semester.addFee(1200); 
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	}
+}
