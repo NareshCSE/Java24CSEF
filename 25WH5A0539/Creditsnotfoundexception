@@ -1,0 +1,21 @@
+import java.util.Scanner;
+
+class CreditnotfoundException extends RuntimeException {
+	public CreditnotfoundException(String message) {
+		super.getMessage();
+	}
+}
+
+public class Exceptionhandling {
+	public static void main(String[] args) {
+		System.out.println("enter no of credits");
+		Scanner sc = new Scanner(System.in);
+		int credits = sc.nextInt();
+		if(credits<50)
+		{
+			throw new CreditnotfoundException("credits not found");
+		}
+		System.out.println("credits are"+credits);
+
+	}
+}
