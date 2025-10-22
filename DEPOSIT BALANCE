@@ -1,0 +1,45 @@
+package Area;
+
+public class Bank {
+	public int getBalance() {
+		return 0;
+	}
+}
+class BankA extends Bank
+{
+	int balance = 1000;
+	public int getBalance()
+	{
+		return balance;
+	}
+}
+class BankB extends Bank
+{
+	int balance = 1500;
+	public int getBalance()
+	{
+		return balance;
+	}
+}
+class BankC extends Bank
+{
+	int balance = 2000;
+	public int getbBalance()
+	{
+		return balance;
+	}
+}
+public class Banks
+{
+	public static void main(String[]args)
+	{
+		Bank obj1 =new  BankA();
+		Bank obj2 =new  BankB();
+		Bank obj3 =new  BankC();
+		System.out.println("Money Deposit in BankA:"+ obj1 .getBalance());
+		System.out.println("Money Deposit in BankB:"+ obj2 .getBalance());
+		System.out.println("Money Deposit in BankC:"+ obj13 .getBalance());
+		
+	}
+	
+}
