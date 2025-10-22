@@ -1,0 +1,33 @@
+package labPrograms;
+import java.util.Scanner;
+public class fibonocciPrime {
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		int count=0;
+		int n=sc.nextInt();
+		int a=0,b=1;
+		int c;
+		while(a<n)
+		{
+			for(int i=2;i<a;i++)
+			{
+				if(a%i==0)
+				{
+					count+=1;
+				}
+			}
+			if(count==0 && a!=0 && a!=1)
+			{
+				System.out.println(a);
+			}
+			count=0;
+			c=a+b;
+			a=b;
+			b=c;
+		}
+		
+
+	}
+
+}
