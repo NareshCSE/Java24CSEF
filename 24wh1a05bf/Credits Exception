@@ -1,0 +1,54 @@
+package Assignment;
+import java.util.Scanner;
+
+class creditnotsufficient extends Exception{
+	public creditnotsufficient(String message) {
+    super(message);
+	}
+}
+class studentservice{
+	public void registerCourse(int credits) throws creditnotsufficient  {
+		if(credits<50) {
+			throw new creditnotsufficient("Credits are less than 50,cannot register for course");
+		}
+		System.out.println("Course registration successfull");
+	}
+	public void accesslibrary(int credits) throws creditnotsufficient  {
+		if(credits<50) {
+			throw new creditnotsufficient("Credits are less than 50,cannot have library access");
+		}
+		System.out.println("Library access granted");
+	}
+	public void joinclub (int credits) throws creditnotsufficient  {
+		if(credits<50) {
+			throw new creditnotsufficient("Credits are less than 50,cannot join club");
+		}
+		System.out.println("Joined club successfully");
+	}
+	
+}
+public class ass15 {
+	public static void main(String[] args) {
+		Scanner scanner=new Scanner(System.in);
+		studentservice service=new studentservice();
+		System.out.println("Enter student credits:");
+		int studentcredits=scanner.nextInt();
+		try {
+			service.registerCourse(studentcredits);
+		}catch(creditnotsufficient e) {
+			System.out.println("ERROR:"+e.getMessage());
+		}
+		try {
+			service.accesslibrary(studentcredits);
+		}catch(creditnotsufficient e) {
+			System.out.println("ERROR:"+e.getMessage());
+		}
+		try {
+			service.joinclub(studentcredits);
+		}catch(creditnotsufficient e) {
+			System.out.println("ERROR:"+e.getMessage());
+		}
+		scanner.close();
+	}
+
+}
