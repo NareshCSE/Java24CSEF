@@ -1,0 +1,78 @@
+abstract class shape
+	
+	   {
+		int a,b;
+		abstract void printarea();
+	   }
+	
+	
+	 class Rectangle extends shape
+	{
+		 
+		public Rectangle(int length,int breadth)
+		
+		{
+			a=length;
+			b=breadth;
+		}
+		
+	@Override
+	void printarea() 
+	   {
+		// TODO Auto-generated method stub
+		int area=a*b;
+		System.out.println("Area of rectangle is:"+area);
+		
+		}
+
+     }
+	 
+	 class Triangle extends shape
+	 {
+		 public Triangle(int base,int height)
+		 {
+			 a=base;
+			 b=height;
+		 }
+
+		@Override
+		void printarea() 
+		{
+			// TODO Auto-generated method stub
+		  double area=0.5*a*b;
+		  System.out.println("Area of traingle is:"+area);
+			
+		}
+		 
+	 }
+	 
+	 class Circle extends shape
+	 {
+		 public Circle(int radius)
+		 {
+			 a=radius;
+			 
+		 }
+
+		@Override
+		void printarea()
+		{
+			// TODO Auto-generated method stub
+			int area=(int) (3.14*a*a);
+			System.out.println("Area of circle:"+area);
+			
+		}
+		 
+	 }
+	 class Area13
+	 {
+		 public static void main(String[]args)
+		 {
+			 shape rect= new Rectangle(5,5);
+			 shape tri=new Triangle(5,5);
+			 shape cir=new Circle(5);
+			 rect.printarea();
+			 tri.printarea();
+			 cir.printarea();
+		 }
+	 }
