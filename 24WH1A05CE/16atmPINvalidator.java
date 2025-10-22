@@ -1,10 +1,11 @@
+package javalab;
 import java.util.Scanner;
-class PinMismatchException extends RuntimeException{
+/*class PinMismatchException extends RuntimeException{
 	public PinMismatchException() {
 		super();
 	}
 	
-}
+}*/
 class AccountLockedException extends RuntimeException{
 	public AccountLockedException() {
 		super();
@@ -15,10 +16,12 @@ public class atmPINvalidator {
  
 	
 		private static final int correct_pin=1234;
-		public static void ValidatePin(int pin)throws PinMismatchException{
+		public static boolean ValidatePin(int pin){
 			if(pin!=correct_pin) {
-				throw new PinMismatchException();
+				//throw new PinMismatchException();
+				return false;
 			}
+			return true;
 		}
 	
 	
@@ -31,14 +34,24 @@ public class atmPINvalidator {
 	 while(attempts<3&&access!=true)
 	 { System.out.println("Enter pin:");
 	    int pin=scanner.nextInt();
-		 try {
+		 /*try {
 			 ValidatePin(pin);
 			 System.out.println("Access granted");
 			 access=true;
 		 }catch(PinMismatchException e) {
 			 attempts++;
 			 System.out.println("Wrong pin.Try again.Attempts left:" + (3-attempts));
-		 }
+		 }*/
+	    if(ValidatePin(pin)) {
+	    	System.out.println("Access granted");
+	    	access=true;
+	    	
+	    }
+	    else {
+	    	attempts++;
+	    	System.out.println("Wrong pin.Try again.Attempts left:" + (3-attempts));
+	    }
+	    
 	 }
 	 if(!access) {
 		 System.out.println(name+" Your account is locked!");
@@ -49,3 +62,4 @@ public class atmPINvalidator {
 	}
 
 }
+
