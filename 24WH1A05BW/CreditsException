@@ -1,0 +1,26 @@
+package labPrograms;
+import java.util.Scanner;
+class CreditsNotSufficientException extends RuntimeException
+{
+	public CreditsNotSufficientException() {
+        super("Sorry!,Credits are not sufficient");
+	}
+}
+public class exceptionCredits {
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		if(n<50)
+		{
+			throw new CreditsNotSufficientException();
+		}
+		else
+		{
+			System.out.println("Credits are sufficient");
+		}
+	
+		
+
+	}
+
+}
