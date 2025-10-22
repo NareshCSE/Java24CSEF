@@ -1,0 +1,26 @@
+package customException;
+class CreditNotSufficientException extends  RuntimeException{
+	CreditNotSufficientException(String message){
+		super(message);
+	}
+}
+
+public class CustomException {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		try {
+			int credits=34;
+			if(credits < 50) {
+				throw new CreditNotSufficientException("Credits Not Sufficient");
+			}
+			System.out.println("Credits are:"+credits);
+		}
+		catch (CreditNotSufficientException e ){
+			System.out.println(e.getMessage());
+			
+		}
+
+	}
+
+}
