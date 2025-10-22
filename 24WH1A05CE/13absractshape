@@ -53,6 +53,12 @@ class Circle extends Shape{
 public class Shapes {
 
 	public static void main(String[] args) {
+        Shape shape1=new Rectangle(5,3);
+		Shape shape2=new Triangle(4,2);
+		Shape shape3=new Circle(7);
+		shape1.printArea();
+		shape2.printArea();
+		shape3.printArea();
 		
 	}
 
