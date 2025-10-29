@@ -1,0 +1,77 @@
+package z7project;
+
+import java.util.HashSet;
+import java.util.Scanner;
+class Product {
+	private int Id;
+	private String name;
+	private double price;
+	public Product(String name,int Id,double price) {
+		this.name = name;
+		this.Id = Id;
+		this.price = price;
+	}
+	public String getName(){
+		return name;
+	}
+	public double getPrice() {
+		return price;
+	}
+	public int getItemId() {
+		return Id;
+	}
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+	    if (obj == null || getClass() != obj.getClass()) return false;
+	    Product product = (Product) obj;
+	    return Id == product.Id;
+	}
+	
+    public String toString() {
+        return "Product ID: " + Id + ", Name: " + name + ", Price: " + price;
+    }
+	
+}
+
+public class Ecommerce {
+	public static void main(String[] args) {
+		HashSet<Product> products = new HashSet<>();
+	    products.add(new Product("Laptop", 111, 55000.0));
+	    products.add(new Product("Mobile", 222, 25000.0));
+	    products.add(new Product("Headphones",333, 2000.0));
+	    products.add(new Product("Earpods", 444, 1500.0));
+	    System.out.println("Available Products:");
+	    for(Product p:products) {
+	    	System.out.println(p);
+	    }
+	    Scanner sc = new Scanner(System.in);
+        System.out.println("\nEnter product IDs to order (comma separated): ");
+        String input = sc.nextLine();
+
+        String[] ids = input.split(",");
+        double total = 0.0;
+
+        System.out.println("\nOrder Details:");
+        for (String idStr : ids) {
+            int id = Integer.parseInt(idStr.trim());
+            boolean found = false;
+
+            for (Product p : products) {
+                if (p.getItemId() == id) {
+                    System.out.println(p);
+                    total += p.getPrice();
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) {
+                System.out.println("Product ID " + id + " not found!");
+            }
+        }
+
+        System.out.println("\nTotal Price: ₹" + total);
+
+	}
+
+}
