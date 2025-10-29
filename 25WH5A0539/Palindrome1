@@ -20,7 +20,6 @@ public class Palindrome {
     }
 
     public static boolean isPalindrome(String str) {
-        // Remove spaces and convert to lowercase for uniformity
         str = str.replaceAll("\\s+", "").toLowerCase();
 
         int length = str.length();
