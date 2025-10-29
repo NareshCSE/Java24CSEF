@@ -1,0 +1,88 @@
+package mid2.java;
+import java.util.*;
+public class EcommersApplication {
+
+	public static class Product{
+		int id;
+		String name;
+		double price;
+		
+		public Product(int id,String name,double price) {
+			this.id=id;
+			this.name=name;
+			this.price=price;
+		}
+		public int getId() {
+			return id;
+		}
+		public  String getName() {
+			return name;
+		}
+		public double getPrice() {
+		    return price;
+		}
+
+		
+	}
+	
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sc=new Scanner(System.in);
+		HashSet<Product> product_Set=new HashSet<>();
+		
+		System.out.println("Enter number of products to add");
+		int n=sc.nextInt();
+		int i;
+		for(i=0;i<n;i++) {
+		      System.out.println("Enter product Details of"+(i+1));
+		      System.out.println("Enter product ID:");
+		      int id=sc.nextInt();
+		      sc.nextLine();
+		      System.out.println("Enter product Name:");
+		      String name=sc.nextLine();
+		      System.out.println("Enter product Price:");
+		      Double price=sc.nextDouble();
+		      
+		      Product p = new Product(id,name,price); 
+		      if(product_Set.add(p)) 
+		    	  System.out.println("Product added");
+		      
+		      else 
+		    	  System.out.println("Already exists");
+		      
+		  }
+		  
+		  List<Product> orderedproducts=new ArrayList<>();
+		  double total_price=0.0;
+		      
+		  while(true) {
+		    	  System.out.println("Enter product id to order: ");
+		    	  int order_id=sc.nextInt();
+		    	  boolean found=false;
+		    	  if(order_id==0) {
+		    		  break;
+		    	  }
+		    	  for(Product p:product_Set) {
+		    		  if(p.getId() == order_id) {
+		    			  orderedproducts.add(p);
+		    			  total_price+=p.getPrice();
+		    			  System.out.println("Added to orderedproducts");
+		    			  found=true;
+		    			  break;
+		    		  }  
+		    	 }
+		          if(!found) 
+		        	  System.out.println("product not found");
+		   }
+		      
+		       
+		  if(orderedproducts.isEmpty()) 
+		        System.out.println("No products are ordered");
+		  else 
+		      
+		       System.out.println("Total Amount:"+total_price);
+		         
+		   sc.close();
+	}   	      
+}
