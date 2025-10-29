@@ -1,0 +1,54 @@
+package z7project;
+import java.util.Random;
+
+class RandomThread extends Thread{
+	int randomNumber;
+	public void run() {
+		Random rand = new Random();
+		randomNumber = rand.nextInt(100);
+		System.out.println("Random Number: "+randomNumber);
+	}
+	public int getRandomNumber() {
+		return randomNumber;
+	}
+}
+class SquareThread extends Thread{
+	private int number;
+	public SquareThread(int number) {
+		this.number=number;
+	}
+	public void run() {
+		int square = number*number;
+		System.out.println("Square of the Number: "+square);
+	}
+}
+class CubeThread extends Thread{
+	private int number;
+	public CubeThread(int number) {
+		this.number=number;
+	}
+	public void run() {
+		int cube = number*number*number;
+		System.out.println("Cube of the Number: "+cube);
+	}
+}
+public class MultiThreadApplication {
+
+	public static void main(String[] args) throws InterruptedException {
+		RandomThread t1 = new RandomThread();
+		t1.start();
+		t1.join();
+		int result = t1.getRandomNumber();
+		
+		if(result%2==0) {
+			SquareThread t2 = new SquareThread(result);
+			t2.start();
+			t2.join();
+		}else {
+			CubeThread t3 = new CubeThread(result);
+			t3.start();
+			t3.join();
+		}
+	}
+
+}
