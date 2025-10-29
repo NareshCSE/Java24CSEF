@@ -46,22 +46,3 @@ package csef5aw;
 	    }
 	}
 
-package csef5aw;
-
-public class Main {
-    public static void main(String[] args) {
-        CreditChecker checker = new CreditChecker();
-
-        try {
-            checker.checkCreditsInCourse(40);  // Will throw exception
-        } catch (CreditsNotSufficientException e) {
-            System.out.println(e.getMessage());
-        }
-
-        try {
-            checker.checkCreditsInProgram(60);  // Will pass
-        } catch (CreditsNotSufficientException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-}
