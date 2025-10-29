@@ -1,0 +1,145 @@
+package assignment_problems;
+
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+class Product {
+    private int id;
+    private String name;
+    private double price;
+
+    Product(int id, String name, double price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
+
+    public int getid() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getprice() {
+        return price;
+    }
+}
+
+class Orders {
+    private static int nextOrderId = 1;
+    private int orderId;
+    List<Product> products;
+
+    Orders(List<Product> products) {
+        this.setOrderId(nextOrderId++);
+        this.products = new ArrayList<>(products);
+    }
+
+    void generateBill(int orderId) {
+        double total = 0;
+        System.out.println("Order ID: " + getOrderId());
+        System.out.println("Bill details:");
+        for (Product prod : products) {
+            System.out.printf("Product: %s, Price: %.2f\n", prod.getName(), prod.getprice());
+            total += prod.getprice();
+        }
+        System.out.printf("Total Price: %.2f\n", total);
+    }
+
+	public int getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
+	}
+}
+
+public class e_commerce {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        List<Product> productList = new ArrayList<Product>();
+        List<Orders> orders = new ArrayList<Orders>();
+        
+
+        while (true) {
+            System.out.println("\n1. Add product\n2. Show products\n3. Place order\n4. Generate bill\n5. Exit");
+            System.out.print("Choose: ");
+            int choice = sc.nextInt();
+            sc.nextLine();
+            switch (choice) {
+                case 1: System.out.print("ID: ");
+	                    int id = sc.nextInt();
+	                    sc.nextLine();
+	                    boolean exists = false;
+	                    for (Product product : productList) {
+	                        if (product.getid() == id) {
+	                            System.out.println("Product ID exists.");
+	                            exists = true;
+	                            break;
+	                        }
+	                    }
+	                    if (exists)
+	                        break;
+	                    System.out.print("Name: ");
+	                    String name = sc.nextLine();
+	                    System.out.print("Price: ");
+	                    double price = sc.nextDouble();
+	                    productList.add(new Product(id, name, price));
+	                    System.out.println("Product added.");
+	                    break;
+
+                case 2: for (Product prod : productList) {
+	                        System.out.printf("ID:%d Name:%s Price:%.2f\n", prod.getid(), prod.getName(), prod.getprice());
+	                    }
+	                    break;
+
+                case 3: System.out.print("How many products in the order? ");
+	                    int n = sc.nextInt();
+	                    sc.nextLine();
+	                    List<Product> orderProducts = new ArrayList<>();
+	                    System.out.println("Enter product IDs:");
+	                    for (int i = 0; i < n; i++) {
+	                        int prod_id = sc.nextInt();
+	                        sc.nextLine();
+	                        Product found = null;
+	                        for (Product product : productList) {
+	                            if (product.getid() == prod_id) {
+	                                found = product;
+	                                break;
+	                            }
+	                        }
+	                        orderProducts.add(found);
+	                    }
+	                    Orders newOrder = new Orders(orderProducts);
+	                    orders.add(newOrder);
+	                    System.out.println("order id = " + newOrder.getOrderId());;
+	                    break;
+
+                case 4: System.out.print("Enter order ID: ");
+		                int orderId = sc.nextInt();
+		                sc.nextLine();
+		                boolean orderFound = false;
+		                for (Orders order : orders) {
+		                    if (order.getOrderId() == orderId) { 
+		                        order.generateBill(orderId);
+		                        orderFound = true;
+		                        break;
+		                    }
+		                }
+		                break;
+
+                case 5: System.out.println("Exiting.");
+	                    sc.close();
+	                    return;
+
+                default:System.out.println("Invalid choice.");
+                    	break;
+            }
+        }
+    }
+}
