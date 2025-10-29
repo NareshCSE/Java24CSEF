@@ -9,17 +9,12 @@ public class primenumbers {
 		        }
 		        return true;
 		    }
-
 		    public static void main(String[] args) {
 		        Scanner sc = new Scanner(System.in);
-
 		        System.out.print("Enter n: ");
 		        int n = sc.nextInt();
-
 		        int a = 0, b = 1;
-
 		        System.out.print("Prime numbers in Fibonacci series up to " + n + ": ");
-
 		        // Generate Fibonacci numbers until n
 		        while (a <= n) {
 		            if (isPrime(a)) {
@@ -31,8 +26,4 @@ public class primenumbers {
 		        }
 		        sc.close();
 		    }
-		
-
-	
-
 }
