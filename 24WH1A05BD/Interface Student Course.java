@@ -1,0 +1,86 @@
+package add;
+class Course {
+    private int id;
+    private String name;
+    private double price;
+
+    public Course(int id, String name, double price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
+
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+
+    public double getPrice() { return price; }
+    public void setPrice(double price) { this.price = price; }
+}
+
+interface StudentCourse {
+    void addCourse(Course course) throws Exception;
+    Course[] viewCourses() throws Exception;
+    double addFee() throws Exception;
+}
+class Semester implements StudentCourse {
+
+    private Course[] courseArray = new Course[10]; 
+    private int count = 0;
+
+    public void addCourse(Course course) throws Exception {
+        if (course == null) {
+            throw new Exception("Course cannot be null");
+        }
+        if (count >= courseArray.length) {
+            throw new Exception("Course limit exceeded");
+        }
+        courseArray[count++] = course;
+    }
+
+    public Course[] viewCourses() throws Exception {
+        if (count == 0) {
+            throw new Exception("No courses available");
+        }
+        Course[] result = new Course[count];
+        for (int i = 0; i < count; i++) {
+            result[i] = courseArray[i];
+        }
+        return result;
+    }
+
+    public double addFee() throws Exception {
+        if (count == 0) {
+            throw new Exception("No courses added to calculate fee");
+        }
+
+        double totalFee = 0;
+        for (int i = 0; i < count; i++) {
+            double fee = courseArray[i].getPrice();
+            if (fee > 2000) {
+                fee -= fee * 0.20;
+            }
+            totalFee += fee;
+        }
+        return totalFee;
+    }
+}
+public class ass14 {
+    public static void main(String[] args) throws Exception {
+    	 Semester semester = new Semester();
+
+         semester.addCourse(new Course(101, "Mathematics", 5245));
+         semester.addCourse(new Course(102, "Physics", 2413));
+         semester.addCourse(new Course(103, "Chemistry", 5697));
+
+         System.out.println("Courses enrolled:");
+         for (Course c : semester.viewCourses()) {
+             System.out.println(c.getName() + " - Fee: $" + c.getPrice());
+         }
+
+         double totalFee = semester.addFee();
+         System.out.println("Total fee after discount : $" + totalFee);
+    }
+}
+
