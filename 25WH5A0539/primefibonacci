@@ -1,0 +1,64 @@
+import java.util.Scanner;
+public class PrimeFibonacci {
+ static boolean isPrime(int num) {
+     if (num < 2)
+         return false;
+     for (int i = 2; i <= Math.sqrt(num); i++) {
+         if (num % i == 0)
+             return false;
+     }
+     return true;
+ }
+ static int[] generateFibonacci(int n) {
+     int[] fib = new int[100]; 
+     fib[0] = 0;
+     fib[1] = 1;
+     int count = 2;
+
+     while (true) {
+         int next = fib[count - 1] + fib[count - 2];
+         if (next > n)
+             break;
+         fib[count] = next;
+         count++;
+     }
+
+     // Trim the array to actual size
+     int[] result = new int[count];
+     for (int i = 0; i < count; i++) {
+         result[i] = fib[i];
+     }
+     return result;
+ }
+ static boolean isInFibonacci(int num, int[] fib) {
+     for (int value : fib) {
+         if (value == num)
+             return true;
+     }
+     return false;
+ }
+ static void displayPrimeFibonacci(int n) {
+     int[] fibSeries = generateFibonacci(n);
+
+     System.out.print("Prime Fibonacci numbers up to " + n + " are: ");
+     boolean found = false;
+     for (int i = 2; i <= n; i++) {
+         if (isPrime(i) && isInFibonacci(i, fibSeries)) {
+             System.out.print(i + " ");
+             found = true;
+         }
+     }
+     if (!found)
+         System.out.print("None");
+     System.out.println();
+ }
+
+ public static void main(String[] args) {
+     Scanner sc = new Scanner(System.in);
+     System.out.print("Enter the value of n: ");
+     int n = sc.nextInt();
+     displayPrimeFibonacci(n);
+     sc.close();
+ }
+}
+
