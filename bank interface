@@ -1,0 +1,101 @@
+package demo;
+import java.util.Scanner;
+interface Bank {
+	void createAccount();
+	void creditAmount();
+	void debitAmount();
+	void transferAmount();
+	void miniStatement();
+}
+class sbi implements Bank {
+	double balance = 0;
+	Scanner sc = new Scanner(System.in);
+	public void createAccount() {
+		System.out.println("Account created in SBI");
+	}
+	public void creditAmount() {
+		System.out.print("Enter amount to credit: ");
+		double amt = sc.nextDouble();
+		balance += amt;
+		System.out.println("Amount credited: " + amt);
+	}
+	public void debitAmount() {
+		System.out.print("Enter amount to debit: ");
+		double amt = sc.nextDouble();
+		if (amt <= balance) {
+			balance -= amt;
+			System.out.println("Amount debited: " + amt);
+		} else {
+			System.out.println("Insufficient balance");
+		}
+	}
+	public void transferAmount() {
+		System.out.print("Enter amount to transfer: ");
+		double amt = sc.nextDouble();
+		if (amt <= balance) {
+			balance -= amt;
+			System.out.println("Amount transferred: " + amt);
+		} else {
+			System.out.println("Insufficient balance");
+		}
+	}
+	public void miniStatement() {
+		System.out.println("Balance: " + balance);
+	}
+}
+class Axis implements Bank {
+	double balance = 0;
+	Scanner sc = new Scanner(System.in);
+
+	public void createAccount() {
+		System.out.println("Account created in Axis");
+	}
+	public void creditAmount() {
+		System.out.print("Enter amount to credit: ");
+		double amt = sc.nextDouble();
+		balance += amt;
+		System.out.println("Amount credited: " + amt);
+	}
+	public void debitAmount() {
+		System.out.print("Enter amount to debit: ");
+		double amt = sc.nextDouble();
+		if (amt <= balance) {
+			balance -= amt;
+			System.out.println("Amount debited: " + amt);
+		} else {
+			System.out.println("Insufficient balance");
+		}
+	}
+	public void transferAmount() {
+		System.out.print("Enter amount to transfer: ");
+		double amt = sc.nextDouble();
+		if (amt <= balance) {
+			balance -= amt;
+			System.out.println("Amount transferred: " + amt);
+		} else {
+			System.out.println("Insufficient balance");
+		}
+	}
+
+	public void miniStatement() {
+		System.out.println("Balance: " + balance);
+	}
+}
+
+public class Bankinterface {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Enter Bank name (SBI / Axis): ");
+		String bankName = sc.next();
+		Bank b;
+		if (bankName.equalsIgnoreCase("SBI"))
+			b = new sbi();
+		else
+			b = new Axis();
+		b.createAccount();
+		b.creditAmount();
+		b.debitAmount();
+		b.miniStatement();
+		sc.close();
+	}
+}
