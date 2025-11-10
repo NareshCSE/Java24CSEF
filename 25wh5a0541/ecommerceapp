@@ -1,0 +1,98 @@
+package demo;
+import java.util.HashSet;
+import java.util.Scanner;
+class Product {
+	private int product_id;
+	private String name;
+	private double cost;
+	
+	Product(int product_id,String name,double cost){
+		this.product_id=product_id;
+		this.name=name;
+		this.cost=cost;
+	}
+
+	public int getProduct_id() {
+		return product_id;
+	}
+
+	public String getName() {
+		return name;
+	}
+	public double getCost() {
+		return cost;
+	}
+
+    @Override
+    public String toString() {
+        return "Product ID: " + product_id + ", Name: " + name + ", Price: " + cost;
+    }
+}
+class Seller {
+	
+	    private HashSet<Product> productSet = new HashSet<>();
+
+	    public void addProduct(Product p) {
+	        productSet.add(p);
+	    }
+
+	    public HashSet<Product> getProducts() {
+	        return productSet;
+	    }
+
+	    public void displayProducts() {
+	        System.out.println("Available Products:");
+	        for (Product p : productSet) {
+	            System.out.println(p);
+	        }
+	    }
+	}
+ class Customer {
+	 private String name;
+
+	    public Customer(String name) {
+	        this.name = name;
+	    }
+
+	    public void orderProduct(int[] orderIds, HashSet<Product> availableProducts) {
+	        double total = 0;
+	        System.out.println("\nCustomer: " + name);
+	        System.out.println("Order Details:");
+
+	        for (int id : orderIds) {
+	            boolean found = false;
+	            for (Product p : availableProducts) {
+	                if (p.getProduct_id() == id) {
+	                    System.out.println(p);
+	                    total += p.getCost();
+	                    found = true;
+	                    break;
+	                }
+	            }
+	            if (!found) {
+	                System.out.println("Product ID " + id + " not found!");
+	            }
+	        }
+
+	        System.out.println("\nTotal Price: " + total);
+	    }
+	}
+    
+
+
+public class ecommerceapp {
+	public  static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		Seller s=new Seller();
+		s.addProduct(new Product(11,"Car",150000));
+		s.addProduct(new Product(12,"mobile",30500));
+		s.addProduct(new Product(13,"sofa",45000));
+		s.addProduct(new Product(14,"dress",3000));
+		s.displayProducts();
+		Customer customer = new Customer("sonu");
+        int[] orderIds = {13, 12, 11};
+        customer.orderProduct(orderIds, s.getProducts());
+
+        sc.close();
+    }
+}
