@@ -1,0 +1,123 @@
+package demo;
+
+import java.util.ArrayList;
+import java.util.List;
+
+class Course {
+	private int id;
+	private String name;
+	private double price;
+
+	public Course(int id, String name, double price) {
+		this.id = id;
+		this.name = name;
+		this.price = price;
+	}
+
+	// Getters
+	public int getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	// Setter method (if needed for setter injection)
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	@Override
+	public String toString() {
+		return id + " - " + name + " (Fee: $" + price + ")";
+	}
+}
+
+interface StudentCourse {
+	void addCourse(Course course) throws Exception;
+
+	Course[] viewCourses() throws Exception;
+
+	void addFee() throws Exception;
+}
+
+class Semester implements StudentCourse {
+
+	private List<Course> courseList = new ArrayList<>();
+
+	
+	@Override
+	public void addCourse(Course course) throws Exception {
+		if (course == null) {
+			throw new Exception("Invalid course! Cannot be null.");
+		}
+		if (course.getPrice() < 1000 || course.getPrice() > 3000) {
+			throw new Exception("Course fee must be between $1000 and $3000.");
+		}
+		courseList.add(course);
+		System.out.println("Course added successfully: " + course.getName());
+	}
+
+	
+	@Override
+	public Course[] viewCourses() throws Exception {
+		if (courseList.isEmpty()) {
+			throw new Exception("No courses available!");
+		}
+		return courseList.toArray(new Course[0]);
+	}
+
+	
+	@Override
+	public void addFee() throws Exception {
+		if (courseList.isEmpty()) {
+			throw new Exception("No courses to process fee for!");
+		}
+		for (Course course : courseList) {
+			double fee = course.getPrice();
+			if (fee > 1500) {
+				double discountedFee = fee - (fee * 0.10);
+				course.setPrice(discountedFee);
+				System.out.println(course.getName() + ": Fee after 10% discount = $" + discountedFee);
+			} else {
+				System.out.println(course.getName() + ": No discount (Fee = $" + fee + ")");
+			}
+		}
+	}
+}
+
+public class studentcouseapp {
+	public static void main(String[] args) {
+		try {
+			Semester semester = new Semester();
+
+			
+			semester.addCourse(new Course(101, "Java Programming", 2500));
+			semester.addCourse(new Course(102, "Web Development", 1400));
+			semester.addCourse(new Course(103, "Database Systems", 1800));
+			
+			System.out.println("\n--- Available Courses ---");
+			for (Course c : semester.viewCourses()) {
+				System.out.println(c);
+			}
+
+			
+			System.out.println("\n--- Fee Details ---");
+			semester.addFee();
+
+			
+			System.out.println("\n--- Updated Course Fees ---");
+			for (Course c : semester.viewCourses()) {
+				System.out.println(c);
+			}
+
+		} catch (Exception e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+	}
+}
