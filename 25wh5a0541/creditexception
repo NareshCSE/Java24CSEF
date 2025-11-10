@@ -1,0 +1,20 @@
+package demo;
+class CreditsNotSuffiecientException extends RuntimeException{
+	 public  CreditsNotSuffiecientException(String message) {
+	 super(message); 
+	 }
+}
+public class creditexception {
+	int userCredits = 70;  
+    public static void main(String[] args)throws Exception {
+        creditexception creditexception = new creditexception();
+        creditexception.checkCredits();
+    }
+    public void checkCredits() throws Exception{
+    	if(userCredits<50) {
+    		throw new Exception("Credits are insufficient:" + userCredits);
+    	} else {
+    		System.out.println("Credits are sufficent");
+        }
+    }
+}  
