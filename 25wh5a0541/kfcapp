@@ -1,0 +1,114 @@
+package demo;
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
+class Item {
+	private int itemId;
+	private String itemName;
+	private double price;
+	public Item(int itemId, String itemName, double price) {
+		this.itemId = itemId;
+		this.itemName = itemName;
+		this.price = price;
+	}
+	public int getItemId() {
+		return itemId;
+	}
+	public String getItemName() {
+		return itemName;
+	}
+	public double getPrice() {
+		return price;
+	}
+	@Override
+	public String toString() {
+		return itemId + " - " + itemName + " ($" + price + ")";
+	}
+}
+class Order {
+	private int orderId;
+	private List<Item> items;
+	public Order(int orderId, List<Item> items) {
+		this.orderId = orderId;
+		this.items = items;
+	}
+	public int getOrderId() {
+		return orderId;
+	}
+	public List<Item> getItems() {
+		return items;
+	}
+}
+interface Restaurant {
+	void printRestaurantName();
+	void addItem(Item item);
+	Item[] getMenu();
+	Order placeOrder(int orderId, int[] itemIds);
+	double generateBill(int orderId);
+}
+class kfc implements Restaurant {
+	private String name = "KFC";
+	private List<Item> menu = new ArrayList<>();
+	private List<Order> orders = new ArrayList<>();
+	@Override
+	public void printRestaurantName() {
+		System.out.println("Welcome to " + name);
+	}
+	@Override
+	public void addItem(Item item) {
+		menu.add(item);
+	}
+	@Override
+	public Item[] getMenu() {
+		return menu.toArray(new Item[0]);
+	}
+	@Override
+	public Order placeOrder(int orderId, int[] itemIds) {
+		List<Item> orderItems = new ArrayList<>();
+		for (int id : itemIds) {
+			for (Item i : menu) {
+				if (i.getItemId() == id) {
+					orderItems.add(i);
+				}
+			}
+		}
+		Order order = new Order(orderId, orderItems);
+		orders.add(order);
+		System.out.println("Order placed successfully! Order ID: " + orderId);
+		return order;
+	}
+	@Override
+	public double generateBill(int orderId) {
+		double total = 0;
+		for (Order order : orders) {
+			if (order.getOrderId() == orderId) {
+				for (Item item : order.getItems()) {
+					total += item.getPrice();
+				}
+				break;
+			}
+		}
+		double tax = total * 0.06;
+		double finalAmount = total + tax;
+		System.out.println("Bill for Order ID " + orderId + ": $" + finalAmount);
+		return finalAmount;
+	}
+}
+
+public class kfcapp {
+	public static void main(String[] args) {
+		kfc kfc = new kfc();
+		kfc.printRestaurantName();
+		kfc.addItem(new Item(1, "Zinger Burger", 120.0));
+		kfc.addItem(new Item(2, "Chicken Bucket", 200.0));
+		kfc.addItem(new Item(3, "Pepsi", 20.0));
+		System.out.println("\n--- Menu ---");
+		for (Item item : kfc.getMenu()) {
+			System.out.println(item);
+		}
+		int[] selectedItems = { 1, 3 };
+		kfc.placeOrder(101, selectedItems);
+		kfc.generateBill(101);
+	}
+}
