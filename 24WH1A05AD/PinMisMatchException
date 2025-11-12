@@ -1,0 +1,41 @@
+package firstjavalab;
+import java.util.*;
+class PinMismatchException extends Exception{
+	public PinMismatchException() {
+		System.out.println("Sorry..Your Account Has been Locked");
+	}
+}
+
+public class PinMismatch {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter your name:");
+		String name = sc.next();
+		int pin = 3467;
+		
+		try {
+			for(int i=0;i<3;i++) {
+				System.out.println("Enter the pin:");
+				int pin1 = sc.nextInt();
+				if(pin1==pin) {
+					System.out.println("Correct pin... ");
+					break;
+				}
+				else if(i<2 && pin1!=pin){
+					System.out.println("Pin is incorrect..Enter the pin again");
+					
+				}
+				else if(i==2&&pin1!=pin) {
+					throw new PinMismatchException();
+				}
+			}
+		}
+		catch(Exception e) {
+			
+			System.out.println(e.getMessage());
+		}
+	}
+
+}
