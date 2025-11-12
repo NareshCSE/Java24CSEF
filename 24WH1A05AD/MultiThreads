@@ -1,0 +1,54 @@
+import java.util.*;
+
+class RandomNumberThread extends Thread{
+	public void run() {
+		Random randint = new Random();
+		while(true) {
+			int num = randint.nextInt(100);
+			System.out.println("Generated random number is:"+num);
+			if(num%2==0) {
+				new EvennumberThread(num).start();
+			}
+			else {
+				new OddnumberThread(num).start();
+			}
+			try {
+                Thread.sleep(1000); 
+            } catch (InterruptedException e) {
+                System.out.println(e);
+            }
+			
+		}
+		
+	}
+	
+}
+ class EvennumberThread extends Thread{
+	 int num;
+	 public EvennumberThread(int num) {
+		 this.num = num;
+	 }
+	 public void run() {
+		 System.out.println("The square of the generated number is: "+(num*num));
+	 }
+ }
+ 
+ class OddnumberThread extends Thread{
+	 int num;
+	 public OddnumberThread(int num) {
+		 this.num = num;
+	 }
+	 public void run() {
+		 System.out.println("The cube of the generated number is: "+(num*num*num));
+	 }
+ }
+public class MultiThreads {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		RandomNumberThread ran = new RandomNumberThread();
+		ran.start();
+
+	}
+
+}
