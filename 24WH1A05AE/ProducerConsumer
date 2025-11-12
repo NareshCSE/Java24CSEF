@@ -1,0 +1,79 @@
+package practiceprograms;
+import java.util.*;
+class SharedBuffer {
+    private int data;
+    private boolean available;
+
+    synchronized void produce(int value) {
+        while (available) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        data = value;
+        available = true;
+        System.out.println("Produced: " + data);
+        notify();
+    }
+    synchronized void consume() {
+        while (!available) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("Consumed: " + data);
+        available = false;
+        notify();
+    }
+}
+class Producer extends Thread {
+    private SharedBuffer buffer;
+
+    Producer(SharedBuffer buffer) {
+        this.buffer = buffer;
+    }
+
+    public void run() {
+        int value = 1;
+        while (true) {
+            buffer.produce(value++);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+class Consumer extends Thread {
+    private SharedBuffer buffer;
+
+    Consumer(SharedBuffer buffer) {
+        this.buffer = buffer;
+    }
+
+    public void run() {
+        while (true) {
+            buffer.consume();
+            try {
+                Thread.sleep(1500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+public class producerconsumer {
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		SharedBuffer buffer = new SharedBuffer();
+        Producer producer = new Producer(buffer);
+        Consumer consumer = new Consumer(buffer);
+        producer.start();
+        consumer.start();
+	}
+}
