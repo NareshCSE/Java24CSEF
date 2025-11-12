@@ -29,7 +29,7 @@ class OddThread extends Thread{
 		num = n;
 	}
 	public void run() {
-		System.out.println("Cube of "+ num + " = " + num*num);
+		System.out.println("Cube of "+ num + " = " + num*num*num);
 	}
 }
 
