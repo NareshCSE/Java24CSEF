@@ -1,0 +1,57 @@
+package assignment_problems;
+
+import java.util.Random;
+
+class RandomNumberthread extends Thread{
+	eventhread even;
+	oddthread odd;
+	
+	Random random = new Random();
+	
+	public void run() {
+        for(int i = 0; i <= 10; i++) {
+            int num = random.nextInt(100);
+            System.out.println("number: " + num);
+            if(num % 2 == 0) {
+            	eventhread even = new eventhread();
+                even.number = num;
+                even.start();
+            }
+            else {
+            	oddthread odd = new oddthread();
+                odd.number = num;
+                odd.start();
+
+            }
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+	}
+}
+
+class eventhread extends Thread{
+	int number;
+	
+	public void run() {
+         	System.out.println("Square: " + number * number);
+	}
+}
+
+class oddthread extends Thread{
+	int number;
+	
+	public void run() {
+         System.out.println("Cube: " + number * number * number);
+	}
+}
+public class even_odd_thread {
+	public static void main(String[] args) {
+		RandomNumberthread random = new RandomNumberthread();		
+		random.start();
+	
+	}
+	
+}
