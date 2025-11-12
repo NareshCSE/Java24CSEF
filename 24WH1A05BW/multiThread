@@ -1,0 +1,71 @@
+package labPrograms;
+import java.lang.Thread;
+import java.util.Random;
+class squareEven extends Thread
+{
+	int num;
+	public squareEven(int num)
+	{
+		this.num=num;
+	}
+	public void run()
+	{
+		System.out.println(num*num);
+	}
+}
+class cubeOdd extends Thread
+{
+	int num;
+	public cubeOdd(int num)
+	{
+		this.num=num;
+	}
+	public void run()
+	{
+		System.out.println(num*num*num);
+	}
+}
+class createRandom
+{
+	int num;
+	Random random=new Random();
+	public int create()
+	{
+		num=random.nextInt(100);
+		return num;
+	}
+}
+public class threadExample {
+	public static void main(String[] args) {
+		int n;
+		for(int i=0;i<5;i++)
+		{
+		   createRandom newrandom=new createRandom();
+		   n=newrandom.create();
+		   System.out.println(n);
+		if(n%2==0)
+		{
+			squareEven sqnum=new squareEven(n);
+			sqnum.start();
+		}
+		else
+		{
+			cubeOdd cubenum=new cubeOdd(n);
+			cubenum.start();
+		}
+		try
+		{
+			Thread.sleep(1000);
+		}
+		catch(InterruptedException e)
+		{
+			e.printStackTrace();
+		}
+		
+		}
+		
+		
+
+	}
+
+}
