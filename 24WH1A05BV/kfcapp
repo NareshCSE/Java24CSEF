@@ -1,0 +1,41 @@
+package labprojects;
+
+	import java.util.Scanner;
+
+	public class kfcapp {
+	    public static void main(String[] args) {
+	        try (Scanner sc = new Scanner(System.in)) {
+				KFC kfc = new KFC();
+
+				// Add items to menu
+				kfc.addItem(new Item(1, "Burger", 120));
+				kfc.addItem(new Item(2, "Chicken Roll", 150));
+				kfc.addItem(new Item(3, "Pepsi", 50));
+
+				kfc.printRestaurantName();
+				kfc.showMenu();
+
+				// Take an order from user
+				System.out.print("\nEnter number of items you want to order: ");
+				int n = sc.nextInt();
+				int[] itemIds = new int[n];
+
+				for (int i = 0; i < n; i++) {
+				    System.out.print("Enter Item ID: ");
+				    itemIds[i] = sc.nextInt();
+				}
+
+				// Place order
+				Order order = kfc.placeOrder(itemIds);
+				System.out.println("\nOrder placed successfully!");
+				System.out.println("Order ID: " + order.orderId);
+				System.out.println("Total (before GST): " + order.totalAmount);
+
+				// Generate bill
+				kfc.generateBill(order.orderId);
+			}
+	    }
+	    
+
+	}
+
