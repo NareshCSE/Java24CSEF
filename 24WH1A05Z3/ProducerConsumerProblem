@@ -1,0 +1,99 @@
+package assignment_problems;
+
+class ItemQ {
+    int item;
+    boolean hasItem = false;
+
+    synchronized void put(int item) {
+        while (hasItem) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+        this.item = item;
+        hasItem = true;
+        notify();
+    }
+
+    synchronized int get() throws InterruptedException {
+        while (!hasItem) {
+            wait();
+        }
+        hasItem = false;
+        notify();
+        return item;
+    }
+}
+
+class Producer extends Thread {
+    ItemQ q;
+
+    Producer(ItemQ q) {
+        this.q = q;
+    }
+
+    public void run() {
+        for (int i = 1; i <= 10; i++) {
+            q.put(i);
+            System.out.println("Produced: " + i);
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            Thread.yield();
+        }
+        System.out.println("Producer finished");
+    }
+}
+
+class Consumer extends Thread {
+    ItemQ q;
+
+    Consumer(ItemQ q) {
+        this.q = q;
+    }
+
+    public void run() {
+        for (int i = 1; i <= 10; i++) {
+            try {
+                int value = q.get();
+                System.out.println("Consumed: " + value);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            Thread.yield();
+        }
+        System.out.println("Consumer finished");
+    }
+}
+
+public class ProducerConsumer {
+    public static void main(String[] args) {
+        ItemQ q = new ItemQ();
+
+        Producer producer = new Producer(q);
+        Consumer consumer = new Consumer(q);
+
+        producer.start();
+        consumer.start();
+
+        try {
+            producer.join();
+            consumer.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
