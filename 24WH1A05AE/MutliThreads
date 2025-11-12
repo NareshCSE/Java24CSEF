@@ -1,0 +1,45 @@
+package practiceprograms;
+import java.util.Random;
+class randomInteger extends Thread {
+	public void run() {
+		Random rand = new Random();
+		while(true) {
+			int num = rand.nextInt(100);
+			System.out.println("Generated number:"+num);
+			if (num % 2 == 0) {
+				new evenThread(num).start();
+			} else {
+				new oddThread(num).start();
+			}
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				System.out.println(e);
+			}
+		}
+	}
+}
+class evenThread extends Thread {
+	 int num;
+	 evenThread (int num) {
+		 this.num = num;
+	 }
+	 public void run() {
+		System.out.println("square of the" + num + "is : " + (num * num));
+	}
+}
+class oddThread extends Thread {
+	int num;
+	oddThread (int num) {
+		this.num = num;
+	}
+	public void run() {
+		System.out.println("Cube of " +num+ " is : " + (num * num * num));
+	}
+}
+public class MutliThreading {
+	public static void main(String[] args) {
+		randomInteger end = new randomInteger();
+		end.start();
+	}
+}
