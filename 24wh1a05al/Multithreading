@@ -1,0 +1,64 @@
+package multitask;
+import java.util.Random;
+
+public class NumberGenerator extends Thread {
+    Random random = new Random();
+    int num;
+
+    public void run() {
+        try {
+            while (true) {
+                num = random.nextInt(100);
+                System.out.println("\nGenerated Number: " + num);
+                if (num % 2 == 0)
+                    new SquareThread(num).start();
+                else
+                    new CubeThread(num).start();
+                Thread.sleep(1000);
+            }
+        } catch (InterruptedException e) {
+            System.out.println(e);
+        }
+    }
+}
+package multitask;
+
+
+	public class CubeThread extends Thread {
+	    int number;
+
+	    public CubeThread(int n) {
+	        number = n;
+	    }
+
+	    public void run() {
+	        System.out.println("Cube of " + number + " = " + (number * number * number));
+	    }
+}
+package multitask;
+  public class SquareThread extends Thread {
+	    int number;
+
+	    public SquareThread(int n) {
+	        number = n;
+	    }
+
+	    public void run() {
+	        System.out.println("Square of " + number + " = " + (number * number));
+	    }
+	}
+	package multitask;
+
+public class MultiThreadExample{
+    public static void main(String[] args) {
+        NumberGenerator t1 = new NumberGenerator();
+        t1.start();
+    }
+}
+
+
+	
+
+	
+
+	
