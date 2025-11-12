@@ -1,0 +1,32 @@
+package firstjavalab;
+import java.util.*;
+class CreditsNotfoundException extends RuntimeException{
+	public CreditsNotfoundException() {
+		System.out.println("Credits are not sufficient to attempt the exam");
+	}
+}
+
+public class Credits {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the number of credits:");
+		int credits = sc.nextInt();
+		try {
+			if(credits<50) {
+				throw new CreditsNotfoundException();
+			}
+			else {
+				System.out.println("Credits are sufficient to attempt the exam");
+			}
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+	}
+	
+
+}
+
