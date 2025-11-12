@@ -1,6 +1,6 @@
 package javaPrograms;
 import java.util.*;
-class NumGenerator extends Thread{
+class NumGeneratorThread extends Thread{
 	public void run() {
 		Random r = new Random();
 		int num = r.nextInt(50);
@@ -35,7 +35,7 @@ class OddThread extends Thread{
 
 public class RandomNumberThread {
 	public static void main(String[] args) {
-		NumGenerator t1 = new NumGenerator();
+		NumGeneratorThread t1 = new NumGeneratorThread();
 		t1.start();
 	}
 }
