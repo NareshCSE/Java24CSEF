@@ -1,0 +1,103 @@
+package ecommerce;
+
+public class Product {
+    private int id;
+    private String name;
+    private double price;
+
+    // Constructor
+    public Product(int id, String name, double price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
+
+    // Getters
+    public int getId() { 
+    	return id; }
+    public String getName() 
+    { return name; }
+    public double getPrice() { 
+    	return price; }
+
+    // To compare two products (important for HashSet)
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Product product = (Product) obj;
+        return id == product.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
+
+    // To print product details
+    @Override
+    public String toString() {
+        return "Product ID: " + id + ", Name: " + name + ", Price: " + price;
+    }
+
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
+package ecommerce;
+import java.util.*;
+public class ECommerceClient {
+	    public static void main(String[] args) {
+	        // Seller adds products to HashSet
+	        HashSet<Product> products = new HashSet<>();
+	        products.add(new Product(1, "Laptop", 50000));
+	        products.add(new Product(2, "Smartphone", 20000));
+	        products.add(new Product(3, "Headphones", 1500));
+	        products.add(new Product(4, "Book", 300));
+
+	        System.out.println("Available Products:");
+	        for (Product p : products) {
+	            System.out.println(p);
+	        }
+
+	        // Customer orders products
+	        Scanner sc = new Scanner(System.in);
+	        double total = 0;
+	        List<Product> orderedProducts = new ArrayList<>();
+
+	        System.out.print("\nHow many products do you want to order? ");
+	        int count = sc.nextInt();
+
+	        for (int i = 0; i < count; i++) {
+	            System.out.print("Enter Product ID to order: ");
+	            int pid = sc.nextInt();
+
+	            boolean found = false;
+	            for (Product p : products) {
+	                if (p.getId() == pid) {
+	                    orderedProducts.add(p);
+	                    total += p.getPrice();
+	                    found = true;
+	                    break;
+	                }
+	            }
+
+	            if (!found) {
+	                System.out.println("❌ Product ID " + pid + " not found!");
+	            }
+	        }
+
+	        System.out.println("\n🧾 Order Summary:");
+	        for (Product p : orderedProducts) {
+	            System.out.println(p);
+	        }
+	        System.out.println("Total Price = ₹" + total);
+
+	        sc.close();
+	    }
+	}
+
+	
