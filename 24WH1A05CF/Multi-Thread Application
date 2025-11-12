@@ -1,0 +1,51 @@
+import java.util.*;
+class numbergenerator extends Thread{
+	public void run() {
+		Random r=new Random();
+		for(int i=0;i<10;i++) {
+		int num=r.nextInt(100);
+		System.out.println("Generated Number:"+num);
+		if(num%2==0) {
+			new EvenThread(num).start();
+		}else {
+			new OddThread(num).start();
+		}
+		try {
+			Thread.sleep(1000);
+		}
+		catch (InterruptedException e) {
+				System.out.println(e);
+			}
+
+		}
+	}
+	}
+
+class EvenThread extends Thread{
+	int num;
+	EvenThread(int n){
+		num=n;
+	}
+	public void run() {
+		System.out.println("Square of "+num+"="+num*num);
+	}
+}
+
+class OddThread extends Thread{
+	int num;
+	OddThread(int n){
+		num=n;
+	}
+	public void run() {
+		System.out.println("Cube of "+num+"="+num*num*num);
+	}
+}
+
+	public class Threads {
+
+	public static void main(String[] args) {
+		numbergenerator t1=new numbergenerator();	
+        t1.start();
+	}
+
+}
