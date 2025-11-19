@@ -1,0 +1,47 @@
+package labprograms;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+public class TrafficLights {
+    public static void main(String[] args) {
+        JFrame f = new JFrame("Traffic Light Simulator");
+        f.setSize(300, 200);
+        f.setLayout(new BorderLayout());
+        JLabel messageLabel = new JLabel("", SwingConstants.CENTER);
+        f.add(messageLabel, BorderLayout.NORTH);
+        JPanel panel = new JPanel();
+        JRadioButton red = new JRadioButton("Red");
+        JRadioButton yellow = new JRadioButton("Yellow");
+        JRadioButton green = new JRadioButton("Green");
+
+        ButtonGroup group = new ButtonGroup();
+        group.add(red);
+        group.add(yellow);
+        group.add(green);
+
+        panel.add(red);
+        panel.add(yellow);
+        panel.add(green);
+        f.add(panel, BorderLayout.CENTER);
+        red.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                messageLabel.setText("Stop");
+                messageLabel.setForeground(Color.RED);
+            }
+        });
+        yellow.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                messageLabel.setText("Ready");
+                messageLabel.setForeground(Color.YELLOW);
+            }
+        });
+        green.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                messageLabel.setText("Go");
+                messageLabel.setForeground(Color.GREEN);
+            }
+        });
+        f.setVisible(true);
+    }
+}
+
