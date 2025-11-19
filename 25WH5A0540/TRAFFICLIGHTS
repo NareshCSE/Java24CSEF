@@ -1,0 +1,54 @@
+package Practise;
+import java.awt.*;
+import java.awt.event.*;
+public class Trafficlights extends Frame implements ItemListener{
+		// TODO Auto-generated method stub
+		Label message;
+	    Checkbox redBtn, yellowBtn, greenBtn;
+	    CheckboxGroup group;
+
+	    public Trafficlights() {
+	        setTitle("25WH5A0540");
+	        setSize(300, 200);
+	        setLayout(new FlowLayout());
+	        message = new Label("");
+	        add(message);
+	        group = new CheckboxGroup();
+	        redBtn = new Checkbox("Red"  , group, false);
+	        yellowBtn = new Checkbox("Yellow  ", group, false);
+	        greenBtn = new Checkbox("Green"  , group, false);
+
+	        add(redBtn);
+	        add(yellowBtn);
+	        add(greenBtn);
+
+	        redBtn.addItemListener(this);
+	        yellowBtn.addItemListener(this);
+	        greenBtn.addItemListener(this);
+
+	        addWindowListener(new WindowAdapter() {
+	            public void windowClosing(WindowEvent e) { System.exit(0); }
+	        });
+
+	        setVisible(true);
+	    }
+
+	    public void itemStateChanged(ItemEvent e) {
+	        if (redBtn.getState()) {
+	            message.setText("Stop");
+	            message.setForeground(Color.RED);
+	        }
+	        if (yellowBtn.getState()) {
+	            message.setText("Ready");
+	            message.setForeground(Color.ORANGE);
+	        }
+	        if (greenBtn.getState()) {
+	            message.setText("Go"   );
+	            message.setForeground(Color.GREEN);
+	        }
+	    }
+
+	    public static void main(String[] args) {
+	        new Trafficlights();
+	    }
+	}
