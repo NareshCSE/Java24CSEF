@@ -1,0 +1,40 @@
+package labprograms;
+import java.util.Random;
+public class MultiThreadApp {
+    public static void main(String[] args) {
+        new NumberGen().start(); 
+    }
+}
+class NumberGen extends Thread {     
+    public void run() {
+        Random r = new Random();
+        while(true) {
+            int n = r.nextInt(100);
+            System.out.println("\nGenerated number: " + n);
+            if(n % 2 == 0) new evenThread(n).start();
+            else new oddThread(n).start();
+            try {
+            	Thread.sleep(1000);
+            	} catch(Exception e) {}
+
+                    }
+    }
+}
+class evenThread extends Thread {
+    int n;
+    evenThread(int n){ 
+    	this.n = n;
+    	}
+    public void run(){
+    	System.out.println("Square of " + n + " = " + (n*n)); 
+    	}
+}
+class oddThread extends Thread {
+    int n;
+    oddThread(int n){ 
+    	this.n = n; 
+    	}
+    public void run(){ 
+    	System.out.println("Cube of " + n + " = " + (n*n*n));
+    	}
+}
