@@ -1,0 +1,68 @@
+package Multithread;
+
+import java.util.Random;
+
+public class Multithread {
+
+    private static final Object lock = new Object();
+    private static int number = -1;
+
+    public static void main(String[] args) {
+
+        Thread generatorThread = new Thread(() -> {
+            Random rand = new Random();
+            try {
+                while (true) {
+                    int generatedNumber = rand.nextInt(100); // 0 to 99
+                    synchronized (lock) {
+                        number = generatedNumber;
+                        System.out.println("Generated number: " + number);
+                        lock.notifyAll(); // Notify other threads
+                    }
+                    Thread.sleep(1000); // generate every 1 second
+                }
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        });
+
+        Thread squareThread = new Thread(() -> {
+            try {
+                while (true) {
+                    synchronized (lock) {
+                        while (number == -1 || number % 2 != 0) {
+                            lock.wait();
+                        }
+                        int square = number * number;
+                        System.out.println("Square of " + number + " is: " + square);
+                        number = -1; // reset after processing
+                    }
+                }
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        });
+
+        Thread cubeThread = new Thread(() -> {
+            try {
+                while (true) {
+                    synchronized (lock) {
+                        while (number == -1 || number % 2 == 0) {
+                            lock.wait();
+                        }
+                        int cube = number * number * number;
+                        System.out.println("Cube of " + number + " is: " + cube);
+                        number = -1; // reset after processing
+                    }
+                }
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        });
+
+        // Start all threads
+        generatorThread.start();
+        squareThread.start();
+        cubeThread.start();
+    }
+}
