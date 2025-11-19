@@ -1,0 +1,103 @@
+package demo1;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class Caluculator extends JFrame implements ActionListener {
+
+	JTextField display;
+	double num1 = 0, num2 = 0, result = 0;
+	char operator;
+
+	public Caluculator() {
+
+		setTitle("25wh5a0539");
+		setSize(300, 400);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLayout(new BorderLayout());
+
+		display = new JTextField();
+		display.setEditable(false);
+		display.setHorizontalAlignment(JTextField.RIGHT);
+		display.setFont(new Font("Arial", Font.BOLD, 20));
+		add(display, BorderLayout.NORTH);
+
+		JPanel panel = new JPanel();
+		panel.setLayout(new GridLayout(4, 4, 5, 5));
+
+		String buttons[] = { "7", "8", "9", "+", "4", "5", "6", "-", "1", "2", "3", "*", "0", "%", "/", "=" };
+
+		for (String text : buttons) {
+			JButton btn = new JButton(text);
+			btn.setFont(new Font("Arial", Font.BOLD, 18));
+			btn.addActionListener(this);
+			panel.add(btn);
+		}
+
+		add(panel, BorderLayout.CENTER);
+		setVisible(true);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+		String command = e.getActionCommand();
+
+		if (command.charAt(0) >= '0' && command.charAt(0) <= '9') {
+			display.setText(display.getText() + command);
+		}
+
+		else if (command.equals("+") || command.equals("-") || command.equals("*") || command.equals("/")
+				|| command.equals("%")) {
+
+			try {
+				num1 = Double.parseDouble(display.getText());
+			} catch (Exception ex) {
+				num1 = 0;
+			}
+
+			operator = command.charAt(0);
+			display.setText("");
+		}
+
+		else if (command.equals("=")) {
+			try {
+				num2 = Double.parseDouble(display.getText());
+			} catch (Exception ex) {
+				num2 = 0;
+			}
+
+			try {
+				switch (operator) {
+				case '+':
+					result = num1 + num2;
+					break;
+				case '-':
+					result = num1 - num2;
+					break;
+				case '*':
+					result = num1 * num2;
+					break;
+				case '/':
+					if (num2 == 0)
+						throw new ArithmeticException("Cannot divide by zero");
+					result = num1 / num2;
+					break;
+				case '%':
+					if (num2 == 0)
+						throw new ArithmeticException("Cannot modulo by zero");
+					result = num1 % num2;
+					break;
+				}
+				display.setText(String.valueOf(result));
+			} catch (ArithmeticException ex) {
+				display.setText(ex.getMessage()); // Show error
+			}
+		}
+	}
+
+	public static void main(String[] args) {
+		new Caluculator();
+	}
+}
