@@ -1,0 +1,101 @@
+package javalab;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Calculator implements ActionListener {
+	TextField display;
+	String operand1="";
+	String operator="";
+	boolean startNumber=false;
+	public Calculator() {
+		display=new TextField();
+		Frame frame=new Frame("Calculator");
+		frame.setSize(500,600);
+	    
+	    display.setBounds(200,200,50,50);
+	    display.setEditable(false);
+	    frame.add(display,BorderLayout.NORTH);
+	    
+	    Panel panel=new Panel();
+	   panel.setLayout(new GridLayout(4,4,5,5));
+	    String []Buttons={"9","8","7","/",
+	                      "6","5","4","*",
+	                      "3","2","1","-",
+	                      "0","%","ac","+"};
+	    for(String text:Buttons)
+	    {
+	    	Button b=new Button(text);
+	    	b.addActionListener(this);
+	    	panel.add(b);
+	    	
+	    	
+	    }
+	    Button equals=new Button("=");
+	    equals.addActionListener(this);
+	    frame.add(equals,BorderLayout.SOUTH);
+	    frame.add(panel,BorderLayout.CENTER);
+		frame.setVisible(true);
+	}
+	public static void main(String[] args) {
+		new Calculator();
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String value=e.getActionCommand();
+		if(value.equals("ac"))
+		{
+			display.setText("");
+			operand1="";
+			startNumber=false;
+			operator="";
+			return;
+			
+		}
+		
+		if ("+-*/%".contains(value)) {
+            operand1 = display.getText();
+            operator = value;
+            startNumber = true;
+            return;
+        }
+		if (value.equals("=")) {
+            try {
+                String operand2 = display.getText();
+                double num1 = Double.parseDouble(operand1);
+                double num2 = Double.parseDouble(operand2);
+                double result = 0;
+
+                switch (operator) {
+                    case "+": result = num1 + num2; break;
+                    case "-": result = num1 - num2; break;
+                    case "*": result = num1 * num2; break;
+                    case "/":
+                        if (num2 == 0) {
+                            display.setText("Error: Divide by zero");
+                            return;
+                        }
+                        result = num1 / num2;
+                        break;
+                    case "%": result = num1 % num2; break;
+                }
+
+                display.setText(String.valueOf(result));
+                startNumber = true;
+
+            } catch (Exception ex) {
+                display.setText("Error");
+            }
+            return;
+        }
+
+        // Digits 0–9
+        if (startNumber) {
+            display.setText(value);
+            startNumber = false;
+        } else {
+            display.setText(display.getText() + value);
+        }
+    }
+}
