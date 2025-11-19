@@ -1,0 +1,66 @@
+package practiceprograms;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+public class Calcuator extends JFrame implements ActionListener {
+    JTextField text;
+    double num1 = 0, num2 = 0;
+    String op = "";
+    public Calcuator() {
+        setTitle("24wh1a05ae");
+        setSize(250, 350);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        text = new JTextField();
+        text.setEditable(false);
+        add(text, BorderLayout.NORTH);
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(4, 4));
+        String[] buttons = {
+            "7","8","9","+",
+            "4","5","6","-",
+            "1","2","3","*",
+            "0","C","=","/"
+        };
+        for (String b : buttons) {
+            JButton btn = new JButton(b);
+            btn.addActionListener(this);
+            panel.add(btn);
+        }
+        add(panel);
+        setVisible(true);
+    }
+    public void actionPerformed(ActionEvent e) {
+        String cmd = e.getActionCommand();
+        if (cmd.equals("C")) {
+            text.setText("");
+            op = "";
+            return;
+        }
+        if ("+-*/".contains(cmd)) {
+            num1 = Double.parseDouble(text.getText());
+            op = cmd;
+            text.setText("");
+            return;
+        }
+        if (cmd.equals("=")) {
+            num2 = Double.parseDouble(text.getText());
+            double result = 0;
+            if (op.equals("+")) result = num1 + num2;
+            if (op.equals("-")) result = num1 - num2;
+            if (op.equals("*")) result = num1 * num2;
+            if (op.equals("/")) {
+                if (num2 == 0) {
+                    text.setText("Error");
+                    return;
+                }
+                result = num1 / num2;
+            }
+            text.setText("" + result);
+            return;
+        }
+        text.setText(text.getText() + cmd);
+    }
+    public static void main(String[] args) {
+        new Calcuator();
+    }
+}
