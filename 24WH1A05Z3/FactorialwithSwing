@@ -1,0 +1,65 @@
+package assignment_problems;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+public class FactorialSwing {
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Calculator");
+        frame.setSize(500, 500);
+        frame.setLayout(null);
+
+        JLabel inputLabel = new JLabel("Enter an integer:");
+        inputLabel.setBounds(20, 10, 100, 20);
+        frame.add(inputLabel);
+
+        JTextField inputField = new JTextField(10);
+        inputField.setBounds(120, 10, 200, 20);
+        frame.add(inputField);
+
+        JLabel outputLabel = new JLabel("Factorial:");
+        outputLabel.setBounds(20, 40, 100, 20);
+        frame.add(outputLabel);
+
+        JTextField outputField = new JTextField(15);
+        outputField.setBounds(120, 40, 200, 20);
+        outputField.setEditable(false);
+        frame.add(outputField);
+
+        JButton computeButton = new JButton("Compute");
+        computeButton.setBounds(120, 80, 150, 30);
+        frame.add(computeButton);
+
+        computeButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    int n = Integer.parseInt(inputField.getText());
+                    if (n < 0) {
+                        outputField.setText("Enter non-negative integer");
+                        return;
+                    }
+                    outputField.setText(String.valueOf(factorial(n)));
+                } catch (NumberFormatException ex) {
+                    outputField.setText("Invalid input");
+                }
+            }
+
+            private long factorial(int n) {
+                long fact = 1;
+                for (int i = 2; i <= n; i++) {
+                    fact *= i;
+                }
+                return fact;
+            }
+        });
+
+        frame.setVisible(true);
+    }
+
+}
