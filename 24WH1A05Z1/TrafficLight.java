@@ -1,0 +1,54 @@
+package awtSwing;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class TrafficLight {
+
+    public static void main(String[] args) {
+
+        JFrame frame = new JFrame("Traffic Light");
+        frame.setSize(300, 250);
+        frame.setLayout(new GridLayout(5, 1));
+
+        JLabel messageLabel = new JLabel("", SwingConstants.CENTER);
+        messageLabel.setFont(new Font("Arial", Font.BOLD, 24));
+
+        JRadioButton redButton = new JRadioButton("Red");
+        JRadioButton yellowButton = new JRadioButton("Yellow");
+        JRadioButton greenButton = new JRadioButton("Green");
+
+        ButtonGroup group = new ButtonGroup();
+        group.add(redButton);
+        group.add(yellowButton);
+        group.add(greenButton);
+
+        frame.add(messageLabel);
+        frame.add(redButton);
+        frame.add(yellowButton);
+        frame.add(greenButton);
+
+        redButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                messageLabel.setText("STOP");
+                messageLabel.setForeground(Color.RED);
+            }
+        });
+
+        yellowButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                messageLabel.setText("READY");
+                messageLabel.setForeground(Color.ORANGE);
+            }
+        });
+        
+        greenButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                messageLabel.setText("GO");
+                messageLabel.setForeground(Color.GREEN);
+            }
+        });
+
+        frame.setVisible(true);
+    }
+}
