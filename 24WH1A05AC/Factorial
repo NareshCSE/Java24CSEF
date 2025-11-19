@@ -1,0 +1,26 @@
+package labprograms;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+public class Swingapp {
+	public static void main(String[] args) {
+		JFrame f = new JFrame("Factorial");
+		JTextField input = new JTextField();
+		JTextField output = new JTextField();
+		JButton btn = new JButton("Compute");
+		btn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int n = Integer.valueOf(input.getText());
+				long fact = 1;
+				for (int i = 1; i <= n; i++) fact *= i;
+				output.setText(String.valueOf(fact));
+				}
+			});
+		f.setLayout(new GridLayout(5,2));
+		f.add(input);
+		f.add(btn);
+		f.add(output);
+		f.setSize(300,150);
+		f.setVisible(true);
+}
+}
