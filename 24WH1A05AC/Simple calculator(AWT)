@@ -1,0 +1,33 @@
+package labprograms;
+import javax.swing.*; 
+import java.awt.*; 
+import java.awt.event.*;
+public class SimpleCalculator {
+	static int a;
+	static char op;
+	public static void main(String[] args) {
+		JFrame f=new JFrame();
+		JTextField t=new JTextField();
+		JPanel p=new JPanel(new GridLayout(4,4));
+		String[] b={"7","8","9","+","4","5","6","-","1","2","3","*","0","C","=","/"};
+		for(String s:b){
+			JButton x=new JButton(s);
+			x.addActionListener(e->{
+				String c=e.getActionCommand();
+				if("+-*/".contains(c)){ a=Integer.valueOf(t.getText()); op=c.charAt(0); t.setText(""); 
+				}else if(c.equals("=")){
+					int b2=Integer.valueOf(t.getText());
+					t.setText(""+(op=='+'?a+b2:op=='-'?a-b2:op=='*'?a*b2:a/b2));
+					} else if(c.equals("C")) t.setText("");
+					else t.setText(t.getText()+c);
+				});
+			p.add(x);
+			}
+		f.add(t,"North");
+		f.add(p); 
+		f.setSize(350,350);
+		f.setVisible(true);
+		}
+}
+
+
