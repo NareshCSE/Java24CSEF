@@ -1,0 +1,69 @@
+package demo;
+
+import java.awt.*;
+import java.awt.event.*;
+
+public class Textcounter extends Frame implements ActionListener {
+	TextArea ta;
+	Button countBtn, clearBtn;
+	Label charLabel, wordLabel;
+
+	public Textcounter() {
+
+		setLayout(null);
+
+		ta = new TextArea();
+		ta.setBounds(50, 50, 300, 200);
+
+		countBtn = new Button("Count");
+		countBtn.setBounds(80, 270, 100, 35);
+
+		clearBtn = new Button("Clear");
+		clearBtn.setBounds(220, 270, 100, 35);
+
+		charLabel = new Label("Characters: ");
+		charLabel.setBounds(50, 330, 200, 30);
+
+		wordLabel = new Label("Words: ");
+		wordLabel.setBounds(50, 370, 200, 30);
+
+		add(ta);
+		add(countBtn);
+		add(clearBtn);
+		add(charLabel);
+		add(wordLabel);
+
+		countBtn.addActionListener(this);
+		clearBtn.addActionListener(this);
+
+		setTitle("Word & Character Counter");
+		setSize(400, 450);
+		setVisible(true);
+	}
+
+	public void actionPerformed(ActionEvent e) {
+
+		if (e.getSource() == countBtn) {
+			String text = ta.getText();
+			int characters = text.length();
+			int words = 0;
+
+			if (!text.isEmpty()) {
+				words = text.split("\\s+").length;
+			}
+
+			charLabel.setText("Characters: " + characters);
+			wordLabel.setText("Words: " + words);
+		}
+
+		else if (e.getSource() == clearBtn) {
+			ta.setText("");
+			charLabel.setText("Characters: ");
+			wordLabel.setText("Words: ");
+		}
+	}
+
+	public static void main(String[] args) {
+		new Textcounter();
+	}
+}
