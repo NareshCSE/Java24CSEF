@@ -1,0 +1,42 @@
+package labprograms;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+public class Frame extends JFrame implements ActionListener {
+    JTextArea textArea;
+    JButton countButton;
+    JLabel charLabel, wordLabel;
+    public Frame() {
+        setTitle("Text Counter");
+        setSize(400, 300);
+        JPanel panel = new JPanel(new GridLayout(5, 1, 5, 5));
+
+        textArea = new JTextArea(5, 15);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+
+        countButton = new JButton("Count Characters & Words");
+        countButton.addActionListener(this);
+
+        charLabel = new JLabel("Characters: 0");
+        wordLabel = new JLabel("Words: 0");
+        
+        panel.add(scrollPane);
+        panel.add(countButton);
+        panel.add(charLabel);
+        panel.add(wordLabel);
+        add(panel);
+        setVisible(true);
+    }
+    
+    public void actionPerformed(ActionEvent e) {
+        String text = textArea.getText();
+        int charCount = text.length();
+        String[] words = text.trim().split("\\s+");
+        int wordCount = (text.trim().isEmpty()) ? 0 : words.length;
+        charLabel.setText("Characters: " + charCount);
+        wordLabel.setText("Words: " + wordCount);
+    }
+    public static void main(String[] args) {
+        new Frame();
+    }
+}
