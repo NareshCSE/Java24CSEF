@@ -1,0 +1,26 @@
+package labprograms;
+import java.util.Scanner;
+class CreditsNotSufficientException extends Exception {
+    CreditsNotSufficientException(String message) {
+        super(message);
+    }
+}
+public class Excep {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter your credits: ");
+        int credits = sc.nextInt();
+        try {
+            if (credits < 50) {
+            	throw new CreditsNotSufficientException("Credits not sufficient! Minimum 50 required.");
+            } else {
+                System.out.println("Credits are sufficient.");
+                System.out.println("You can register for exams.");
+            }
+        } catch (CreditsNotSufficientException e) {
+            System.out.println(e.getMessage());
+            System.out.println("Exam registration failed." );
+        }
+        sc.close();
+    }
+}
