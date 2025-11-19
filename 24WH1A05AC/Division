@@ -1,0 +1,36 @@
+package labprograms;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+public class Division {
+    public static void main(String[] args) {
+        JFrame f = new JFrame("Integer Division");
+        f.setSize(300, 300);
+        f.setLayout(new GridLayout(5, 2, 3, 3));
+        JTextField num1Field = new JTextField();
+        JTextField num2Field = new JTextField();
+        JTextField resultField = new JTextField();
+        resultField.setEditable(false);
+        JButton divideButton = new JButton("Divide");
+        divideButton.addActionListener(e -> {
+            try {
+                int n1 = Integer.valueOf(num1Field.getText().trim());
+                int n2 = Integer.valueOf(num2Field.getText().trim());
+                if (n2 == 0) throw new ArithmeticException("Divide by zero");
+                resultField.setText("" + (n1 / n2));
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(f, "Enter valid integers!", "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (ArithmeticException ex) {
+                JOptionPane.showMessageDialog(f, "Zero division error!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+        f.add(new JLabel("Num1:")); f.add(num1Field);
+        f.add(new JLabel("Num2:")); f.add(num2Field);
+        f.add(new JLabel("Result:")); f.add(resultField);
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(1, 1));
+        panel.add(divideButton);
+        f.add(panel);
+        f.setVisible(true);
+    }
+}
