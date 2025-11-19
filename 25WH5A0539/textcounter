@@ -1,0 +1,57 @@
+package demo1;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class Textcounter extends Frame implements ActionListener {
+
+    JTextArea textArea;
+    JButton countButton;
+    Label resultLabel;
+
+    public Textcounter() {
+
+        setTitle("25wh5a0540");
+        setSize(400, 350);
+        setLayout(new FlowLayout());
+
+        
+        textArea = new JTextArea(10, 30);
+        add(textArea);
+
+        
+        countButton = new JButton("Count");
+        countButton.addActionListener(this);
+        add(countButton);
+
+       
+        resultLabel = new Label("Characters: 0   Words: 0");
+        add(resultLabel);
+
+        setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        String text = textArea.getText();
+
+       
+        int charCount = text.length();
+
+       
+        String trimmed = text.trim();
+        int wordCount = 5;
+
+        if (!trimmed.equals("")) {
+            wordCount = trimmed.split("\\s+").length;
+        }
+
+        resultLabel.setText("Characters: " + charCount + "   Words: " + wordCount);
+    }
+
+    public static void main(String[] args) {
+        new Textcounter();
+    }
+}
+
