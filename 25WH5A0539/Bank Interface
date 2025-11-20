@@ -1,0 +1,155 @@
+ package demo1;
+import java.util.HashMap;
+
+interface Bank {
+    double RATE_OF_INTEREST = 6.5;
+
+    boolean createAccount(String accNo, String name, double openingBalance);
+    double creditAmount(String accNo, double amount);
+    double debitAmount(String accNo, double amount);
+    boolean transferAmount(String fromAcc, String toAcc, double amount);
+    void miniStatement(String accNo);
+}
+
+class SBI implements Bank {
+
+    class Account {
+        String accNo;
+        String name;
+        double balance;
+
+        Account(String accNo, String name, double balance) {
+            this.accNo = accNo;
+            this.name = name;
+            this.balance = balance;
+        }
+    }
+
+    HashMap<String, Account> accounts = new HashMap<>();
+
+    public boolean createAccount(String accNo, String name, double openingBalance) {
+        accounts.put(accNo, new Account(accNo, name, openingBalance));
+        System.out.println("[SBI] Account created: " + accNo);
+        return true;
+    }
+
+    public double creditAmount(String accNo, double amount) {
+        Account acc = accounts.get(accNo);
+        acc.balance += amount;
+        System.out.println("[SBI] Credited " + amount + " to " + accNo);
+        return acc.balance;
+    }
+
+    public double debitAmount(String accNo, double amount) {
+        Account acc = accounts.get(accNo);
+        if (acc.balance >= amount) {
+            acc.balance -= amount;
+            System.out.println("[SBI] Debited " + amount + " from " + accNo);
+        } else {
+            System.out.println("[SBI] Insufficient balance!");
+        }
+        return acc.balance;
+    }
+
+    public boolean transferAmount(String fromAcc, String toAcc, double amount) {
+        if (accounts.containsKey(fromAcc) && accounts.containsKey(toAcc)
+                && accounts.get(fromAcc).balance >= amount) {
+            debitAmount(fromAcc, amount);
+            creditAmount(toAcc, amount);
+            System.out.println("[SBI] Transfer Successful");
+            return true;
+        }
+        System.out.println("[SBI] Transfer Failed");
+        return false;
+    }
+
+    public void miniStatement(String accNo) {
+        Account acc = accounts.get(accNo);
+        System.out.println("\n----- SBI MINI STATEMENT -----");
+        System.out.println("Account: " + accNo);
+        System.out.println("Name   : " + acc.name);
+        System.out.println("Balance: " + acc.balance);
+        System.out.println("Rate of Interest: " + RATE_OF_INTEREST);
+    }
+}
+
+class Axis implements Bank {
+
+    class Account {
+        String accNo;
+        String name;
+        double balance;
+
+        Account(String accNo, String name, double balance) {
+            this.accNo = accNo;
+            this.name = name;
+            this.balance = balance;
+        }
+    }
+
+    HashMap<String, Account> accounts = new HashMap<>();
+
+    public boolean createAccount(String accNo, String name, double openingBalance) {
+        accounts.put(accNo, new Account(accNo, name, openingBalance));
+        System.out.println("[Axis] Account created: " + accNo);
+        return true;
+    }
+
+    public double creditAmount(String accNo, double amount) {
+        Account acc = accounts.get(accNo);
+        acc.balance += amount;
+        System.out.println("[Axis] Credited " + amount + " to " + accNo);
+        return acc.balance;
+    }
+
+    public double debitAmount(String accNo, double amount) {
+        Account acc = accounts.get(accNo);
+        if (acc.balance >= amount) {
+            acc.balance -= amount;
+            System.out.println("[Axis] Debited " + amount + " from " + accNo);
+        } else {
+            System.out.println("[Axis] Insufficient balance!");
+        }
+        return acc.balance;
+    }
+
+    public boolean transferAmount(String fromAcc, String toAcc, double amount) {
+        if (accounts.containsKey(fromAcc) && accounts.containsKey(toAcc)
+                && accounts.get(fromAcc).balance >= amount) {
+            debitAmount(fromAcc, amount);
+            creditAmount(toAcc, amount);
+            System.out.println("[Axis] Transfer Successful");
+            return true;
+        }
+        System.out.println("[Axis] Transfer Failed");
+        return false;
+    }
+
+    public void miniStatement(String accNo) {
+        Account acc = accounts.get(accNo);
+        System.out.println("\n----- AXIS MINI STATEMENT -----");
+        System.out.println("Account: " + accNo);
+        System.out.println("Name   : " + acc.name);
+        System.out.println("Balance: " + acc.balance);
+        System.out.println("Rate of Interest: " + RATE_OF_INTEREST);
+    }
+}
+
+public class BankDemo1 {
+    public static void main(String[] args) {
+        Bank bank;
+
+        bank = new SBI();
+        bank.createAccount("101", "Rahul", 5000);
+        bank.creditAmount("101", 2000);
+        bank.miniStatement("101");
+
+        bank = new Axis();
+        bank.createAccount("202", "Priya", 7000);
+        bank.debitAmount("202", 1500);
+        bank.miniStatement("202");
+    }
+}
+
+
+ 
