@@ -1,0 +1,162 @@
+package oopjp;
+
+import java.util.*;
+
+class Product {
+    private int id;
+    private String name;
+    private double price;
+
+    public Product(int id, String name, double price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
+
+    public int getId() { return id; }
+    public String getName() { return name; }
+    public double getPrice() { return price; }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Product)) return false;
+        Product p = (Product) o;
+        return this.id == p.id;
+    }
+}
+
+
+class Seller {
+    private HashSet<Product> productSet = new HashSet<>();
+
+    public void addProduct(Product p) {
+        productSet.add(p);
+    }
+
+    public HashSet<Product> getProducts() {
+        return productSet;
+    }
+
+    public void displayProducts() {
+        System.out.println("\n--- Seller Product List ---");
+        for (Product p : productSet) {
+            System.out.println("ID: " + p.getId() + ", Name: " + p.getName() + ", Price: " + p.getPrice());
+        }
+    }
+}
+
+class Customer {
+
+    public void orderProduct(int id, HashSet<Product> stock) {
+        boolean found = false;
+
+        for (Product p : stock) {
+            if (p.getId() == id) {
+                System.out.println("\nProduct Ordered Successfully:");
+                System.out.println("ID: " + p.getId());
+                System.out.println("Name: " + p.getName());
+                System.out.println("Price: " + p.getPrice());
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("Product with ID " + id + " not found!");
+        }
+    }
+
+    public void orderMultiple(ArrayList<Integer> ids, HashSet<Product> stock) {
+        double total = 0;
+        boolean foundAny = false;
+
+        System.out.println("\n--- Ordered Product Details ---");
+
+        for (int id : ids) {
+            for (Product p : stock) {
+                if (p.getId() == id) {
+                    System.out.println("ID: " + p.getId() + ", Name: " + p.getName() + ", Price: " + p.getPrice());
+                    total += p.getPrice();
+                    foundAny = true;
+                }
+            }
+        }
+
+        if (!foundAny) {
+            System.out.println("No matching products found!");
+        } else {
+            System.out.println("\nTotal Price = ₹" + total);
+        }
+    }
+}
+
+
+public class EcommerceApplication {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        Seller seller = new Seller();
+
+        // Adding sample products
+        seller.addProduct(new Product(1, "Laptop", 55000));
+        seller.addProduct(new Product(2, "Smartphone", 22000));
+        seller.addProduct(new Product(3, "Headphones", 1500));
+        seller.addProduct(new Product(4, "Keyboard", 800));
+        seller.addProduct(new Product(5, "Mouse", 500));
+
+        Customer customer = new Customer();
+
+        int choice;
+
+        do {
+            System.out.println("\n========= E-Commerce Menu =========");
+            System.out.println("1. View All Products");
+            System.out.println("2. Order a Single Product");
+            System.out.println("3. Order Multiple Products");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+            choice = sc.nextInt();
+
+            switch (choice) {
+
+                case 1:
+                    seller.displayProducts();
+                    break;
+
+                case 2:
+                    System.out.print("Enter Product ID to Order: ");
+                    int pid = sc.nextInt();
+                    customer.orderProduct(pid, seller.getProducts());
+                    break;
+
+                case 3:
+                    System.out.print("Enter number of products to order: ");
+                    int n = sc.nextInt();
+                    ArrayList<Integer> idList = new ArrayList<>();
+
+                    System.out.println("Enter " + n + " product IDs:");
+                    for (int i = 0; i < n; i++) {
+                        idList.add(sc.nextInt());
+                    }
+
+                    customer.orderMultiple(idList, seller.getProducts());
+                    break;
+
+                case 4:
+                    System.out.println("Exiting Application...");
+                    break;
+
+                default:
+                    System.out.println("Invalid Choice! Try again.");
+            }
+
+        } while (choice != 4);
+
+        sc.close();
+    }
+}
