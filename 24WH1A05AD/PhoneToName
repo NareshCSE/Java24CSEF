@@ -1,0 +1,52 @@
+package oopjp;
+
+import java.io.*;
+import java.util.*;
+
+public class PhoneToName {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+       
+        Hashtable<String, String> nameToPhone = new Hashtable<>();
+        Hashtable<String, String> phoneToName = new Hashtable<>();
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\Sneha\\OneDrive\\Desktop\\24WH1A05AD\\oopjp\\src\\oopjp\\data.txt"));
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split("\t");  
+
+                if (parts.length == 2) {
+                    String name = parts[0].trim();
+                    String phone = parts[1].trim();
+
+                    nameToPhone.put(name, phone);
+                    phoneToName.put(phone, name);
+                }
+            }
+
+            br.close();
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            return;
+        }
+
+        System.out.println("Enter a name or phone number to search:");
+        String input = sc.nextLine().trim();
+
+        if (nameToPhone.containsKey(input)) {
+            System.out.println("Phone Number: " + nameToPhone.get(input));
+        }
+        else if (phoneToName.containsKey(input)) {
+            System.out.println("Name: " + phoneToName.get(input));
+        }
+        else {
+            System.out.println("No record found!");
+        }
+
+        sc.close();
+    }
+}
