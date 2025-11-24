@@ -1,0 +1,92 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class IntegerDivisionUI extends JFrame {
+
+    private JTextField num1Field;
+    private JTextField num2Field;
+    private JTextField resultField;
+    private JButton divideButton;
+
+    public IntegerDivisionUI() {
+       
+        setTitle("Integer Division");
+        setSize(400, 200);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null); 
+
+        JLabel num1Label = new JLabel("Num1:");
+        JLabel num2Label = new JLabel("Num2:");
+        JLabel resultLabel = new JLabel("Result:");
+
+        num1Field = new JTextField(10);
+        num2Field = new JTextField(10);
+        resultField = new JTextField(10);
+        resultField.setEditable(false);
+
+        divideButton = new JButton("Divide");
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        add(num1Label, gbc);
+        gbc.gridx = 1;
+        add(num1Field, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        add(num2Label, gbc);
+        gbc.gridx = 1;
+        add(num2Field, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        add(resultLabel, gbc);
+        gbc.gridx = 1;
+        add(resultField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.gridwidth = 2;
+        gbc.fill = GridBagConstraints.CENTER;
+        add(divideButton, gbc);
+
+        divideButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                performDivision();
+            }
+        });
+    }
+
+    private void performDivision() {
+        try {
+            int num1 = Integer.parseInt(num1Field.getText().trim());
+            int num2 = Integer.parseInt(num2Field.getText().trim());
+
+            int result = num1 / num2;
+            resultField.setText(String.valueOf(result));
+
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(this,
+                    "Please enter valid integers for Num1 and Num2.",
+                    "Number Format Exception",
+                    JOptionPane.ERROR_MESSAGE);
+        } catch (ArithmeticException ae) {
+            JOptionPane.showMessageDialog(this,
+                    "Division by zero is not allowed.",
+                    "Arithmetic Exception",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            IntegerDivisionUI frame = new IntegerDivisionUI();
+            frame.setVisible(true);
+        });
+    }
+}
