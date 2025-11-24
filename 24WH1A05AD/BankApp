@@ -1,0 +1,112 @@
+
+import java.util.ArrayList;
+import java.util.List;
+interface Bank2 {
+    void createAccount(String accountHolderName);
+    void credit(double amount);
+    void debit(double amount);
+    void transfer(Bank2 receiver, double amount);
+    void miniStatement();
+    double getRateOfInterest();
+}
+class SBI implements Bank2 {
+    private String accountHolder;
+    private double balance;
+    private final List<String> transactions = new ArrayList<>();
+    private final double rateOfInterest = 4.5;
+    public void createAccount(String accountHolderName) {
+        this.accountHolder = accountHolderName;
+        this.balance = 0;
+        transactions.add("Account created for " + accountHolderName);
+    }
+    public void credit(double amount) {
+        balance += amount;
+        transactions.add("Credited: $" + amount);
+    }
+    public void debit(double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+            transactions.add("Debited: $" + amount);
+        } else {
+            transactions.add("Failed Debit: $" + amount + " (Insufficient balance)");
+        }
+    }
+    public void transfer(Bank2 receiver, double amount) {
+        if (amount <= balance) {
+            this.debit(amount);
+            receiver.credit(amount);
+            transactions.add("Transferred: $" + amount);
+        } else {
+            transactions.add("Failed Transfer: $" + amount + " (Insufficient balance)");
+        }
+    }
+    public void miniStatement() {
+        System.out.println("\n--- Mini Statement for SBI Account ---");
+        for (String transaction : transactions) {
+            System.out.println(transaction);
+        }
+        System.out.println("Current Balance: $" + balance);
+        System.out.println("Rate of Interest: " + getRateOfInterest() + "%");
+    }
+    public double getRateOfInterest() {
+        return rateOfInterest;
+    }
+}
+class Axis implements Bank2 {
+    private String accountHolder;
+    private double balance;
+    private final List<String> transactions = new ArrayList<>();
+    private final double rateOfInterest = 5.0;
+    public void createAccount(String accountHolderName) {
+        this.accountHolder = accountHolderName;
+        this.balance = 0;
+        transactions.add("Account created for " + accountHolderName);
+    }
+    public void credit(double amount) {
+        balance += amount;
+        transactions.add("Credited: $" + amount);
+    }
+    public void debit(double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+            transactions.add("Debited: $" + amount);
+        } else {
+            transactions.add("Failed Debit: $" + amount + " (Insufficient balance)");
+        }
+    }
+    public void transfer(Bank2 receiver, double amount) {
+        if (amount <= balance) {
+            this.debit(amount);
+            receiver.credit(amount);
+            transactions.add("Transferred: $" + amount);
+        } else {
+            transactions.add("Failed Transfer: $" + amount + " (Insufficient balance)");
+        }
+    }
+    public void miniStatement() {
+        System.out.println("\n--- Mini Statement for Axis Account ---");
+        for (String transaction : transactions) {
+            System.out.println(transaction);
+        }
+        System.out.println("Current Balance: $" + balance);
+        System.out.println("Rate of Interest: " + getRateOfInterest() + "%");
+    }
+    public double getRateOfInterest() {
+        return rateOfInterest;
+    }
+}
+public class BankApp {
+    public static void main(String[] args) {
+        Bank2 sbi = new SBI();
+        Bank2 axis = new Axis();
+        sbi.createAccount("Rahul Sharma");
+        axis.createAccount("Sneha Mehta");
+        sbi.credit(5000);
+        sbi.debit(1000);
+        sbi.transfer(axis, 1500.);
+        axis.credit(3000);
+        axis.debit(500);
+        sbi.miniStatement();
+        axis.miniStatement();
+    }
+}
