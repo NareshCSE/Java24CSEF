@@ -1,0 +1,132 @@
+package oopjp;
+
+import java.util.Scanner;
+
+public class StudentCourseManagement {
+
+    static class Course {
+        private int id;
+        private String name;
+        private double price;
+
+        public Course(int id, String name, double price) {
+            this.id = id;
+            this.name = name;
+            this.price = price;
+        }
+
+        public int getId() { return id; }
+        public String getName() { return name; }
+        public double getPrice() { return price; }
+    }
+
+    interface StudentCourse {
+        void addCourse(Course c) throws Exception;
+        Course[] viewCourses() throws Exception;
+        double addFee(double fee) throws Exception;
+    }
+
+    static class Semester implements StudentCourse {
+
+        private Course[] selected = new Course[10];
+        private int index = 0;
+
+        @Override
+        public void addCourse(Course c) throws Exception {
+            if (index >= selected.length)
+                throw new Exception("Course limit reached!");
+            selected[index++] = c;
+        }
+
+        @Override
+        public Course[] viewCourses() throws Exception {
+            if (index == 0)
+                throw new Exception("No courses selected!");
+            Course[] copy = new Course[index];
+            for (int i = 0; i < index; i++)
+                copy[i] = selected[i];
+            return copy;
+        }
+
+        @Override
+        public double addFee(double fee) throws Exception {
+            if (fee < 1000 || fee > 3000)
+                throw new Exception("Fee must be between 1000 and 3000!");
+
+            if (fee > 1500)
+                fee = fee - (fee * 0.10);
+
+            return fee;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Semester sem = new Semester();
+
+        Course c1 = new Course(1, "Java Programming", 1000);
+        Course c2 = new Course(2, "Python Basics", 1200);
+        Course c3 = new Course(3, "Web Development", 1500);
+
+        int choice;
+
+        do {
+            System.out.println("\n===== Course Selection Menu =====");
+            System.out.println("1. Add Java Programming");
+            System.out.println("2. Add Python Basics");
+            System.out.println("3. Add Web Development");
+            System.out.println("4. View Selected Courses and Price");
+            System.out.println("5. Exit");
+            System.out.print("Enter choice: ");
+            choice = sc.nextInt();
+
+            try {
+                switch (choice) {
+
+                    case 1:
+                        sem.addCourse(c1);
+                        System.out.println("Java Programming added!");
+                        break;
+
+                    case 2:
+                        sem.addCourse(c2);
+                        System.out.println("Python Basics added!");
+                        break;
+
+                    case 3:
+                        sem.addCourse(c3);
+                        System.out.println("Web Development added!");
+                        break;
+
+                    case 4:
+                        Course[] list = sem.viewCourses();
+                        double total = 0;
+
+                        System.out.println("\nYour Selected Courses:");
+                        for (Course c : list) {
+                            System.out.println(c.getId() + ". " + c.getName() + " - Rs." + c.getPrice());
+                            total += c.getPrice();
+                        }
+
+                        System.out.println("\nTotal Price Before Discount = " + total);
+                        double finalFee = sem.addFee(total);
+                        System.out.println("Final Price After Discount = " + finalFee);
+                        break;
+
+                    case 5:
+                        System.out.println("Exiting...");
+                        break;
+
+                    default:
+                        System.out.println("Invalid choice! Try again.");
+                }
+
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+
+        } while (choice != 5);
+
+        sc.close();
+    }
+}
