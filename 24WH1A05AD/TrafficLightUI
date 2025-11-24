@@ -1,0 +1,87 @@
+package oopjp;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class TrafficLightGUI extends JFrame {
+
+    private JLabel messageLabel;
+    private LightPanel redLight;
+    private LightPanel yellowLight;
+    private LightPanel greenLight;
+
+    public TrafficLightGUI() {
+        setTitle("Graphical Traffic Light Simulator");
+        setSize(200, 400);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setLayout(new BorderLayout());
+
+       
+        messageLabel = new JLabel("", SwingConstants.CENTER);
+        messageLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        add(messageLabel, BorderLayout.NORTH);
+
+        JPanel lightsPanel = new JPanel();
+        lightsPanel.setLayout(new GridLayout(3, 1, 10, 10));
+        lightsPanel.setBackground(Color.DARK_GRAY);
+        lightsPanel.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
+
+        
+        redLight = new LightPanel(Color.RED);
+        yellowLight = new LightPanel(Color.ORANGE);
+        greenLight = new LightPanel(Color.GREEN);
+
+        
+        redLight.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                messageLabel.setText("Stop");
+                messageLabel.setForeground(Color.RED);
+            }
+        });
+
+        yellowLight.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                messageLabel.setText("Ready");
+                messageLabel.setForeground(Color.ORANGE);
+            }
+        });
+
+        greenLight.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                messageLabel.setText("Go");
+                messageLabel.setForeground(Color.GREEN);
+            }
+        });
+
+        lightsPanel.add(redLight);
+        lightsPanel.add(yellowLight);
+        lightsPanel.add(greenLight);
+
+        add(lightsPanel, BorderLayout.CENTER);
+    }
+
+    class LightPanel extends JPanel {
+        private Color color;
+
+        public LightPanel(Color color) {
+            this.color = color;
+            setPreferredSize(new Dimension(100, 100));
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            g.setColor(color);
+            g.fillOval(10, 10, getWidth() - 20, getHeight() - 20);
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            TrafficLightGUI frame = new TrafficLightGUI();
+            frame.setVisible(true);
+        });
+    }
+}
