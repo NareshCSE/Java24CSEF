@@ -1,0 +1,81 @@
+package oopjp;
+
+class SharedBuffer {
+ private int data;
+ private boolean available = false;
+
+ 
+ public synchronized void produce(int value) throws InterruptedException {
+     while (available) { 
+         wait();
+     }
+     data = value;
+     available = true;
+     System.out.println("Produced: " + data);
+     notify();
+ }
+
+ public synchronized int consume() throws InterruptedException {
+     while (!available) { 
+         wait();
+     }
+     available = false;
+     System.out.println("Consumed: " + data);
+     notify(); 
+     return data;
+ }
+}
+
+class Producer implements Runnable {
+ private SharedBuffer buffer;
+
+ public Producer(SharedBuffer buffer) {
+     this.buffer = buffer;
+ }
+
+ @Override
+ public void run() {
+     int value = 0;
+     try {
+         while (true) {
+             buffer.produce(value++);
+             Thread.sleep(500); 
+         }
+     } catch (InterruptedException e) {
+         System.out.println("Producer interrupted");
+     }
+ }
+}
+
+class Consumer implements Runnable {
+ private SharedBuffer buffer;
+
+ public Consumer(SharedBuffer buffer) {
+     this.buffer = buffer;
+ }
+
+ @Override
+ public void run() {
+     try {
+         while (true) {
+             buffer.consume();
+             Thread.sleep(800);
+         }
+     } catch (InterruptedException e) {
+         System.out.println("Consumer interrupted");
+     }
+ }
+}
+
+
+public class ProducerConsumer {
+ public static void main(String[] args) {
+     SharedBuffer buffer = new SharedBuffer();
+
+     Thread producerThread = new Thread(new Producer(buffer));
+     Thread consumerThread = new Thread(new Consumer(buffer));
+
+     producerThread.start();
+     consumerThread.start();
+ }
+}
