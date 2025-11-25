@@ -1,0 +1,47 @@
+package javarecord;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+public class TrafficLight extends JFrame implements ActionListener {
+    JRadioButton redButton, yellowButton, greenButton;
+    JLabel messageLabel;
+    ButtonGroup group;
+    public TrafficLight() {
+        super("Traffic Light Simulation");
+        setLayout(new FlowLayout());
+        messageLabel = new JLabel("");
+        messageLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        add(messageLabel);
+        redButton = new JRadioButton("Red");
+        yellowButton = new JRadioButton("Yellow");
+        greenButton = new JRadioButton("Green");
+        redButton.addActionListener(this);
+        yellowButton.addActionListener(this);
+        greenButton.addActionListener(this);
+        group = new ButtonGroup();
+        group.add(redButton);
+        group.add(yellowButton);
+        group.add(greenButton);
+        add(redButton);
+        add(yellowButton);
+        add(greenButton);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(300, 200);
+        setVisible(true);
+    }
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == redButton) {
+            messageLabel.setText("Stop");
+            messageLabel.setForeground(Color.RED);
+        } else if (e.getSource() == yellowButton) {
+            messageLabel.setText("Ready");
+            messageLabel.setForeground(Color.ORANGE);
+        } else if (e.getSource() == greenButton) {
+            messageLabel.setText("Go");
+            messageLabel.setForeground(Color.GREEN);
+        }
+    }
+    public static void main(String[] args) {
+        new TrafficLight();
+    }
+}
