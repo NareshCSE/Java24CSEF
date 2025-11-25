@@ -1,18 +1,16 @@
 import java.util.Scanner;
-public class Week1_NumbersPattern {
-
+public class Number_Pattern {
 	public static void main(String[] args) {
 		Scanner sc=new Scanner(System.in);
-		System.out.print("enter the no. of rows:");
-		int rows=sc.nextInt();
-		int i,j,s;
-		for(i=1;i<=rows;i++)
+		System.out.print("Enter the number of rows:");
+		int n=sc.nextInt();
+		for(int i=1;i<=n;i++)
 		{
-			for(s=1;s<=rows-i;s++)
+			for(int s=1;s<=n-i;s++)
 			{
 				System.out.print(" ");
 			}
-			for(j=1;j<=i;j++)
+			for(int j=1;j<=i;j++)
 			{
 				System.out.print(j);
 			}
@@ -22,6 +20,7 @@ public class Week1_NumbersPattern {
 			}
 			System.out.println();
 		}	
-			sc.close();
+		sc.close();
 	   }
 }
+
