@@ -1,0 +1,45 @@
+package javarecord;
+import java.awt.*;
+import java.awt.event.*;
+public class CharWordCounter extends Frame implements ActionListener {
+    TextArea textArea;
+    Button countButton;
+    public CharWordCounter() {
+        super("Character and Word Counter");
+        setLayout(new FlowLayout());
+        textArea = new TextArea(10, 40);
+        add(textArea);
+        countButton = new Button("Count Words and Characters");
+        add(countButton);
+        countButton.addActionListener(this);
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);
+            }
+        });
+        setSize(500, 300);
+        setVisible(true);
+    }
+    public void actionPerformed(ActionEvent e) {
+        String text = textArea.getText();
+        int charCount = text.length();
+        String[] words = text.trim().split("\\s+");
+        int wordCount = (text.trim().isEmpty()) ? 0 : words.length;
+        Dialog dialog = new Dialog(this, "Result", true);
+        dialog.setLayout(new FlowLayout());
+        Label resultLabel = new Label("Characters: " + charCount + " | Words: " + wordCount);
+        dialog.add(resultLabel);
+        Button okButton = new Button("OK");
+        okButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                dialog.setVisible(false);
+            }
+        });
+        dialog.add(okButton);
+        dialog.setSize(300, 100);
+        dialog.setVisible(true);
+    }
+    public static void main(String[] args) {
+        new CharWordCounter();
+    }
+}
