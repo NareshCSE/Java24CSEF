@@ -1,0 +1,60 @@
+package javarecord;
+import java.util.Random;
+class NumberGenerator extends Thread {
+    static int number;
+    static final Object lock = new Object();
+    public void run() {
+        Random rand = new Random();
+        while (true) {
+            synchronized (lock) {
+                number = rand.nextInt(100);
+                System.out.println("\nGenerated number: " + number);
+                lock.notifyAll();
+            }
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {}
+        }
+    }
+}
+class SquareThread extends Thread {
+    public void run() {
+        while (true) {
+            synchronized (NumberGenerator.lock) {
+                try {
+                    NumberGenerator.lock.wait();
+                } catch (InterruptedException e) {}
+
+                if (NumberGenerator.number % 2 == 0)
+                    System.out.println(
+                        "Square of " + NumberGenerator.number + " = " +
+                        (NumberGenerator.number * NumberGenerator.number)
+                    );
+            }
+        }
+    }
+}
+class CubeThread extends Thread {
+    public void run() {
+        while (true) {
+            synchronized (NumberGenerator.lock) {
+                try {
+                    NumberGenerator.lock.wait();
+                } catch (InterruptedException e) {}
+
+                if (NumberGenerator.number % 2 != 0)
+                    System.out.println(
+                        "Cube of " + NumberGenerator.number + " = " +
+                        (NumberGenerator.number * NumberGenerator.number * NumberGenerator.number)
+                    );
+            }
+        }
+    }
+}
+public class MultiThreadApp {
+    public static void main(String[] args) {
+        new NumberGenerator().start();
+        new SquareThread().start();
+        new CubeThread().start();
+    }
+}
