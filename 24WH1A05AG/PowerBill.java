@@ -1,8 +1,6 @@
 import java.util.Scanner;
-public class Week1_Electricity_bill {
-
-	public static void main(String[] args) {
-		
+public class Electricity_bill {
+	public static void main(String[] args) {		
 		Scanner sc=new Scanner(System.in);
 		System.out.print("enter old readings:");
 		int old=sc.nextInt();
@@ -34,5 +32,5 @@ public class Week1_Electricity_bill {
         System.out.println("Total charge for " + u + " units is " + sum );
         sc.close();
 	}
-
 }
+
