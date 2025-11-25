@@ -1,0 +1,81 @@
+package javarecord;
+import java.io.*;
+import java.util.*;
+public class PhoneDirectory {
+    public static void main(String[] args) throws Exception {
+        Hashtable<String, String> nameToPhone = new Hashtable<>();
+        Hashtable<String, String> phoneToName = new Hashtable<>();
+        Scanner sc = new Scanner(System.in);
+        File file = new File("contacts.txt");
+        PrintWriter pw = new PrintWriter(file);
+        pw.println("Java\t9123456780");
+        pw.println("DS\t9000012345");
+        pw.println("Python\t9988776655");
+        pw.println("C\t9876543210");
+        pw.close();
+        System.out.println("Contacts file recreated successfully!");
+        BufferedReader br = new BufferedReader(new FileReader(file));
+        String line;
+        while ((line = br.readLine()) != null) {
+            String[] parts = line.split("\t");
+            if (parts.length == 2) {
+                String name = parts[0].trim();
+                String phone = parts[1].trim();
+                nameToPhone.put(name, phone);
+                phoneToName.put(phone, name);
+            }
+        }
+        br.close();
+        int choice;
+        do {
+            System.out.println("----- PHONE DIRECTORY -----");
+            System.out.println("1. Display All Contacts");
+            System.out.println("2. Search by Name or Phone");
+            System.out.println("3. Add New Contact");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+            choice = sc.nextInt();
+            sc.nextLine();
+            switch (choice) {
+                case 1:
+                    System.out.println("Contacts:");
+                    for (String name : nameToPhone.keySet()) {
+                        System.out.println(name + " -> " + nameToPhone.get(name));
+                    }
+                    System.out.println();
+                    break;
+                case 2:
+                    System.out.print("Enter Name or Phone: ");
+                    String search = sc.nextLine();
+                    if (nameToPhone.containsKey(search)) {
+                        System.out.println("Phone: " + nameToPhone.get(search));
+                    } else if (phoneToName.containsKey(search)) {
+                        System.out.println("Name: " + phoneToName.get(search));
+                    } else {
+                        System.out.println("Not found!");
+                    }
+                    System.out.println();
+                    break;
+                case 3:
+                    System.out.print("Enter Name: ");
+                    String newName = sc.nextLine();
+                    System.out.print("Enter Phone: ");
+                    String newPhone = sc.nextLine();
+                    nameToPhone.put(newName, newPhone);
+                    phoneToName.put(newPhone, newName);
+                    FileWriter fw = new FileWriter("contacts.txt", true);
+                    fw.write(newName + "\t" + newPhone + "\n");
+                    fw.close();
+                    System.out.println("Contact added successfully!\n");
+                    break;
+                case 4:
+                    System.out.println("Exiting...");
+                    break;
+                default:
+                    System.out.println("Invalid choice! Try again.\n");
+            }
+        } while (choice != 4);
+
+        sc.close();
+    }
+}
