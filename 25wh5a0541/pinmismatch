@@ -1,0 +1,46 @@
+package demo;
+
+import java.util.Scanner;
+
+public class pinmismatch {
+	public static final String correctpin = "1234";
+	public static final int attempts = 3;
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		String name, userpin;
+		System.out.println("Enter name:");
+		name = sc.nextLine();
+		for (int i = 0; i < attempts; i++) {
+			System.out.println("Enter pin:");
+			userpin = sc.nextLine();
+			try {
+				vadidatepin(userpin);
+				System.out.println("Access granted enjoy");
+				break;
+			} catch (PinMisMatchException e) {
+				e.getMessage();
+				if (i == 2) {
+					System.out.println("Too many attempts");
+				}
+			}
+		}
+		sc.close();
+	}
+
+	static void vadidatepin(String userpin) throws PinMisMatchException {
+		pinchecking(userpin);
+	}
+
+	static void pinchecking(String userpin) throws PinMisMatchException {
+		if (!userpin.equals(correctpin)) {
+			throw new PinMisMatchException();
+		}
+	}
+}
+
+class PinMisMatchException extends Exception {
+	public void mismatchexception() {
+		System.out.println("pin is incorrect please check.");
+	}
+}
