@@ -1,0 +1,88 @@
+package demo;
+
+class ItemQueue {
+	int item;
+	boolean valueSet = false;
+
+	synchronized int getItem() {
+		while (!valueSet)
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				System.out.println("InterruptedException caught");
+			}
+		System.out.println(Thread.currentThread().getName() + " consumed: " + item);
+		valueSet = false;
+		notify(); // Notify the producer to produce another item
+		return item;
+	}
+
+	synchronized void putItem(int item) {
+		while (valueSet)
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				System.out.println("InterruptedException caught");
+			}
+		this.item = item;
+		valueSet = true;
+		System.out.println(Thread.currentThread().getName() + " produced: " + item);
+		notify(); // Notify the consumer to consume the item
+	}
+}
+
+class Producer implements Runnable {
+	ItemQueue itemQueue;
+	int maxItems;
+
+	Producer(ItemQueue itemQueue, int maxItems) {
+		this.itemQueue = itemQueue;
+		this.maxItems = maxItems;
+		new Thread(this, "Producer").start();
+	}
+
+	public void run() {
+		int i = 0;
+		while (i < maxItems) {
+			itemQueue.putItem(i++);
+			try {
+				Thread.sleep(500); // Simulate time taken to produce an item
+			} catch (InterruptedException e) {
+				System.out.println("Producer interrupted.");
+			}
+		}
+	}
+}
+
+class Consumer implements Runnable {
+	ItemQueue itemQueue;
+	int maxItems;
+
+	Consumer(ItemQueue itemQueue, int maxItems) {
+		this.itemQueue = itemQueue;
+		this.maxItems = maxItems;
+		new Thread(this, "Consumer").start();
+	}
+
+	public void run() {
+		int consumedItems = 0;
+		while (consumedItems < maxItems) {
+			itemQueue.getItem();
+			consumedItems++;
+			try {
+				Thread.sleep(1000); // Simulate time taken to consume an item
+			} catch (InterruptedException e) {
+				System.out.println("Consumer interrupted.");
+			}
+		}
+	}
+}
+
+public class producerconsumer {
+	public static void main(String args[]) {
+		int maxItems = 10; // Maximum number of items to produce and consume
+		ItemQueue itemQueue = new ItemQueue();
+		new Producer(itemQueue, maxItems);
+		new Consumer(itemQueue, maxItems);
+	}
+}
