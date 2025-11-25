@@ -1,0 +1,44 @@
+package javarecord;
+import javax.swing.*;
+import java.awt.event.*;
+public class FactorialApp extends JFrame implements ActionListener {
+    JTextField t1, t2;
+    JButton b;
+    FactorialApp() {
+        setTitle("24WH1A05AE");
+        setSize(300, 200);
+        setLayout(null);
+        JLabel l1 = new JLabel("Enter Number:");
+        l1.setBounds(30, 30, 100, 30);
+        add(l1);
+        t1 = new JTextField();
+        t1.setBounds(150, 30, 100, 30);
+        add(t1);
+        JLabel l2 = new JLabel("Factorial:");
+        l2.setBounds(30, 70, 100, 30);
+        add(l2);
+        t2 = new JTextField();
+        t2.setBounds(150, 70, 100, 30);
+        t2.setEditable(false);
+        add(t2);
+        b = new JButton("Compute");
+        b.setBounds(90, 110, 100, 30);
+        b.addActionListener(this);
+        add(b);
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+    public void actionPerformed(ActionEvent e) {
+        try {
+            int n = Integer.parseInt(t1.getText());
+            long fact = 1;
+            for (int i = 1; i <= n; i++) fact *= i;
+            t2.setText(String.valueOf(fact));
+        } catch (Exception ex) {
+            t2.setText("Invalid Input");
+        }
+    }
+    public static void main(String[] args) {
+        new FactorialApp();
+    }
+}
