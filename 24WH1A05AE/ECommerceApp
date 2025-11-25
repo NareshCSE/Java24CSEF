@@ -1,0 +1,47 @@
+package javarecord;
+import java.util.*;
+class Product {
+    int id;
+    String name;
+    double price;
+    Product(int id, String name, double price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
+    public int hashCode() {
+        return id;
+    }
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product p = (Product) o;
+        return id == p.id;
+    }
+}
+public class EcommerceApp {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        HashSet<Product> products = new HashSet<>();
+        products.add(new Product(1, "Smart TV", 55000));
+        products.add(new Product(2, "IPhone Pro Max", 85000));
+        products.add(new Product(3, "Washing Machine", 25000));
+        System.out.println("Available Products:");
+        for (Product p : products)
+            System.out.println(p.id + " " + p.name + " " + p.price);
+        System.out.print("Enter number of products to order: ");
+        int n = sc.nextInt();
+        double total = 0;
+        for (int i = 0; i < n; i++) {
+            System.out.print("Enter product id to order: ");
+            int id = sc.nextInt();
+            for (Product p : products) {
+                if (p.id == id) {
+                    System.out.println("Ordered: " + p.name + " Price: " + p.price);
+                    total += p.price;
+                }
+            }
+        }
+        System.out.println("Total Price: " + total);
+    }
+}
