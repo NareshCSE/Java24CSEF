@@ -1,3 +1,5 @@
+package assignment;
+
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -58,7 +60,7 @@ class Product {
     }
 }
 
-public class ECommerceApp {
+public class SellerCustomer {
     private static Set<Product> products = new HashSet<>();
     private static Scanner scanner = new Scanner(System.in);
 
@@ -119,13 +121,15 @@ public class ECommerceApp {
 
         double totalPrice = 0;
         Set<Product> orderedProducts = new HashSet<>();
-        System.out.println("Enter product Ids you want to order (comma separated): ");
-        String line = scanner.nextLine();
-        String[] ids = line.split(",");
+        System.out.print("How many products would you like to order? ");
+        int count = scanner.nextInt();
+        scanner.nextLine();
 
-        for(String idStr : ids) {
+        for(int i = 0; i < count; i++) {
+            System.out.print("Enter product Id #" + (i+1) + ": ");
+            String input = scanner.nextLine();
             try {
-                int id = Integer.parseInt(idStr.trim());
+                int id = Integer.parseInt(input.trim());
                 Product temp = new Product();
                 temp.setId(id);
                 if(products.contains(temp)) {
@@ -139,7 +143,7 @@ public class ECommerceApp {
                     System.out.println("Product with Id " + id + " not found.");
                 }
             } catch(NumberFormatException e) {
-                System.out.println(idStr + " is not a valid product Id.");
+                System.out.println(input + " is not a valid product Id.");
             }
         }
 
