@@ -1,0 +1,25 @@
+package javarecord;
+class CreditsNotSuffiecientException extends Exception {
+    public CreditsNotSuffiecientException(String message) {
+        super(message);
+    }
+}
+public class CreditNotSuff {
+    static void checkCredits(int credits) throws CreditsNotSuffiecientException {
+        if (credits < 50) {
+            throw new CreditsNotSuffiecientException("Credits not sufficient: " + credits);
+        } else {
+            System.out.println("Credits are sufficient: " + credits);
+        }
+    }
+    public static void main(String[] args) {
+        try {
+            checkCredits(60);  
+            checkCredits(40);  
+        } catch (CreditsNotSuffiecientException e) {
+            System.out.println("Caught exception → " + e.getMessage());
+        }
+
+        System.out.println("Program continues normally.");
+    }
+}
