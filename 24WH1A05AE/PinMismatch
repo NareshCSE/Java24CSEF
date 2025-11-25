@@ -1,0 +1,30 @@
+package javarecord;
+import java.util.*;
+class PinMisMatchException extends RuntimeException {
+    PinMisMatchException(String message) {
+        super(message);
+    }
+}
+public class PinMismatch {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter account holder name:");
+        String accHolderName = sc.next();
+        int pinNum = 7337417;
+        int pin;
+        int attempts = 0;
+        while (attempts < 3) {
+            System.out.println(""
+            		+ "Enter pin number:");
+            pin = sc.nextInt();
+            if (pin == pinNum) {
+                System.out.println("Your pin is correct");
+                return;
+            } else {
+                attempts++;
+                System.out.println("Entered pin is wrong");
+            }
+        }
+        throw new PinMisMatchException("Your account is blocked");
+    }
+}
