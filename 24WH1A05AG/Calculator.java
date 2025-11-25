@@ -1,9 +1,6 @@
 import java.util.Scanner;
-
-public class Week1_Calculator {
-
+public class Simple_Calculator{
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		Scanner sc =new Scanner(System.in);
 		System.out.print("Enter first number:");
 		int a=sc.nextInt();
@@ -30,9 +27,8 @@ public class Week1_Calculator {
 			System.out.print("invald input");
 		}
 		System.out.println("Result: " + r );
-		sc.close();
-			
-			
+		sc.close();	
 	}
 
 }
+
